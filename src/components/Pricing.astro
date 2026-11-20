@@ -1,0 +1,326 @@
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS · 05 PLATFORM MODULES — dark cards, enriched. Scoped block.
+   ══════════════════════════════════════════════════════════════════════════ */
+.pm{
+  --ink:#0E2E4D;--body:#42506A;--muted:#7B8698;
+  --navy:#0E2E4D;--navy-2:#0B1E33;--orange:#E46E14;--orange-2:#F58A4B;--teal:#38A0DE;
+  --line:rgba(14,46,77,.12);--navy-soft:#EAF0F6;
+  --gap:20px;--r:8px;
+  --font:"Manrope",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Poppins",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.85,.3,1);
+  background:#fff;font-family:var(--font);color:var(--ink);padding:clamp(48px,4vw,48px) 0;
+}
+.pm *{box-sizing:border-box}
+.pm-wrap{max-width:1260px;margin:0 auto;}
+
+/* ── dark hero band ── */
+.pm-hero{position:relative;overflow:hidden;border-radius:18px;
+  background:linear-gradient(122deg,#123457 0%,#0C2140 48%,#0A1B30 100%);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 34px 80px rgba(11,30,51,.30), inset 0 1px 0 rgba(255,255,255,.10);
+  min-height:clamp(230px,28vw,400px);display:flex;align-items:center;padding:clamp(30px,4vw,50px);
+  opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.pm.in .pm-hero{opacity:1;transform:none}
+.pm-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.pm-hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(10,27,48,.92) 0%,rgba(10,27,48,.66) 54%,rgba(10,27,48,.30) 100%)}
+.pm-hero::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(50% 116% at 86% 14%, rgba(56,160,222,.26), transparent 58%),
+    radial-gradient(46% 120% at 3% 98%, rgba(228,110,20,.16), transparent 60%),
+    radial-gradient(120% 140% at 50% -20%, rgba(255,255,255,.05), transparent 55%)}
+
+.pm-dots{position:absolute;right:clamp(20px,4.4vw,70px);top:50%;transform:translateY(-50%);z-index:3;
+  width:clamp(180px,28vw,380px);pointer-events:none;
+  filter:drop-shadow(0 0 22px rgba(56,160,222,.22));animation:pmFloat 7.5s ease-in-out infinite}
+@keyframes pmFloat{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 7px))}}
+
+.pm-hero-c{position:relative;z-index:4;max-width:690px}
+.pm-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--orange-2);margin-bottom:clamp(16px,2vw,22px)}
+.pm-eyebrow::before{content:"";width:28px;height:2px;background:var(--orange)}
+.pm-hero-c h2{margin:0;color:#fff;font-size:clamp(25px,3.6vw,46px);font-weight:700;line-height:1.1;
+  letter-spacing:-.03em;text-shadow:0 2px 24px #040c1859;text-transform:capitalize}
+
+/* ── slider ── */
+.pm-slider{margin-top:clamp(30px,3.4vw,48px);
+  opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease) .12s,transform .8s var(--ease) .12s}
+.pm.in .pm-slider{opacity:1;transform:none}
+.pm-ctrls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding:20px;}
+.pm-ctrls .lab{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pm-arrows{display:flex;gap:8px}
+.pm-arrows button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);
+  display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s,color .2s,opacity .2s}
+.pm-arrows button:hover:not(:disabled){background:var(--navy);border-color:var(--navy);color:#fff}
+.pm-arrows button:disabled{opacity:.34;cursor:default}
+.pm-arrows svg{width:15px;height:15px}
+
+.pm-viewport{overflow:hidden;padding:28px 16px 36px}
+.pm-track{display:flex;gap:var(--gap);transition:transform .55s var(--ease);cursor:grab;touch-action:pan-y}
+.pm-track.drag{cursor:grabbing;transition:none}
+
+/* ── ENRICHED DARK CARDS ── */
+.pm-card{flex:0 0 calc((100% - 2*var(--gap))/3);min-width:0;
+  background:linear-gradient(160deg,#12345A 0%,#0C2140 100%);
+  border:1px solid rgba(255,255,255,.10);border-radius:14px;
+  box-shadow:0 12px 30px -18px rgba(6,16,30,.55), inset 0 1px 0 rgba(255,255,255,.06);
+  padding:24px 22px 22px;position:relative;overflow:hidden;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+/* gradient top accent bar (reveals on hover) */
+.pm-card::before{content:"";position:absolute;left:22px;right:22px;top:0;height:2px;
+  background:linear-gradient(90deg,var(--orange),var(--orange-2));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+/* soft corner glow */
+.pm-card::after{content:"";position:absolute;top:-42%;right:-32%;width:72%;height:92%;pointer-events:none;
+  background:radial-gradient(closest-side, rgba(56,160,222,.22), transparent 70%);
+  opacity:.45;transition:opacity .35s var(--ease)}
+.pm-card:hover{transform:translateY(-6px);
+  box-shadow:0 26px 46px -20px rgba(6,16,30,.62), inset 0 1px 0 rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.22)}
+.pm-card:hover::before{transform:scaleX(1)}
+.pm-card:hover::after{opacity:1}
+
+/* ghost number */
+.pm-no{position:absolute;top:8px;right:16px;z-index:0;font-weight:800;font-size:54px;line-height:1;
+  letter-spacing:-.04em;color:rgba(255,255,255,.06);pointer-events:none;user-select:none}
+
+.pm-ic{position:relative;z-index:1;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;margin-bottom:16px;
+  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.pm-card:hover .pm-ic{background:linear-gradient(135deg,var(--orange-2),var(--orange));border-color:transparent;color:#fff;transform:scale(1.06) rotate(-3deg)}
+.pm-ic svg{width:24px;height:24px}
+
+.pm-kicker{position:relative;z-index:1;display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--orange-2);margin-bottom:7px}
+.pm-card h3{position:relative;z-index:1;margin:0 0 8px;font-size:19px;font-weight:600;letter-spacing:-.01em;color:#fff}
+.pm-card p{position:relative;z-index:1;margin:0;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.66)}
+
+/* footer: hairline + arrow chip */
+.pm-foot{position:relative;z-index:1;display:flex;align-items:center;gap:14px;margin-top:20px}
+.pm-line{flex:1;height:1px;background:rgba(255,255,255,.12)}
+.pm-go{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);
+  transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.pm-go svg{width:13px;height:13px}
+.pm-card:hover .pm-go{background:var(--orange);border-color:var(--orange);color:#fff;transform:translateX(2px)}
+
+.pm-dotsnav{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.pm-dotsnav button{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:width .25s var(--ease),background .25s var(--ease)}
+.pm-dotsnav button.on{width:24px;border-radius:5px;background:var(--orange)}
+
+@media (max-width:760px){.pm-card{flex-basis:calc((100% - var(--gap))/2)}.pm-dots{opacity:.45}}
+@media (max-width:520px){.pm-card{flex-basis:100%}.pm-ctrls .lab{display:none}.pm-ctrls{justify-content:flex-end}}
+@media (prefers-reduced-motion:reduce){
+  .pm-hero,.pm-slider{opacity:1;transform:none;transition:none}
+  .pm-track{transition:none}.pm-dots{animation:none}
+}
+</style>
+
+<!-- GLOBAL block: styles JS-injected SVG dots (Astro won't scope these, so they must be global) -->
+<style is:global>
+  .pm-dots svg{width:100%;height:auto;display:block;overflow:visible}
+  .pm-dots svg circle{transform-box:fill-box;transform-origin:center;
+    animation:pmPulse 4.8s cubic-bezier(.22,.85,.3,1) infinite}
+  @keyframes pmPulse{
+    0%  {transform:scale(1);   filter:drop-shadow(0 0 0 rgba(56,160,222,0))}
+    8%  {opacity:1;transform:scale(1.85); filter:drop-shadow(0 0 8px rgba(56,160,222,.9))}
+    22% {transform:scale(1);   filter:drop-shadow(0 0 0 rgba(56,160,222,0))}
+    100%{transform:scale(1);   filter:drop-shadow(0 0 0 rgba(56,160,222,0))}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .pm-dots svg circle{animation:none;opacity:1!important}
+  }
+</style>
+
+<!-- ══════════ 05 PLATFORM MODULES — START ══════════ -->
+<section class="pm" id="pm" aria-label="The platform">
+  <div class="pm-wrap">
+
+    <!-- dark hero band -->
+    <div class="pm-hero">
+      <img class="pm-bg" src="/homecard4.jpg" alt="" onerror="this.style.display='none'">
+      <div class="pm-dots" aria-hidden="true"><svg id="pmPyramid" viewBox="0 0 260 200"></svg></div>
+      <div class="pm-hero-c">
+        <div class="pm-eyebrow">The platform</div>
+        <h2>One platform for the client side of your accounting practice.</h2>
+      </div>
+    </div>
+
+    <!-- slider -->
+    <div class="pm-slider">
+      <div class="pm-ctrls">
+        <span class="lab">Eight connected modules</span>
+        <div class="pm-arrows">
+          <button id="pmPrev" type="button" aria-label="Previous"><svg viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="pmNext" type="button" aria-label="Next"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+
+      <div class="pm-viewport">
+        <div class="pm-track" id="pmTrack">
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">01</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M4.5 16c.6-1.6 2-2.4 3.5-2.4S10.9 14.4 11.5 16M14 9h4M14 13h3"/></svg></span>
+            <span class="pm-kicker">Module 01</span>
+            <h3>Practice Management CRM</h3>
+            <p>Structured records for prospects, clients, entities, conversations and opportunities.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">02</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8.4 6H15.6M6 8.4V13a2 2 0 0 0 2 2h2M18 8.4V13a2 2 0 0 1-2 2h-2"/></svg></span>
+            <span class="pm-kicker">Module 02</span>
+            <h3>Workflow Automation</h3>
+            <p>Triggers, tasks, reminders, internal notifications and approved client follow-up.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">03</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 5h12v9H8l-3 2.5V14H3z"/><path d="M10 9h16.5M21 10v8h-4l-2 1.6V18h-2"/></svg></span>
+            <span class="pm-kicker">Module 03</span>
+            <h3>Client Communication</h3>
+            <p>Supported email, SMS, WhatsApp, live chat and social messages in one view.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">04</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4M8 14l2.4 2.4L16 11"/></svg></span>
+            <span class="pm-kicker">Module 04</span>
+            <h3>Onboarding and Appointments</h3>
+            <p>Forms, calendars, reminders and stage-based onboarding journeys.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">05</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l1.8 4.4L18 9l-4.2 1.6L12 15l-1.8-4.4L6 9l4.2-1.6z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></span>
+            <span class="pm-kicker">Module 05</span>
+            <h3>AI Assistants</h3>
+            <p>Website chat and voice reception for approved FAQs, enquiry capture and booking.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">06</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 14h4"/></svg></span>
+            <span class="pm-kicker">Module 06</span>
+            <h3>Billing and Payments</h3>
+            <p>Proposals, invoices, payment links and follow-up where enabled.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">07</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l2.5 5.2 5.5.7-4 3.9 1 5.5L12 20.6 6.5 18.3l1-5.5-4-3.9 5.5-.7z"/></svg></span>
+            <span class="pm-kicker">Module 07</span>
+            <h3>Reputation and Retention</h3>
+            <p>Review requests, referrals, newsletters and reactivation campaigns.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+          <article class="pm-card">
+            <span class="pm-no" aria-hidden="true">08</span>
+            <span class="pm-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/></svg></span>
+            <span class="pm-kicker">Module 08</span>
+            <h3>Reporting</h3>
+            <p>Enquiry sources, response activity, pipeline stages and campaign outcomes.</p>
+            <div class="pm-foot" aria-hidden="true"><span class="pm-line"></span><span class="pm-go"><svg viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="pm-dotsnav" id="pmDotsNav"></div>
+    </div>
+
+  </div>
+</section>
+<!-- ══════════ 05 PLATFORM MODULES — END ══════════ -->
+
+<script is:inline>
+(function () {
+  'use strict';
+  function init() {
+    var s = document.getElementById('pm'); if (!s) return;
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (e) { e.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { threshold: 0.12 });
+      io.observe(s);
+    } else { s.classList.add('in'); }
+
+    /* dot pyramid + cascading pulse (delay drives the ripple; animation lives in the global <style>) */
+    var svg = document.getElementById('pmPyramid');
+    if (svg) {
+      var rows = 9, gap = 26, r = 3.5, cx = 130, top = 16, ns = 'http://www.w3.org/2000/svg';
+      for (var row = 0; row < rows; row++) {
+        var count = row + 1, y = top + row * (gap * 0.74);
+        var rowOp = 0.30 + 0.58 * (row / (rows - 1));
+        for (var i = 0; i < count; i++) {
+          var mid = (count - 1) / 2, x = cx + (i - mid) * gap;
+          var c = document.createElementNS(ns, 'circle');
+          c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', r);
+          var accent = (row >= rows - 3 && Math.abs(i - mid) < 1.6);
+          c.setAttribute('fill', accent ? '#38A0DE' : '#FFFFFF');
+          c.style.opacity = accent ? '1' : rowOp.toFixed(2);
+          c.style.animationDelay = (row * 0.11 + Math.abs(i - mid) * 0.04).toFixed(2) + 's';
+          svg.appendChild(c);
+        }
+      }
+    }
+
+    /* slider */
+    var track = document.getElementById('pmTrack');
+    var cards = Array.prototype.slice.call(track.children);
+    var prev = document.getElementById('pmPrev'), next = document.getElementById('pmNext');
+    var dotsNav = document.getElementById('pmDotsNav');
+    var GAP = 20, index = 0;
+
+    function step() { return cards[0].getBoundingClientRect().width + GAP; }
+    function perView() { return Math.max(1, Math.round((track.clientWidth + GAP) / step())); }
+    function maxIndex() { return Math.max(0, cards.length - perView()); }
+
+    function buildDots() {
+      dotsNav.innerHTML = '';
+      for (var i = 0; i <= maxIndex(); i++) {
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        (function (n) { b.addEventListener('click', function () { go(n); }); })(i);
+        dotsNav.appendChild(b);
+      }
+    }
+    function sync() {
+      track.style.transform = 'translateX(' + (-index * step()) + 'px)';
+      Array.prototype.slice.call(dotsNav.children).forEach(function (d, i) { d.classList.toggle('on', i === index); });
+      if (prev) prev.disabled = index <= 0;
+      if (next) next.disabled = index >= maxIndex();
+    }
+    function go(i) { index = Math.min(Math.max(i, 0), maxIndex()); sync(); }
+
+    if (next) next.addEventListener('click', function () { go(index + 1); });
+    if (prev) prev.addEventListener('click', function () { go(index - 1); });
+
+    var down = false, startX = 0, startTf = 0;
+    function px(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+    track.addEventListener('mousedown', ds); track.addEventListener('touchstart', ds, { passive: true });
+    function ds(e) { down = true; startX = px(e); startTf = -index * step(); track.classList.add('drag'); }
+    window.addEventListener('mousemove', dm); window.addEventListener('touchmove', dm, { passive: true });
+    function dm(e) { if (!down) return; track.style.transform = 'translateX(' + (startTf + (px(e) - startX)) + 'px)'; }
+    window.addEventListener('mouseup', du); window.addEventListener('touchend', du);
+    function du(e) {
+      if (!down) return; down = false; track.classList.remove('drag');
+      var dx = (e.changedTouches ? e.changedTouches[0].clientX : e.clientX) - startX;
+      if (Math.abs(dx) > 45) go(index + (dx < 0 ? 1 : -1)); else sync();
+    }
+
+    function rebuild() { index = Math.min(index, maxIndex()); buildDots(); sync(); }
+    rebuild();
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(rebuild, 150); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>

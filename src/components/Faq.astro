@@ -1,0 +1,340 @@
+<!-- ============================================================
+     AccrualOS — FAQ (.faqv layout)
+     Canonicalised to the AccrualOS system: Manrope only,
+     orange #E46E14, flat 5px, no box-shadows. Namespace: .fv-*
+     Accordion = one open at a time. Content verbatim as supplied.
+     ============================================================ -->
+<section class="faqv" id="faq">
+  <style>
+    /* Manrope only — remove this @import if the font is loaded page-wide */
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    .faqv{
+      --fv-navy:#0E2E4D;
+      --fv-navy-2:#183f63;
+      --fv-orange:#E46E14;
+      --fv-orange-d:#c95f10;
+      --fv-orange-l:#F58A4B;
+      --fv-ink:#12293f;
+      --fv-mut:#5c6b78;
+      --fv-line:#e6e3dd;
+      --fv-line-2:#efece6;
+      --fv-panel:#f7f5f1;
+      --fv-white:#ffffff;
+      --fv-r:5px;
+      --fv-head:'Manrope',system-ui,sans-serif;
+      --fv-body:'Manrope',system-ui,sans-serif;
+      --fv-mono:'Manrope',system-ui,sans-serif;
+
+      position:relative;
+      background:var(--fv-white);
+      color:var(--fv-ink);
+      font-family:var(--fv-body);
+      padding:96px 0 88px;
+      overflow:hidden;
+    }
+    .faqv *{box-sizing:border-box;}
+
+    .fv-wrap{
+      position:relative;z-index:1;
+      width:min(1120px,92vw);margin:0 auto;
+    }
+
+    /* ---------- TOP: heading + CTA ---------- */
+    .fv-top{
+      display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);
+      gap:40px;align-items:flex-start;
+    }
+    .fv-eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      font-family:var(--fv-mono);font-size:11px;font-weight:600;
+      letter-spacing:.22em;text-transform:uppercase;color:var(--fv-orange);
+    }
+    .fv-eyebrow::before{content:"";width:24px;height:1.5px;background:var(--fv-orange);display:inline-block;}
+    .fv-title{
+      font-family:var(--fv-head);font-weight:800;color:var(--fv-navy);
+      font-size:clamp(30px,4.2vw,46px);line-height:1.06;letter-spacing:-.02em;
+      margin:16px 0 14px;max-width:26ch;
+    }
+    .fv-sub{color:var(--fv-mut);font-size:15px;line-height:1.65;max-width:60ch;margin:0;}
+
+    .fv-top-cta{display:flex;justify-content:flex-end;align-self:end;}
+
+    .fv-rule{height:1px;background:var(--fv-line-2);margin:40px 0 44px;border:0;}
+
+    /* ---------- MAIN GRID ---------- */
+    .fv-grid{
+      display:grid;grid-template-columns:minmax(0,0.82fr) minmax(0,1.35fr);
+      gap:52px;align-items:flex-start;
+    }
+    .fv-left{min-width:0;}
+    .fv-right{min-width:0;}
+
+    /* media */
+    .fv-media{
+      position:relative;border-radius:var(--fv-r);overflow:hidden;
+      aspect-ratio:4/5;background:var(--fv-navy);
+    }
+    .fv-media::after{content:"";position:absolute;left:0;top:0;width:46px;height:4px;background:var(--fv-orange);z-index:3;}
+    .fv-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1);}
+    .fv-media:hover img{transform:scale(1.045);}
+    .fv-media .fv-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,46,77,0) 45%,rgba(14,46,77,.28));z-index:1;}
+
+    .fv-note{
+      margin-top:16px;border:1px solid var(--fv-line);border-radius:var(--fv-r);
+      background:var(--fv-white);padding:16px 18px;
+    }
+    .fv-note-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:'Manrope',system-ui,sans-serif;font-size:10.5px;font-weight:600;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--fv-navy);margin-bottom:8px;
+    }
+    .fv-note-tag i{width:7px;height:7px;border-radius:50%;background:var(--fv-orange);display:inline-block;}
+    .fv-note p{margin:0;font-size:12px;line-height:1.6;color:var(--fv-mut);}
+
+    /* ---------- ACCORDION ---------- */
+    .fv-acc{border-top:2px solid var(--fv-orange);}
+    .fv-item{border-bottom:1px solid var(--fv-line-2);}
+    .fv-q{
+      list-style:none;cursor:pointer;user-select:none;
+      display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;
+      padding:20px 4px 20px 2px;transition:background .2s;
+    }
+    .fv-q::-webkit-details-marker{display:none;}
+
+    .fv-no{
+      font-family:'Manrope';font-size:12px;font-weight:600;letter-spacing:.05em;
+      color:#0e2e4d;min-width:22px;transition:transform .25s;
+    }
+    .fv-item:hover .fv-no{transform:translateY(-1px);}
+    .fv-qt{
+      font-family:var(--fv-head);font-weight:600;color:#12293f;
+      font-size:clamp(15px,1.5vw,15px);line-height:1.35;letter-spacing:-.01em;
+    }
+    .fv-item[open] .fv-qt{color:var(--fv-navy);}
+
+    .fv-ind{
+      width:34px;height:34px;flex:none;border:1.5px solid var(--fv-line);border-radius:var(--fv-r);
+      position:relative;display:inline-block;transition:background .25s,border-color .25s;
+    }
+    .fv-ind i{position:absolute;background:var(--fv-orange);transition:opacity .25s,transform .25s,background .25s;}
+    .fv-ind i.h{left:9px;right:9px;top:50%;height:1.6px;transform:translateY(-50%);}
+    .fv-ind i.v{top:9px;bottom:9px;left:50%;width:1.6px;transform:translateX(-50%);}
+    .fv-item:hover .fv-ind{border-color:var(--fv-orange);}
+    .fv-item[open] .fv-ind{background:var(--fv-orange);border-color:var(--fv-orange);}
+    .fv-item[open] .fv-ind i{background:#fff;}
+    .fv-item[open] .fv-ind i.v{opacity:0;transform:translateX(-50%) scaleY(0);}
+
+    .fv-a{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.22,.61,.36,1);}
+    .fv-inner{
+      padding:0 4px 24px 42px;color:#3d3e3f;
+      font-size:13.5px;line-height:1.72;
+    }
+    .fv-inner b{color:var(--fv-navy);font-weight:600;}
+
+    /* ---------- CTA button ---------- */
+    .fv-btn{
+      flex:none;display:inline-flex;align-items:center;gap:10px;
+      background:#0e2e4d;color:#fff;text-decoration:none;
+      font-family:var(--fv-head);font-weight:700;font-size:15px;
+      padding:14px 22px;border-radius:var(--fv-r);
+      transition:transform .18s, background .2s;
+    }
+    .fv-btn svg{width:18px;height:18px;transition:transform .22s;}
+    .fv-btn:hover{background:var(--fv-orange-d);transform:translateY(-2px);}
+    .fv-btn:hover svg{transform:translateX(4px);}
+
+    /* ---------- reveal ---------- */
+    .fv-reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+    .fv-reveal.in{opacity:1;transform:none;}
+
+    /* ---------- focus + reduced motion ---------- */
+    .fv-q:focus-visible{outline:2px solid var(--fv-orange);outline-offset:3px;border-radius:4px;}
+    .fv-btn:focus-visible,.fv-stuck a:focus-visible{outline:2px solid var(--fv-navy);outline-offset:3px;}
+    @media (prefers-reduced-motion:reduce){
+      .faqv *{transition:none!important;animation:none!important;}
+      .fv-reveal{opacity:1;transform:none;}
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width:900px){
+      .faqv{padding:72px 0 64px;}
+      .fv-top{grid-template-columns:1fr;gap:24px;}
+      .fv-grid{grid-template-columns:1fr;gap:34px;}
+      .fv-media{aspect-ratio:16/10;}
+    }
+    @media (max-width:560px){
+      .fv-inner{padding-left:34px;}
+    }
+  </style>
+
+  <div class="fv-wrap">
+
+    <!-- TOP -->
+    <div class="fv-top">
+      <div class="fv-head-col fv-reveal">
+        <span class="fv-eyebrow">Fair questions</span>
+        <h2 class="fv-title">Answers to the things<br>you are actually thinking.</h2>
+        <p class="fv-sub">The questions we hear on almost every walkthrough. If yours is not here, get in touch and we will answer it straight.</p>
+      </div>
+
+      <div class="fv-top-cta fv-reveal">
+        <a class="fv-btn" href="/contact-us">Still have a question?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <hr class="fv-rule">
+
+    <!-- MAIN -->
+    <div class="fv-grid">
+
+      <!-- LEFT -->
+      <div class="fv-left">
+        <div class="fv-media fv-reveal">
+          <img src="/faq.jpg" alt="AccrualOS running inside a practice" onerror="this.style.display='none'">
+          <div class="fv-tint"></div>
+        </div>
+        <div class="fv-note fv-reveal">
+          <span class="fv-note-tag"><i></i>Two-minute read</span>
+          <p>These cover most of what firms ask before a walkthrough. If yours is not here, we would rather answer it live.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="fv-right">
+        <div class="fv-acc" id="fvAcc">
+
+          <details class="fv-item fv-reveal" open>
+            <summary class="fv-q"><span class="fv-no">01</span>
+              <span class="fv-qt">What is AccrualOS?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              AccrualOS is an accounting practice management and growth platform for Australian firms. It connects CRM, enquiries, appointments, client communication, onboarding, workflow follow-up, AI assistants and managed growth services in one configured system.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">02</span>
+              <span class="fv-qt">Does AccrualOS replace Xero, MYOB or QuickBooks?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              No. AccrualOS manages client-facing and operational workflows around the accounting work. Your accounting platform remains responsible for ledger, reporting and accounting functions.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">03</span>
+              <span class="fv-qt">Does AccrualOS replace Karbon, FYI or another practice system?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              It depends on the functions your firm uses. AccrualOS can manage enquiries, client communication, booking, onboarding and configurable follow-up. Some firms use it alongside a specialised job, document or compliance platform. We map the required systems before implementation.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">04</span>
+              <span class="fv-qt">Is AccrualOS built on GoHighLevel?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              AccrualOS uses selected third-party technology as part of its platform infrastructure. The product includes accounting-specific configuration, workflows, templates, implementation and support delivered under the AccrualOS service.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">05</span>
+              <span class="fv-qt">Can AccrualOS provide accounting or tax advice through AI?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              No. AI assistants are limited to approved administrative and general practice information. They can capture enquiries, answer approved FAQs and book consultations. They do not provide personal accounting, tax, financial or legal advice.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">06</span>
+              <span class="fv-qt">What does implementation include?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              Implementation can include workflow discovery, CRM configuration, pipeline setup, forms, calendars, message templates, approved AI knowledge, testing, data import and team training. The exact scope depends on the selected plan and integrations.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">07</span>
+              <span class="fv-qt">What usage costs are separate?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              SMS, email delivery, WhatsApp conversations, phone numbers, carrier calls, AI voice minutes, advertising media and third-party software may be charged separately. AccrualOS confirms the applicable rates before activation.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">08</span>
+              <span class="fv-qt">How long does setup take?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              A standard implementation may target 21 days after the required information, access and approvals are received. Custom data migration, websites and integrations can extend the timeline. The approved project plan should state the actual go-live date.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">09</span>
+              <span class="fv-qt">Can we export our data?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              The website should state the verified export options for contacts, opportunities and conversation records. Custom objects, documents and integrated data may require a separate export process.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">10</span>
+              <span class="fv-qt">Can AccrualOS guarantee search rankings or AI recommendations?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              No. SEO and AEO improve technical structure, content quality, entity clarity and authority signals. Search engines and AI services decide what they display. No provider can guarantee a ranking, citation or recommendation.
+            </div></div>
+          </details>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script is:inline>
+    (function(){
+      const root  = document.currentScript.closest('.faqv');
+      const items = root.querySelectorAll('#fvAcc .fv-item');
+      const setH  = (el,open)=>{ const p=el.querySelector('.fv-a'); p.style.maxHeight = open ? p.scrollHeight+'px' : '0px'; };
+
+      /* one open at a time */
+      items.forEach(item=>{
+        item.querySelector('.fv-q').addEventListener('click', e=>{
+          e.preventDefault();
+          const willOpen = !item.open;
+          items.forEach(o=>{ if(o!==item){ o.open=false; setH(o,false); }});
+          item.open = willOpen;
+          requestAnimationFrame(()=>setH(item,willOpen));
+        });
+      });
+      const first = root.querySelector('#fvAcc .fv-item[open]');
+      if(first) requestAnimationFrame(()=>setH(first,true));
+      window.addEventListener('resize', ()=> root.querySelectorAll('#fvAcc .fv-item[open]').forEach(i=>setH(i,true)));
+
+      /* scroll reveal */
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reveals = root.querySelectorAll('.fv-reveal');
+      if(!reduce && 'IntersectionObserver' in window){
+        reveals.forEach((el,i)=> el.style.transitionDelay = (i*45)+'ms');
+        const io = new IntersectionObserver((ents,obs)=>{
+          ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); }});
+        },{threshold:0.08, rootMargin:'0px 0px -6% 0px'});
+        reveals.forEach(el=>io.observe(el));
+      } else {
+        reveals.forEach(el=>el.classList.add('in'));
+      }
+    })();
+  </script>
+</section>

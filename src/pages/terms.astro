@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/legal.css';
+
+const updated = 'September 2026';
+const sections = [
+  { id: 'agreement',    t: 'Agreement to terms' },
+  { id: 'service',      t: 'The service' },
+  { id: 'accounts',     t: 'Accounts & eligibility' },
+  { id: 'plans',        t: 'Plans, billing & trial' },
+  { id: 'acceptable',   t: 'Acceptable use' },
+  { id: 'your-content', t: 'Your content & data' },
+  { id: 'third-party',  t: 'Third-party integrations' },
+  { id: 'ip',           t: 'Intellectual property' },
+  { id: 'disclaimer',   t: 'Disclaimers' },
+  { id: 'liability',    t: 'Limitation of liability' },
+  { id: 'termination',  t: 'Termination' },
+  { id: 'changes',      t: 'Changes to terms' },
+  { id: 'governing',    t: 'Governing law' },
+  { id: 'contact',      t: 'Contact us' },
+];
+---
+
+<Layout
+  title="Terms of Service — AccrualOS"
+  description="The terms that govern your access to and use of AccrualOS, the practice-management and automation platform for Australian accounting and bookkeeping firms."
+>
+<main class="lg">
+
+  <!-- HERO -->
+  <header class="lg-hero">
+    <div class="lg-hero-in">
+      <nav class="lg-crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span>Terms of Service</nav>
+      <span class="lg-eyebrow">Legal</span>
+      <h1 class="lg-h1">Terms of Service</h1>
+      <p class="lg-updated">Last updated: <b>{updated}</b></p>
+    </div>
+  </header>
+
+  <div class="lg-wrap">
+
+    <!-- TOC -->
+    <nav class="lg-toc" aria-label="On this page">
+      <p class="lg-toc-title">On this page</p>
+      <ol>
+        {sections.map((s) => <li><a href={`#${s.id}`}>{s.t}</a></li>)}
+      </ol>
+    </nav>
+
+    <!-- BODY -->
+    <div class="lg-body">
+      <p class="lg-intro">These Terms of Service ("Terms") govern your access to and use of the AccrualOS platform, websites, and related services (together, the "Service"). By creating an account or using the Service, you agree to these Terms. If you are agreeing on behalf of a practice or business, you confirm you have authority to bind that organisation.</p>
+
+      <div class="lg-note"><b>Note:</b> This document is a general template. It should be reviewed by a qualified legal adviser and tailored to your registered entity, ABN, and commercial terms before you rely on it.</div>
+
+      <h2 id="agreement"><span class="n">01</span>Agreement to terms</h2>
+      <p>By accessing or using the Service you agree to be bound by these Terms and our <a href="/privacy">Privacy Policy</a>. If you do not agree, you must not use the Service.</p>
+
+      <h2 id="service"><span class="n">02</span>The service</h2>
+      <p>AccrualOS is a practice-management and automation platform for Australian accounting and bookkeeping firms. It helps you capture enquiries, book consultations, coordinate onboarding, run approved follow-up workflows, and see the status of work. AccrualOS does not prepare tax returns, lodge documents with the ATO, or maintain your general ledger, and it does not replace specialised accounting or compliance software.</p>
+
+      <h2 id="accounts"><span class="n">03</span>Accounts &amp; eligibility</h2>
+      <ul>
+        <li>You must provide accurate account information and keep it up to date.</li>
+        <li>You are responsible for safeguarding your login credentials and for all activity under your account.</li>
+        <li>You must notify us promptly of any unauthorised use of your account.</li>
+        <li>The Service is intended for business use by practices and their authorised team members.</li>
+      </ul>
+
+      <h2 id="plans"><span class="n">04</span>Plans, billing &amp; trial</h2>
+      <ul>
+        <li>Paid plans are billed in advance on the cycle shown at checkout. All prices are in Australian dollars and exclude GST unless stated.</li>
+        <li>Any introductory or $1 trial offer applies only to eligible new customers and on the terms stated at sign-up.</li>
+        <li>Additional users beyond those included in your plan are charged at the per-user rate shown on the plan.</li>
+        <li>Fees are non-refundable except where required by law or expressly stated. You can cancel future renewals at any time; cancellation takes effect at the end of the current billing period.</li>
+      </ul>
+
+      <h2 id="acceptable"><span class="n">05</span>Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the Service for any unlawful, harmful, or fraudulent purpose.</li>
+        <li>Send unsolicited communications in breach of the <i>Spam Act 2003</i> (Cth) or similar laws.</li>
+        <li>Attempt to gain unauthorised access to the Service or interfere with its operation or security.</li>
+        <li>Reverse engineer, resell, or misuse the Service or its content except as permitted by law.</li>
+        <li>Upload malicious code or infringe the rights of others.</li>
+      </ul>
+
+      <h2 id="your-content"><span class="n">06</span>Your content &amp; data</h2>
+      <p>You retain all rights to the client records, documents, and other data you put into the Service ("Your Content"). You grant us a limited licence to host, process, and transmit Your Content solely to provide and support the Service. You are responsible for having the necessary rights and consents for Your Content and for complying with applicable privacy laws. Our handling of personal information is described in our <a href="/privacy">Privacy Policy</a>.</p>
+
+      <h2 id="third-party"><span class="n">07</span>Third-party integrations</h2>
+      <p>The Service can connect to third-party tools such as Xero, MYOB, Karbon, and Ignition. Those services are provided by third parties under their own terms, and we are not responsible for their availability, accuracy, or conduct. Enabling an integration authorises the exchange of data required to make it work.</p>
+
+      <h2 id="ip"><span class="n">08</span>Intellectual property</h2>
+      <p>The Service, including its software, design, and content (excluding Your Content), is owned by AccrualOS and its licensors and is protected by intellectual property laws. We grant you a non-exclusive, non-transferable right to use the Service during your subscription, subject to these Terms.</p>
+
+      <h2 id="disclaimer"><span class="n">09</span>Disclaimers</h2>
+      <p>The Service is provided on an "as is" and "as available" basis. AccrualOS is a workflow and automation tool and does not provide accounting, tax, financial, or legal advice. You remain responsible for your professional obligations and for the accuracy of work produced using the Service. To the extent permitted by law, we exclude all warranties not expressly stated in these Terms. Nothing in these Terms excludes rights you may have under the Australian Consumer Law that cannot lawfully be excluded.</p>
+
+      <h2 id="liability"><span class="n">10</span>Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, AccrualOS will not be liable for any indirect, incidental, or consequential loss, or for loss of profits, revenue, or data. Where liability cannot be excluded, our total liability is limited, at our option, to re-supplying the Service or refunding the fees you paid for the Service in the three months before the event giving rise to the claim.</p>
+
+      <h2 id="termination"><span class="n">11</span>Termination</h2>
+      <p>You may stop using the Service at any time. We may suspend or terminate your access if you breach these Terms, fail to pay fees, or use the Service in a way that risks harm to us or others. On termination, your right to use the Service ends; we will make Your Content available for export for a reasonable period, after which it may be deleted.</p>
+
+      <h2 id="changes"><span class="n">12</span>Changes to terms</h2>
+      <p>We may update these Terms from time to time. When we make material changes we will update the "Last updated" date and, where appropriate, notify you. Continued use of the Service after changes take effect means you accept the updated Terms.</p>
+
+      <h2 id="governing"><span class="n">13</span>Governing law</h2>
+      <p>These Terms are governed by the laws of Australia and the state in which the AccrualOS operating entity is registered, and you submit to the non-exclusive jurisdiction of the courts of that state.</p>
+
+      <h2 id="contact"><span class="n">14</span>Contact us</h2>
+      <p>If you have questions about these Terms, please get in touch.</p>
+      <div class="lg-contact">
+        <h3>AccrualOS Legal</h3>
+        <p>Email: <a href="mailto:sales@sharktech.com.au">sales@sharktech.com.au</a></p>
+        <p>Or use our <a href="/contact-us">contact form</a>.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+</Layout>

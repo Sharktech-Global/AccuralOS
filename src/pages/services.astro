@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/about-us.css';
+import Cards from '../components/Services-cards.astro';
+---
+
+<Layout
+  title="Services — AI Deployment, Analytics & Reporting | AccrualOS"
+  description="Specialist services for Australian accounting practices and finance teams — custom AI deployment, Power BI dashboards, analytics and reporting, delivered by Sharktech Services alongside the AccrualOS platform."
+>
+
+<!-- ── TOP BANNER (same as packages / about) ─────────────────────────────── -->
+<section class="ah-section">
+  <div class="ah-wrap">
+    <div class="ah-body">
+      <div class="ah-media"></div>
+      <div class="ah-fluted"></div>
+      <div class="ah-tint"></div>
+      <div class="ah-sheen"></div>
+      <div class="ah-vignette"></div>
+
+      <span class="ah-brand">AccrualOS</span>
+      <h1 class="ah-title"><i>/</i>Services<i>/</i></h1>
+      <nav class="ah-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><em>Services</em>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE CARDS ─────────────────────────────────────────────────────── -->
+<Cards />
+
+</Layout>

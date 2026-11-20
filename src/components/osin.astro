@@ -1,0 +1,346 @@
+
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS TRUST SECTION — COMPLETE STYLES
+   ──────────────────────────────────────────────────────────────────────────
+   Left  · outlined "OS" monogram, bleeding off the page edge, drawn on scroll
+   Right · headline, with the proof band sitting directly beneath it
+
+   THEMES — one attribute on the section:
+       <section class="tk">                    light  (default)
+       <section class="tk" data-theme="dark">   dark
+
+   Every themed value is a token, so the two never drift apart. In dark the
+   band flips from a solid teal panel to frosted glass — a solid dark panel on
+   a dark ground would vanish, so it has to earn its edge from a hairline
+   border and a lift in surface brightness instead.
+
+   Tokens namespaced --tk-*.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.tk{
+  /* ---- shared ---- */
+  --tk-mint:#7FC3E8;
+  --tk-display:"Manrope";
+  --tk-font:"Poppins",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --tk-ease:cubic-bezier(.22,.85,.3,1);
+
+  /* ---- light theme ---- */
+  --tk-base:#FFFFFF;
+  --tk-wash-1:rgba(127,195,232,.20);
+  --tk-wash-2:rgba(79,124,255,.10);
+  --tk-fg:#0E2E4D;
+  --tk-mark-glow:none;
+  --tk-mark-weight:1.3;
+
+  --tk-band-bg:linear-gradient(140deg,#245C86,#08213A 78%);
+  --tk-band-border:transparent;
+  --tk-band-blur:none;
+  --tk-band-glow-1:rgba(127,195,232,.22);
+  --tk-band-glow-2:rgba(79,124,255,.16);
+  --tk-band-fg:#FFFFFF;
+  --tk-divider:rgba(255,255,255,.16);
+  --tk-label:rgba(255,255,255,.66);
+  --tk-shadow:0 22px 50px rgba(6,39,36,.16);
+}
+
+/* ── DARK THEME ────────────────────────────────────────────────────────── */
+.tk[data-theme="dark"]{
+  --tk-base:#06111E;
+  --tk-wash-1:rgba(127,195,232,.15);
+  --tk-wash-2:rgba(79,124,255,.13);
+  --tk-fg:#E9F5F3;
+  --tk-mark-glow:drop-shadow(0 0 14px rgba(74,163,213,.32));
+  --tk-mark-weight:1.5;
+
+  --tk-band-bg:rgba(255,255,255,.045);
+  --tk-band-border:rgba(255,255,255,.11);
+  --tk-band-blur:saturate(150%) blur(14px);
+  --tk-band-glow-1:rgba(127,195,232,.16);
+  --tk-band-glow-2:rgba(79,124,255,.14);
+  --tk-band-fg:#FFFFFF;
+  --tk-divider:rgba(255,255,255,.14);
+  --tk-label:rgba(255,255,255,.60);
+  --tk-shadow:0 22px 60px rgba(0,0,0,.34);
+}
+
+.tk{
+  position:relative;overflow:hidden;
+  padding:clamp(40px,5vw,40px) 20px;
+  font-family:var(--tk-font);color:var(--tk-fg);
+  background:
+    radial-gradient(46% 62% at 12% 44%, var(--tk-wash-1), transparent 68%),
+    radial-gradient(38% 50% at 2% 84%, var(--tk-wash-2), transparent 70%),
+    var(--tk-base);
+  transition:background .4s var(--tk-ease),color .4s var(--tk-ease);
+}
+.tk-shell{max-width:1230px;margin:0 auto;}
+
+.tk-inner{
+  position:relative;
+  display:grid;grid-template-columns:.9fr 1.15fr;
+  gap:clamp(20px,3vw,48px);align-items:center;
+}
+
+/* ── 1. THE OS MONOGRAM ────────────────────────────────────────────────── */
+.tk-mark{margin-left:clamp(-260px,-15vw,-80px);pointer-events:none;filter:var(--tk-mark-glow)}
+.tk-mark svg{width:100%;height:auto;display:block;overflow:visible}
+.tk-mark .stroke{
+  fill:none;stroke:url(#tkGrad);stroke-width:var(--tk-mark-weight);stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset 2.4s var(--tk-ease);
+}
+.tk.in .tk-mark .stroke{stroke-dashoffset:0}
+.tk.in .tk-mark .stroke.d2{transition-delay:.28s}
+
+/* ── 2. HEADLINE ───────────────────────────────────────────────────────── */
+.tk-h2{
+  margin:0;font-family:var(--tk-display);
+  font-size:clamp(27px,3.7vw,52px);font-weight:500;
+  line-height:1.13;letter-spacing:-.028em;
+}
+.tk-h2 .grad{
+  background:linear-gradient(96deg,#2C7FB5,#4AA3D5 42%,#F0742C);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* dark ground: lighten the blue lead, keep the warm orange finish */
+.tk[data-theme="dark"] .tk-h2 .grad{
+  background:linear-gradient(96deg,#5FB0DE,#4AA3D5 42%,#F58A4B);
+  -webkit-background-clip:text;background-clip:text;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. PROOF BAND
+   ══════════════════════════════════════════════════════════════════════════ */
+.tk-band{
+  position:relative;overflow:hidden;
+  margin-top:clamp(28px,3.4vw,46px);
+  border-radius:clamp(18px,1.9vw,26px);
+  padding: clamp(15px, 2vw, 27px);
+  background:var(--tk-band-bg);
+  border:1px solid var(--tk-band-border);
+  -webkit-backdrop-filter:var(--tk-band-blur);
+          backdrop-filter:var(--tk-band-blur);
+  box-shadow:var(--tk-shadow);
+  color:var(--tk-band-fg);
+  opacity:0;transform:translateY(24px);
+  transition:opacity .8s var(--tk-ease),transform .8s var(--tk-ease),
+             background .4s var(--tk-ease),border-color .4s var(--tk-ease);
+}
+.tk.in .tk-band{opacity:1;transform:none;transition-delay:.2s}
+.tk-band::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(58% 92% at 92% 4%, var(--tk-band-glow-1), transparent 62%),
+    radial-gradient(46% 70% at 6% 96%, var(--tk-band-glow-2), transparent 66%);
+}
+.tk-band > *{position:relative}
+
+.tk-band h3{
+margin: 0 0 clamp(24px, 2.8vw, 36px);
+    font-family: var(--tk-display);
+    font-size: clamp(17px, 1.75vw, 25px);
+    font-weight: 600;
+    line-height: 2.3;
+    letter-spacing: -.022em;
+}
+.tk-band h3 em{font-style:normal;color:#F58A4B}
+
+/* ── stats row ─────────────────────────────────────────────────────────── */
+.tk-stats{display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:0 clamp(15px,3.4vw,45px)}
+.stat + .stat{border-left:1px solid var(--tk-divider)}
+.stat:first-child{padding-left:0}
+.stat:last-child{padding-right:0}
+
+.stat-n{
+  display:flex;align-items:baseline;
+  font-family:var(--tk-display);
+      font-size: clamp(46px, 2.5vw, 38px);font-weight:700;
+  line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;
+}
+.stat-n em{font-style:normal;color:#F0742C;font-size:30px;margin-left:10px;font-weight:600;}
+.stat-l{
+  margin-top:clamp(9px,1vw,14px);
+  font-size:clamp(13.5px,.82vw,12.5px);line-height:1.45;
+  color:var(--tk-label);max-width:16ch;
+}
+
+/* ── 4. RESPONSIVE ─────────────────────────────────────────────────────── */
+@media (max-width:1080px){
+  .tk-inner{grid-template-columns:1fr;gap:34px}
+  .tk-mark{margin-left:clamp(-130px,-11vw,-40px);width:min(78%,440px)}
+  .tk-h2{max-width:20ch}
+  .tk-stats{grid-template-columns:repeat(2,1fr);gap:28px 0}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(2){padding-right:0}
+}
+@media (max-width:640px){
+  .tk-mark{width:min(86%,320px)}
+  .tk-stats{grid-template-columns:1fr;gap:22px}
+  .stat{padding:0}
+  .stat + .stat{border-left:0;border-top:1px solid var(--tk-divider);padding-top:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tk *{transition-duration:.01ms!important;animation:none!important}
+  .tk-mark .stroke{stroke-dashoffset:0}
+  .tk-band{opacity:1;transform:none}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DEMO PAGE ONLY — delete below
+   ══════════════════════════════════════════════════════════════════════════ */
+
+</style>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     TRUST SECTION — START
+     Light: <section class="tk">      Dark: <section class="tk" data-theme="dark">
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="tk" id="tk" data-theme="dark" aria-label="Why practices trust AccrualOS">
+  <div class="tk-shell">
+    <div class="tk-inner">
+
+      <!-- the OS monogram, drawn on when scrolled into view -->
+      <div class="tk-mark" aria-hidden="true">
+        <svg viewBox="0 0 500 400">
+          <defs>
+            <linearGradient id="tkGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#2C7FB5"/>
+              <stop offset="52%"  stop-color="#4AA3D5"/>
+              <stop offset="100%" stop-color="#F0742C"/>
+            </linearGradient>
+          </defs>
+          <!-- O — outer ring and inner echo, 30px apart -->
+          <circle class="stroke" cx="168" cy="200" r="126" pathLength="1"/>
+          <circle class="stroke d2" cx="168" cy="200" r="96" pathLength="1" opacity=".45"/>
+          <!-- S — two half circles, centred on the O -->
+          <path class="stroke" d="M398,76 A62,62 0 0 0 398,200 A62,62 0 0 1 398,324" pathLength="1"/>
+        </svg>
+      </div>
+
+      <div class="tk-copy">
+        <h2 class="tk-h2">Try it on <span class="grad">one real client</span> this week. Nothing breaks. Nothing moves. We promise.</h2>
+
+        <!-- ══════════════════════════════════════════════════════════
+             PROOF BAND
+             To change a figure, edit the markup only:
+               <span data-to="340">0</span><em>+</em>
+               data-to  = number to count to
+               data-dec = decimal places (optional, default 0)
+               <em>     = suffix, stays mint, never animates
+             ══════════════════════════════════════════════════════════ -->
+        <div class="tk-band">
+          <h3>The practice standard for <em>Australian accounting</em></h3>
+
+          <div class="tk-stats">
+            <div class="stat">
+              <div class="stat-n"><span data-to="340">0</span><em>+</em></div>
+              <div class="stat-l">Practices running AccrualOS</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n"><span data-to="1.2" data-dec="1">0</span><em>M+</em></div>
+              <div class="stat-l">Documents chased and filed</div>
+            </div>
+            <div class="stat">
+              <div class="stat-n"><span data-to="60">0</span><em>sec</em></div>
+              <div class="stat-l">Average reply to a new enquiry</div>
+            </div>
+           
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════════════
+     TRUST SECTION — END
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<!-- demo switch — delete -->
+
+
+<script is:inline>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS TRUST SECTION — SCRIPT
+   Draws the monogram on, then counts the four figures up. No dependencies.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var DURATION = 1500;   // ms for the count-up
+
+  function countUp(el) {
+    var target = parseFloat(el.dataset.to);
+    var dec    = parseInt(el.dataset.dec || '0', 10);
+    var start  = null;
+
+    function frame(now) {
+      if (start === null) start = now;
+      var p = Math.min((now - start) / DURATION, 1);
+      var eased = 1 - Math.pow(1 - p, 3);          // ease-out cubic
+      el.textContent = (target * eased).toFixed(dec);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function init() {
+    var section = document.getElementById('tk');
+    if (!section) return;
+
+    var figures = Array.prototype.slice.call(section.querySelectorAll('[data-to]'));
+    var reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var reveal = function () {
+      section.classList.add('in');
+      figures.forEach(function (el, i) {
+        if (reduce) {
+          el.textContent = parseFloat(el.dataset.to).toFixed(parseInt(el.dataset.dec || '0', 10));
+        } else {
+          setTimeout(function () { countUp(el); }, 420 + i * 110);
+        }
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) { reveal(); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        reveal();
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.25 });
+
+    io.observe(section);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<script is:inline>
+/* demo theme switch — delete this block */
+(function () {
+  var tk = document.getElementById('tk');
+  var l = document.getElementById('tLight'), d = document.getElementById('tDark');
+  document.body.classList.toggle('dark', tk.dataset.theme === 'dark');
+  l.onclick = function () {
+    tk.removeAttribute('data-theme');
+    document.body.classList.remove('dark');
+    l.classList.add('on'); d.classList.remove('on');
+  };
+  d.onclick = function () {
+    tk.dataset.theme = 'dark';
+    document.body.classList.add('dark');
+    d.classList.add('on'); l.classList.remove('on');
+  };
+})();
+</script>

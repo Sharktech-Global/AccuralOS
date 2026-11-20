@@ -1,0 +1,136 @@
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS · WORKS AROUND YOUR STACK — muted logo strip + right caption
+   Light. Left: greyscale logo marquee (colourises on hover). Right: caption.
+   Added: faint corporate/accounting background details. Scoped to .cl.
+   ══════════════════════════════════════════════════════════════════════════ */
+.cl{
+  --ink:#0E2E4D;--body:#42506A;--muted:#7B8698;--orange:#E46E14;--teal:#2C7FB5;
+  --line:rgba(14,46,77,.10);
+  --font:"Manrope",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Poppins",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.85,.3,1);
+  position:relative;background:#fff;font-family:var(--font);color:var(--ink);padding-bottom:40px;overflow:hidden;
+}
+.cl *{box-sizing:border-box}
+
+/* ── background: corporate / accounting details ── */
+.cl-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+ 
+.cl-motif{position:absolute;color:var(--ink);opacity:.07}
+.cl-motif svg{width:100%;height:auto;display:block}
+.cl-motif.m-ledger{top:-34px;left:-24px;width:clamp(150px,18vw,240px)}
+.cl-motif.m-chart{bottom:-40px;right:-26px;width:clamp(180px,22vw,300px)}
+
+.cl-wrap{position:relative;z-index:1;max-width:1260px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+
+.cl-strip{display:flex;align-items:center;gap:clamp(28px,4vw,60px);
+  opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.cl.in .cl-strip{opacity:1;transform:none}
+
+/* left — muted logo marquee */
+.cl-marquee{flex:1 1 auto;min-width:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 92%,transparent)}
+.cl-track{display:flex;align-items:center;width:max-content;animation:clScroll 38s linear infinite}
+.cl-marquee:hover .cl-track{animation-play-state:paused}
+@keyframes clScroll{to{transform:translateX(-50%)}}
+.cl-mitem{display:inline-flex;align-items:center;justify-content:center;padding:0 clamp(28px,2.4vw,42px);}
+.cl-mlogo{display:grid;place-items:center;
+  transition:filter .35s var(--ease),opacity .35s var(--ease)}
+.cl-marquee:hover .cl-mlogo{filter:none;opacity:1}
+.cl-mlogo img{max-height:45px;max-width:110px;object-fit:contain;display:block}
+.cl-mmark{width:48px;height:48px;border-radius:12px;display:none;place-items:center;background:#EEF2F7;
+  color:var(--teal);font-weight:800;font-size:14px;letter-spacing:-.02em}
+
+/* right — caption */
+.cl-cap{flex: none;
+    width: clamp(180px, 36vw, 430px);
+    font-size: clamp(16px, 4vw, 30px);
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--ink);
+    text-transform: capitalize;
+    letter-spacing: -.01em;
+  }
+.cl-cap::before{content:"";display:block;width:118px;height:2px;background:var(--orange);margin-bottom:12px}
+
+@media (max-width:760px){
+  .cl-strip{flex-direction:column;gap:24px}
+  .cl-cap{width:100%;text-align:center}
+  .cl-cap::before{margin:0 auto 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cl-strip{opacity:1;transform:none;transition:none}
+  .cl-track{animation:none}
+}
+</style>
+
+<!-- ══════════ WORKS AROUND YOUR STACK (muted strip + caption) — START ══════════ -->
+<section class="cl" id="cl" aria-label="Works around your accounting technology">
+
+  <!-- corporate / accounting background details -->
+  <div class="cl-bg" aria-hidden="true">
+    
+    <div class="cl-motif m-chart">
+      <svg viewBox="0 0 240 200" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 18 V176 H226"/>
+        <rect x="52" y="120" width="20" height="56" fill="currentColor" stroke="none" opacity=".5"/>
+        <rect x="92" y="96" width="20" height="80" fill="currentColor" stroke="none" opacity=".5"/>
+        <rect x="132" y="132" width="20" height="44" fill="currentColor" stroke="none" opacity=".5"/>
+        <rect x="172" y="70" width="20" height="106" fill="currentColor" stroke="none" opacity=".5"/>
+        <path d="M52 142 L102 112 L142 124 L192 62"/>
+        <circle cx="192" cy="62" r="5" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cl-wrap">
+    <div class="cl-strip">
+
+      <!-- left: muted logo marquee -->
+      <div class="cl-marquee" aria-label="Integrations">
+        <div class="cl-track">
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l1.webp" alt="Xero" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">X</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l2.png" alt="MYOB" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">MY</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l3.png" alt="QuickBooks" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">QB</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l4.webp" alt="Karbon" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">K</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l5.avif" alt="Ignition" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">Ig</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l6.webp" alt="Microsoft 365" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">365</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l7.webp" alt="Google Workspace" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">GW</span></span></span>
+          <span class="cl-mitem"><span class="cl-mlogo"><img src="/Logo/l8.webp" alt="Zapier" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">Z</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l1.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">X</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">MY</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l3.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">QB</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l4.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">K</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l5.avif" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">Ig</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l6.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">365</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l7.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">GW</span></span></span>
+          <span class="cl-mitem" aria-hidden="true"><span class="cl-mlogo"><img src="/Logo/l8.webp" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="cl-mmark">Z</span></span></span>
+        </div>
+      </div>
+
+      <!-- right: caption -->
+      <p class="cl-cap">Designed to work around your accounting technology.</p>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════ WORKS AROUND YOUR STACK — END ══════════ -->
+
+<script>
+(function () {
+  'use strict';
+  function init() {
+    var s = document.getElementById('cl'); if (!s) return;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (e) {
+        e.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.2 });
+      io.observe(s);
+    } else { s.classList.add('in'); }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>

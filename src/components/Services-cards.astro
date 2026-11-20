@@ -1,0 +1,116 @@
+---
+// Services listing — image + title + description cards (alternating), with a
+// dotted decoration and a divider between rows. Namespace: .svc-*
+const services = [
+  {
+    title: 'AI Deployment for Accountants',
+    body: 'Custom AI assistants and workflow automation for enquiries, client follow-up, onboarding, document collection and internal administration — scoped with clear controls and human approval points for your practice.',
+    img: '/service/ser11.jpg',
+    href: '/services/ai-deployment-accountants',
+  },
+  {
+    title: 'AI Analytics & Reporting for Accountants',
+    body: 'Decision-focused Power BI dashboards for WIP, lock-up, realisation, revenue, client mix, workflow ageing and agreed management KPIs. We connect your accounting, CRM and operational data and govern the KPI logic so partners and CFOs work from one version of the numbers.',
+    img: '/service/ser13.jpg',
+    href: '/services/ai-analytics-reporting-accountants',
+  },
+  {
+    title: 'Cybersecurity & Secure AI Deployment for Accountants',
+    body: 'Security Health Checks, Microsoft 365 reviews, MFA, access controls, logging and backups — so new AI and automation workflows are deployed with the right cyber controls in place from the start.',
+    img: '/service/ser21.jpg',
+    href: '/services/cybersecurity-ai-accountants',
+  },
+];
+---
+
+<section class="svc" aria-label="AccrualOS services">
+  <div class="svc-wrap">
+    <div class="svc-head">
+      <span class="svc-eyebrow">What we deliver</span>
+      <h2 class="svc-h2">Specialist services around the <span class="or">AccrualOS platform.</span></h2>
+    </div>
+
+    {services.map((s, i) => (
+      <article class:list={['svc-row', i % 2 === 1 && 'rev']}>
+        <div class="svc-media">
+          <span class="svc-dots" aria-hidden="true"></span>
+          <img class="svc-img" src={s.img} alt={s.title}
+               loading="lazy" onerror="this.style.visibility='hidden'" />
+        </div>
+        <div class="svc-body">
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+          <a class="svc-link" href={s.href}>Learn more
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .svc{
+    --svc-navy:#0E2E4D; --svc-body:#5b7085; --svc-line:#e6eaf0; --svc-orange:#E46E14; --svc-r:22px;
+    background:#fff; color:var(--svc-navy);
+    font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    padding:clamp(48px,6vw,88px) 0;
+  }
+  .svc *{box-sizing:border-box;}
+  .svc-wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,3vw,44px);}
+
+  .svc-head{max-width:720px;margin:0 0 clamp(24px,3vw,40px);}
+  .svc-eyebrow{
+    display:inline-flex;align-items:center;gap:9px;margin:0 0 14px;
+    font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--svc-orange);
+  }
+  .svc-eyebrow::before{content:"";width:26px;height:2px;background:var(--svc-orange);}
+  .svc-h2{margin:0;font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.12;}
+  .svc-h2 .or{color:var(--svc-orange);}
+
+  /* rows */
+  .svc-row{
+    display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+    gap:clamp(28px,5vw,72px);align-items:center;
+    padding:clamp(30px,4vw,52px) 0;
+  }
+  .svc-row + .svc-row{border-top:1px solid var(--svc-line);}
+
+  /* media + dotted decoration */
+  .svc-media{position:relative;min-width:0;}
+  .svc-dots{
+    position:absolute;z-index:0;top:-26px;left:-18px;width:190px;height:130px;pointer-events:none;
+    background-image:radial-gradient(#cbd5e1 1.7px, transparent 1.7px);
+    background-size:16px 16px;
+    -webkit-mask-image:linear-gradient(135deg,#000,transparent 75%);
+            mask-image:linear-gradient(135deg,#000,transparent 75%);
+  }
+  .svc-img{
+    position:relative;z-index:1;display:block;width:100%;aspect-ratio:5/4;object-fit:cover;
+    border-radius:var(--svc-r);box-shadow:0 26px 54px -32px rgba(14,46,77,.4);
+  }
+
+  /* copy */
+  .svc-body h3{margin:0 0 16px;font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.12;color:var(--svc-navy);}
+  .svc-body p{margin:0;color:var(--svc-body);font-size:clamp(15px,1.05vw,16.5px);line-height:1.75;max-width:62ch;}
+  .svc-link{
+    display:inline-flex;align-items:center;gap:9px;margin-top:22px;
+    font-weight:700;font-size:.95rem;color:var(--svc-navy);text-decoration:none;
+    border-bottom:1px solid transparent;transition:color .2s,border-color .2s,gap .2s;
+  }
+  .svc-link svg{width:16px;height:16px;}
+  .svc-link:hover{color:var(--svc-orange);border-color:var(--svc-orange);gap:13px;}
+
+  /* alternate: image on the right */
+  .svc-row.rev .svc-media{order:2;}
+  .svc-row.rev .svc-dots{left:auto;right:-18px;
+    -webkit-mask-image:linear-gradient(225deg,#000,transparent 75%);
+            mask-image:linear-gradient(225deg,#000,transparent 75%);}
+
+  @media (max-width:860px){
+    .svc-row, .svc-row.rev{grid-template-columns:1fr;gap:22px;}
+    .svc-row.rev .svc-media{order:-1;}
+    .svc-dots{width:140px;height:100px;top:-16px;left:-12px;}
+    .svc-row.rev .svc-dots{right:-12px;left:auto;}
+  }
+</style>

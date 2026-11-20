@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/about-us.css';
+
+// Auto-collect every markdown post in src/pages/blog/
+const modules = import.meta.glob('./blog/*.md', { eager: true }) as Record<string, any>;
+const posts = Object.values(modules)
+  .map((m) => ({
+    url: m.url as string,
+    title: m.frontmatter?.title as string,
+    description: m.frontmatter?.description as string,
+    brand: m.frontmatter?.brand as string,
+    image: m.frontmatter?.image as string,
+    order: Number(m.frontmatter?.order ?? 0),
+  }))
+  .filter((p) => p.url && p.title)
+  // highest `order` first, so the newest post appears at the top
+  .sort((a, b) => b.order - a.order);
+---
+
+<Layout
+  title="Blog — Practical AI & automation for Australian accountants | AccrualOS"
+  description="Practical guides on AI, automation, analytics and cybersecurity for Australian accounting practices and finance teams, from AccrualOS by Sharktech Global."
+>
+
+<!-- ── TOP BANNER (same as about / services) ─────────────────────────────── -->
+<section class="ah-section">
+  <div class="ah-wrap">
+    <div class="ah-body">
+      <div class="ah-media"></div>
+      <div class="ah-fluted"></div>
+      <div class="ah-tint"></div>
+      <div class="ah-sheen"></div>
+      <div class="ah-vignette"></div>
+
+      <span class="ah-brand">AccrualOS</span>
+      <h1 class="ah-title"><i>/</i>Blog<i>/</i></h1>
+      <nav class="ah-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><em>Blog</em>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ── POST GRID ─────────────────────────────────────────────────────────── -->
+<section class="blg" aria-label="Blog articles">
+  <div class="blg-wrap">
+    <div class="blg-head">
+      <span class="blg-eyebrow">Insights</span>
+      <h2 class="blg-h2">Practical AI &amp; automation for <span class="or">Australian practices.</span></h2>
+    </div>
+
+    {posts.length === 0 ? (
+      <p class="blg-empty">New articles are on the way.</p>
+    ) : (
+      <div class="blg-grid">
+        {posts.map((post) => (
+          <a class="blg-card" href={post.url}>
+            {post.image && (
+              <span class="blg-thumb">
+                <img src={post.image} alt={post.title} loading="lazy" onerror="this.closest('.blg-thumb').style.display='none'" />
+              </span>
+            )}
+            <span class="blg-tag">{post.brand ?? 'AccrualOS'}</span>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
+            <span class="blg-more">Read article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+</Layout>
+
+<style>
+  .blg{
+    --blg-navy:#0E2E4D; --blg-body:#5b7085; --blg-line:#e6eaf0; --blg-orange:#E46E14; --blg-soft:#f5f8fb;
+    background:#fff;color:var(--blg-navy);
+    font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    padding:clamp(44px,6vw,84px) 0;
+  }
+  .blg *{box-sizing:border-box;}
+  .blg-wrap{max-width:1160px;margin:0 auto;padding:0 clamp(18px,3vw,44px);}
+
+  .blg-head{max-width:720px;margin:0 0 clamp(26px,3vw,44px);}
+  .blg-eyebrow{
+    display:inline-flex;align-items:center;gap:9px;margin:0 0 14px;
+    font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blg-orange);
+  }
+  .blg-eyebrow::before{content:"";width:26px;height:2px;background:var(--blg-orange);}
+  .blg-h2{margin:0;font-size:clamp(26px,3.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.14;}
+  .blg-h2 .or{color:var(--blg-orange);}
+
+  .blg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+  .blg-empty{color:var(--blg-body);font-size:16px;}
+
+  .blg-card{
+    display:flex;flex-direction:column;gap:12px;
+    padding:clamp(24px,2.6vw,32px);border:1px solid var(--blg-line);border-radius:18px;
+    background:#fff;text-decoration:none;color:inherit;position:relative;
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+  }
+  .blg-card::before{
+    content:"";position:absolute;left:0;top:22px;bottom:22px;width:3px;border-radius:3px;
+    background:var(--blg-orange);opacity:0;transform:scaleY(.4);transform-origin:top;
+    transition:opacity .22s ease,transform .22s ease;
+  }
+  .blg-card:hover{transform:translateY(-4px);border-color:#d7deea;box-shadow:0 26px 50px -34px rgba(14,46,77,.45);}
+  .blg-card:hover::before{opacity:1;transform:scaleY(1);}
+
+  .blg-thumb{
+    display:block;overflow:hidden;border-radius:14px;
+    margin:calc(-1 * clamp(24px,2.6vw,32px)) calc(-1 * clamp(24px,2.6vw,32px)) 6px;
+    border-radius:18px 18px 0 0;
+  }
+  .blg-thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .35s ease;}
+  .blg-card:hover .blg-thumb img{transform:scale(1.04);}
+
+  .blg-tag{
+    align-self:flex-start;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--blg-orange);background:#fbeee3;border:1px solid #f3d6bd;
+    padding:5px 11px;border-radius:999px;
+  }
+  .blg-card h3{margin:2px 0 0;font-size:clamp(19px,1.7vw,22px);font-weight:800;letter-spacing:-.015em;line-height:1.28;color:var(--blg-navy);}
+  .blg-card p{margin:0;color:var(--blg-body);font-size:14.5px;line-height:1.65;}
+  .blg-more{
+    display:inline-flex;align-items:center;gap:8px;margin-top:6px;
+    font-weight:700;font-size:.9rem;color:var(--blg-navy);transition:gap .2s,color .2s;
+  }
+  .blg-more svg{width:15px;height:15px;color:var(--blg-orange);}
+  .blg-card:hover .blg-more{color:var(--blg-orange);gap:12px;}
+
+  @media (max-width:560px){
+    .blg-grid{grid-template-columns:1fr;}
+  }
+</style>

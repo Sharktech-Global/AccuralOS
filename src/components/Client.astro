@@ -1,0 +1,168 @@
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS · CLIENT JOURNEY — centred image flanked by numbered steps
+   Layout modelled on the "features around a device" reference, rebuilt in the
+   AccrualOS system: navy + orange, Manrope, flat 5px radius, no box-shadows.
+   Left column 01–04 · centre image · right column 05–08.
+   Tokens --jn-*.
+   ══════════════════════════════════════════════════════════════════════════ */
+.jn{
+  --jn-navy:#0E2E4D;--jn-ink:#0E2E4D;--jn-body:#3F4A57;--jn-muted:#6B7686;
+  --jn-line:rgba(14,46,77,.14);--jn-line-soft:rgba(14,46,77,.08);
+  --jn-orange:#E46E14;--jn-orange-2:#F58A4B;--jn-navy-soft:#EAF0F6;
+  --jn-r:5px;
+  --jn-font:"Manrope",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --jn-ease:cubic-bezier(.22,.85,.3,1);
+}
+.jn{position:relative;overflow:hidden;padding:clamp(56px,5vw,60px) 0;
+  font-family:var(--jn-font);color:var(--jn-ink);background:#fff}
+.jn *{box-sizing:border-box}
+.jn-shell{position:relative;z-index:1;max-width:1230px;margin:0 auto;padding:0 clamp(16px,2vw,24px)}
+
+/* faint ledger grid, consistent with the Features section */
+.jn-gridbg{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right,  rgba(14,46,77,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14,46,77,.055) 1px, transparent 1px);
+  background-size:38px 38px;
+  -webkit-mask-image:radial-gradient(82% 70% at 50% 40%, #000 0%, transparent 82%);
+          mask-image:radial-gradient(82% 70% at 50% 40%, #000 0%, transparent 82%)}
+
+/* ── HEADER ── */
+.jn-head{margin:0 auto clamp(34px,4.4vw,64px);text-align:center;
+  opacity:0;transform:translateY(22px);transition:opacity .8s var(--jn-ease),transform .8s var(--jn-ease)}
+.jn.in .jn-head{opacity:1;transform:none}
+.jn-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--jn-orange);margin-bottom:clamp(14px,1.6vw,18px)}
+.jn-eyebrow::before,.jn-eyebrow::after{content:"";width:28px;height:2px;background:var(--jn-orange);opacity:.85}
+.jn-h2{margin:0;font-size:clamp(27px,3.6vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--jn-ink)}
+.jn-sub{margin:clamp(12px,1.4vw,18px) auto 0;max-width:52ch;font-size:16px;line-height:1.6;color:var(--jn-body)}
+
+/* ── GRID ── */
+.jn-grid{    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(340px, 40vw, 500px) minmax(0, 1fr);
+    gap: clamp(26px, 3vw, 60px);
+    align-items: center;}
+
+/* ── STEP COLUMNS ── */
+.jn-col{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(22px,2.6vw,36px)}
+.jn-step{position:relative;padding-top:16px;
+  opacity:0;transform:translateY(18px);transition:opacity .6s var(--jn-ease),transform .6s var(--jn-ease)}
+.jn-step::before{content:"";position:absolute;left:0;top:0;width:28px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--jn-orange),var(--jn-orange-2));transition:width .25s var(--jn-ease)}
+.jn-step:hover::before{width:42px}
+.jn.in .jn-step{opacity:1;transform:none}
+.jn.in .jn-col .jn-step:nth-child(1){transition-delay:.06s}
+.jn.in .jn-col .jn-step:nth-child(2){transition-delay:.16s}
+.jn.in .jn-col .jn-step:nth-child(3){transition-delay:.26s}
+.jn.in .jn-col .jn-step:nth-child(4){transition-delay:.36s}
+
+.jn-tx{min-width:0}
+.jn-tx h3{margin:0 0 6px;font-size:clamp(16px,1.2vw,19px);font-weight:700;letter-spacing:-.015em;color:var(--jn-ink);line-height:1.2}
+.jn-tx p{margin:0;font-size:14px;line-height:1.55;color:var(--jn-muted)}
+
+/* ── CENTRE IMAGE ── */
+.jn-media{position:relative;display:flex;justify-content:center;
+  opacity:0;transform:translateY(24px) scale(.98);transition:opacity .9s var(--jn-ease) .1s,transform .9s var(--jn-ease) .1s}
+.jn.in .jn-media{opacity:1;transform:none}
+.jn-media img{display:block;width:100%;height:auto;max-width:100%}
+.jn-mediafb{display:none;width:100%;aspect-ratio:1/1;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,var(--jn-navy-soft),#fff);
+  border:1px dashed var(--jn-line);place-items:center;color:var(--jn-muted);font-size:13px;font-weight:600}
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px){
+  .jn-grid{grid-template-columns:1fr;gap:clamp(28px,4vw,44px)}
+  .jn-media{order:-1;max-width:460px;margin:0 auto}
+  .jn-col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3vw,34px);max-width:720px;width:100%;margin:0 auto}
+  /* reveal stagger loses meaning in the reflowed grid — keep it gentle */
+  .jn.in .jn-col .jn-step:nth-child(n){transition-delay:.06s}
+}
+@media (max-width:640px){
+  .jn-col{grid-template-columns:1fr;gap:22px;max-width:520px}
+}
+@media (prefers-reduced-motion:reduce){
+  .jn *{transition-duration:.01ms!important;animation:none!important}
+  .jn-head,.jn-step,.jn-media{opacity:1;transform:none}
+}
+</style>
+
+<!-- ══════════ CLIENT JOURNEY — START ══════════ -->
+<section class="jn" id="jn" aria-label="From enquiry to established client">
+
+  <div class="jn-gridbg" aria-hidden="true"></div>
+
+  <div class="jn-shell">
+
+    <header class="jn-head">
+      <div class="jn-eyebrow">The client journey</div>
+      <h2 class="jn-h2">From Enquiry to Established Client</h2>
+      <p class="jn-sub">Guiding your prospects through every step of their lifecycle.</p>
+    </header>
+
+    <div class="jn-grid">
+
+      <!-- LEFT · 01–04 -->
+      <ol class="jn-col" aria-label="Steps one to four">
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Discover</h3><p>Website, search visibility, ads and referrals create an entry point.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Enquire</h3><p>Forms, chat, phone, email or messages create a contact and opportunity.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Qualify</h3><p>Approved questions capture service, entity, location and consultation needs.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Book</h3><p>The prospect selects an approved appointment and receives confirmations.</p></div>
+        </li>
+      </ol>
+
+      <!-- CENTRE · image -->
+      <div class="jn-media">
+        <img src="/accur.png" alt="An advisory team reviewing client work together"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="jn-mediafb" aria-hidden="true">Team image</div>
+      </div>
+
+      <!-- RIGHT · 05–08 -->
+      <ol class="jn-col" start="5" aria-label="Steps five to eight">
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Progress</h3><p>The team tracks ownership, stage, activity and next action.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Onboard</h3><p>Forms, information requests, reminders and internal tasks begin.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Handover</h3><p>The responsible staff member receives the available client history.</p></div>
+        </li>
+        <li class="jn-step">
+          <div class="jn-tx"><h3>Retain</h3><p>Approved check-ins, service communications, reviews and referrals.</p></div>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════ CLIENT JOURNEY — END ══════════ -->
+
+<script is:inline>
+(function () {
+  'use strict';
+  function init() {
+    var section = document.getElementById('jn');
+    if (!section) return;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.15 });
+      io.observe(section);
+    } else { section.classList.add('in'); }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+})();
+</script>
+<!-- ══════════ CLIENT JOURNEY — END ══════════ -->

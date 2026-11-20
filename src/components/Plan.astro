@@ -1,0 +1,344 @@
+<!-- ============================================================
+     AccrualOS — CHOOSE YOUR PLAN (Frameblox-style layout)
+     Pure HTML + CSS. No JS, no external <link> imports.
+     Manrope loaded globally (GHL theme). Namespace: .pli-*
+     Navy #0E2E4D / Orange #E46E14 · Flat 5px · no shadows.
+     Inclusion copy verbatim as supplied.
+     ============================================================ -->
+<section class="pli-section" id="plans" aria-labelledby="pli-title" data-page="pricing">
+  <style>
+    .pli-section{
+      --pli-navy:#0E2E4D;
+      --pli-orange:#E46E14;
+      --pli-orange-2:#F58A4B;
+      --pli-ink:#0E2E4D;
+      --pli-body:#5A6B7B;
+      --pli-muted:#8792A2;
+      --pli-bg:#F3F5F8;
+      --pli-card:#FFFFFF;
+      --pli-line:#E4E9EF;
+      --pli-r:5px;
+      position:relative;overflow:hidden;isolation:isolate;
+      padding:80px 24px 88px;
+      font-family:'Manrope',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      color:var(--pli-body);
+      -webkit-font-smoothing:antialiased;
+    }
+    .pli-section *{box-sizing:border-box;}
+
+    /* Approved background motif: faint graph-paper grid */
+    .pli-grid-bg{
+      position:absolute;inset:0;z-index:0;pointer-events:none;
+      background-image:
+        linear-gradient(to right, rgba(14,46,77,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14,46,77,.05) 1px, transparent 1px);
+      background-size:44px 44px;
+      -webkit-mask-image:radial-gradient(120% 90% at 50% 20%, #000 0%, rgba(0,0,0,0) 78%);
+              mask-image:radial-gradient(120% 90% at 50% 20%, #000 0%, rgba(0,0,0,0) 78%);
+    }
+
+    .pli-inner{position:relative;z-index:1;max-width:1280px;margin:0 auto;}
+
+    /* Header — left aligned like the reference */
+    .pli-head{max-width:760px;margin:0 0 44px;}
+    .pli-title{
+      margin:0 0 14px;color:var(--pli-ink);
+      font-size:clamp(34px,5vw,52px);line-height:1.02;font-weight:700;letter-spacing:-.03em;
+    }
+    .pli-sub{margin:0;max-width:640px;font-size:18px;line-height:1.55;font-weight:400;color:var(--pli-muted);}
+
+    /* Cards (equal height) */
+    .pli-cards{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:24px;align-items:stretch;
+    }
+    .pli-card{
+          background: #f5f6f8;
+    border: 1px solid var(--pli-line);
+    border-radius: var(--pli-r);
+    flex-direction: column;
+    min-width: 0;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    height: 100%;
+    padding: 22px 22px 24px;
+    display: flex;
+    position: relative;
+    }
+
+    /* Highlighted middle card = navy */
+    .pli-card--elevate{
+      background:linear-gradient(165deg,#123456 0%, var(--pli-navy) 55%, #0B2540 100%);
+      border-color:var(--pli-navy);color:#fff;
+    }
+    .pli-card--elevate .pli-plan{color:rgba(255,255,255,.62);}
+    .pli-card--elevate .pli-desc{color:rgba(255,255,255,.68);}
+    .pli-card--elevate .pli-price b{color:#fff;}
+    .pli-card--elevate .pli-price span{color:rgba(255,255,255,.6);}
+    .pli-card--elevate .pli-list li{color:rgba(255,255,255,.82);}
+    .pli-card--elevate .pli-icon{background:#0f3050;}
+    .pli-card--elevate .pli-icon svg{stroke:#fff;}
+    .pli-card--elevate .pli-lead{    color: #0d2b48 !important;
+    background: #ffffff;
+    padding: 13px;
+    font-weight: 800;
+    margin: 10px 0px;}
+
+    /* "Recommended" pill (matches Best Seller placement) */
+    .pli-pill{
+      position:absolute;top:16px;right:16px;z-index:2;
+      padding:6px 12px;border-radius:100px;background:#fff;color:var(--pli-navy);
+      font-size:11px;font-weight:700;letter-spacing:.02em;
+    }
+
+    /* Icon slot */
+    .pli-icon{
+      height:110px;border-radius:var(--pli-r);margin-bottom:28px;
+      display:flex;
+    }
+    .pli-icon svg{width:60px;height:60px;stroke:var(--pli-navy);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+
+    /* Plan name + description */
+    .pli-plan{    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    /* text-transform: uppercase; */
+    color: #103151;}
+    .pli-desc{margin:12px 0 20px;font-size:14px;line-height:1.5;font-weight:400;color:var(--pli-body);}
+
+    /* Price */
+    .pli-price{display:flex;align-items:baseline;gap:8px;padding-bottom:22px;margin-bottom:6px;border-bottom:1px solid var(--pli-line);}
+    .pli-card--elevate .pli-price{border-bottom-color:rgba(255,255,255,.14);}
+    .pli-price b{font-size:46px;font-weight:700;letter-spacing:-.03em;color:var(--pli-ink);line-height:1;}
+    .pli-price span{font-size:15px;font-weight:500;color:var(--pli-muted);}
+
+    /* Inclusion list — circle checks */
+    .pli-list{list-style:none;margin:16px 0 0;padding:0;flex:1;}
+    .pli-list li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:6px 0;font-size:13px;line-height:1.5;font-weight:400;color:var(--pli-body);
+    }
+    .pli-tick{
+      flex:0 0 auto;width:18px;height:18px;margin-top:1px;border-radius:50%;
+      border:1.5px solid var(--pli-orange);
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .pli-tick svg{width:9px;height:9px;stroke:var(--pli-orange);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;}
+    .pli-card--elevate .pli-tick{border-color:var(--pli-orange-2);}
+    .pli-card--elevate .pli-tick svg{stroke:var(--pli-orange-2);}
+
+    /* "Everything in ___" — emphasised first row */
+    .pli-lead{
+      margin: 0 0 6px; */
+    /* padding: 9px 11px; */
+    border-radius: var(--pli-r);
+    background: #e46e14;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin: 10px 0px;
+    padding: 12px !important;
+    color: #ffffff !important;
+    }
+    .pli-lead .pli-tick{border-color:var(--pli-orange);background:var(--pli-orange);}
+    .pli-lead .pli-tick svg{stroke:#fff;}
+
+    /* CTA — full width, pinned to a shared baseline */
+    .pli-cta{
+      margin-top:24px;display:block;text-align:center;
+      padding:14px 20px;border-radius:var(--pli-r);
+      font-size:14px;font-weight:700;letter-spacing:.01em;text-decoration:none;
+      background:var(--pli-navy);color:#fff;border:1.5px solid var(--pli-navy);
+      transition:background .2s ease,border-color .2s ease,color .2s ease;
+    }
+    .pli-cta:hover{background:#0A2440;border-color:#0A2440;}
+    /* middle card gets the orange primary */
+    .pli-card--elevate .pli-cta{background:var(--pli-orange);border-color:var(--pli-orange);color:#fff;}
+    .pli-card--elevate .pli-cta:hover{background:var(--pli-orange-2);border-color:var(--pli-orange-2);}
+
+    .pli-note{
+      position:relative;z-index:1;max-width:1280px;margin:28px auto 0;
+      font-size:12.5px;font-weight:400;color:var(--pli-muted);
+    }
+
+    /* ---------- ANIMATION ---------- */
+    /* hover lift */
+    .pli-card{transition:transform .35s cubic-bezier(.22,.85,.3,1),box-shadow .35s ease,border-color .3s ease;}
+    .pli-card:hover{transform:translateY(-8px);box-shadow:0 26px 52px -30px rgba(14,46,77,.4);}
+    .pli-card--elevate:hover{box-shadow:0 30px 62px -28px rgba(14,46,77,.55);}
+    .pli-cta{will-change:transform;}
+    .pli-cta:hover{transform:translateY(-2px);}
+
+    /* gentle floating plan icon + hover zoom */
+    .pli-icon img{animation:pliFloat 5s ease-in-out infinite;}
+    .pli-card--elevate .pli-icon img{animation-delay:-1.6s;}
+    .pli-card--dominate .pli-icon img{animation-delay:-3.2s;}
+    @keyframes pliFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    .pli-icon{transition:transform .4s cubic-bezier(.22,.85,.3,1);}
+    .pli-card:hover .pli-icon{transform:scale(1.07);}
+
+    /* pulsing "Recommended" pill */
+    .pli-pill{animation:pliPill 2.4s ease-out infinite;}
+    @keyframes pliPill{
+      0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}
+      70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+    }
+
+    /* shine sweep across the CTA on hover */
+    .pli-cta{position:relative;overflow:hidden;}
+    .pli-cta::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);
+      transform:skewX(-18deg);transition:left .6s ease;pointer-events:none;}
+    .pli-cta:hover::after{left:150%;}
+
+    /* tick pop on card hover */
+    .pli-tick{transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+    .pli-card:hover .pli-tick{transform:scale(1.18);}
+
+    /* scroll-reveal entrance (staggered) */
+    .pli-reveal{opacity:0;transform:translateY(26px);
+      transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+    .pli-reveal.in{opacity:1;transform:none;}
+    .pli-cards .pli-card:nth-child(1){transition-delay:.05s;}
+    .pli-cards .pli-card:nth-child(2){transition-delay:.16s;}
+    .pli-cards .pli-card:nth-child(3){transition-delay:.27s;}
+
+    /* inclusion list cascades in with its card */
+    .pli-list li{opacity:0;transform:translateX(-9px);
+      transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);}
+    .pli-card.in .pli-list li{opacity:1;transform:none;}
+    .pli-card.in .pli-list li:nth-child(1){transition-delay:.22s}
+    .pli-card.in .pli-list li:nth-child(2){transition-delay:.27s}
+    .pli-card.in .pli-list li:nth-child(3){transition-delay:.32s}
+    .pli-card.in .pli-list li:nth-child(4){transition-delay:.37s}
+    .pli-card.in .pli-list li:nth-child(5){transition-delay:.42s}
+    .pli-card.in .pli-list li:nth-child(6){transition-delay:.47s}
+    .pli-card.in .pli-list li:nth-child(7){transition-delay:.52s}
+    .pli-card.in .pli-list li:nth-child(8){transition-delay:.57s}
+    .pli-card.in .pli-list li:nth-child(n+9){transition-delay:.62s}
+
+    @media (prefers-reduced-motion:reduce){
+      .pli-icon img,.pli-pill{animation:none!important;}
+      .pli-reveal,.pli-list li{opacity:1!important;transform:none!important;transition:none!important;}
+      .pli-card:hover,.pli-cta:hover,.pli-card:hover .pli-icon,.pli-card:hover .pli-tick{transform:none;}
+      .pli-cta::after{display:none;}
+    }
+
+    /* Responsive */
+    @media (max-width:920px){
+      .pli-cards{grid-template-columns:1fr;gap:20px;}
+      .pli-card{height:auto;}
+    }
+    @media (max-width:600px){
+      .pli-section{padding:56px 18px 64px;}
+    }
+  </style>
+
+  <span class="pli-grid-bg" aria-hidden="true"></span>
+
+  <div class="pli-inner">
+
+    <header class="pli-head pli-reveal">
+      <h2 id="pli-title" class="pli-title">Choose Your Plan</h2>
+      <p class="pli-sub">Explore the plans and pick the level of support your practice needs — from running the day-to-day to full-service growth.</p>
+    </header>
+
+    <div class="pli-cards">
+
+      <!-- LAUNCH -->
+      <article class="pli-card pli-card--launch pli-reveal">
+        <div class="pli-icon">
+          <img src="/feat-img1.png">
+        </div>
+        <span class="pli-plan">Launch Plan</span>
+        <p class="pli-desc">Your whole practice, running on one system.</p>
+        <div class="pli-price"><b>A$295</b><span>/ month</span></div>
+        <ul class="pli-list">
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>AccrualOS CRM subaccount</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Contact and client database</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Up to three configured pipelines</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Central conversation inbox</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Forms and calendar booking</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Website chat widget</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Basic workflow templates</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Appointment reminders</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Document-request reminder workflow</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Basic dashboard</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Mobile app access</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Five users, then A$30 + GST per user per month</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Initial team training</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Standard email support</li>
+        </ul>
+        <a class="pli-cta" href="/contact-us">Get it now</a>
+      </article>
+
+      <!-- ELEVATE (highlighted navy) -->
+      <article class="pli-card pli-card--elevate pli-reveal">
+        <span class="pli-pill">Recommended</span>
+        <div class="pli-icon">
+          <img src="/feat-img4.png">
+        </div>
+        <span class="pli-plan">Elevate Plan</span>
+        <p class="pli-desc">Run and grow the practice, done for you.</p>
+        <div class="pli-price"><b>A$495</b><span>/ month</span></div>
+        <ul class="pli-list">
+          <li class="pli-lead"><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Everything in Launch</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Done-for-you accounting workflow configuration</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Expanded onboarding and document-follow-up journeys</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>StoryBrand accounting practice webpage or agreed website scope</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>SEO and AEO foundation with monthly optimisation</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Google Business Profile management</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Review and reputation workflows</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Client reactivation campaign</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Monthly performance review</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Dedicated account manager</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Three live team training sessions</li>
+        </ul>
+        <a class="pli-cta" href="/contact-us">Get it now</a>
+      </article>
+
+      <!-- DOMINATE -->
+      <article class="pli-card pli-card--dominate pli-reveal">
+        <div class="pli-icon">
+          <img src="/feat-img2.png">
+        </div>
+        <span class="pli-plan">Dominate Plan</span>
+        <p class="pli-desc">Full-service growth, automation and strategy.</p>
+        <div class="pli-price"><b>A$895</b><span>/ month</span></div>
+        <ul class="pli-list">
+          <li class="pli-lead"><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Everything in Elevate</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Advanced multi-step automation workflows</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Custom dashboards and segmentation</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>One approved service, location or insight page each month</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Weekly AEO and authority-content activity</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Managed social content calendar</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Google and Meta Ads management</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Advanced reactivation and referral campaigns</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Senior strategist check-ins</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Quarterly executive review</li>
+          <li><span class="pli-tick"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.5 2.5L10 3"/></svg></span>Custom integration scoping</li>
+        </ul>
+        <a class="pli-cta" href="/contact-us">Get it now</a>
+      </article>
+
+    </div>
+
+    <p class="pli-note">All prices exclude GST. Additional users beyond the included five are billed at A$30 + GST per user per month.</p>
+  </div>
+
+  <script is:inline>
+    (function(){
+      var root = document.currentScript.closest('.pli-section');
+      if(!root) return;
+      var els = root.querySelectorAll('.pli-reveal');
+      if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        els.forEach(function(el){ el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+</section>

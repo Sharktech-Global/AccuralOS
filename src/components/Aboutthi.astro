@@ -1,0 +1,178 @@
+<!-- =================================================================
+     AccrualOS - PRODUCT FLOW / LINEAGE  (navy-only gradient + white cards)
+     Order: Sharktech Global -> VCPility -> Launch Your Dream -> AccrualOS.
+     Background: the gradient you supplied (blue + orange radial glows
+     over near-black). NOTE: navy-only variant (no off-palette blue)
+     keeps the two-colour palette (navy shades + orange only).
+     Cards are white for high-contrast pop. Manrope, 5px radius, no
+     box-shadows, no dashes. Copy is blueprint-safe.
+     TODO: real logos + photo; confirm "Meet the group" + LYD targets;
+     verify trademark usage. Delete @import if Manrope is global in GHL.
+     ================================================================= -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+.pfl{
+  --nv:#0E2E4D; --or:#E46E14; --r:5px;
+  --ink:#0E2E4D; --mut:#54687c; --line:rgba(14,46,77,.12);
+  --white:#f4f8fc; --lite:#c7d4e0; --soft:#8ea3b8;
+  position:relative; box-sizing:border-box; overflow:clip;
+  font-family:'Manrope',system-ui,-apple-system,sans-serif; color:var(--white);
+  padding:clamp(60px,8vw,112px) 0;
+  /* supplied gradient (orange nudged to brand orange; blue kept as requested) */
+  background:
+    radial-gradient(50% 60% at 20% 30%, rgba(38,104,168,.20), transparent 62%),
+    radial-gradient(45% 55% at 88% 78%, rgba(228,110,20,.12), transparent 60%),
+    radial-gradient(60% 70% at 62% 4%, rgba(38,104,168,.14), transparent 60%),
+    radial-gradient(120% 120% at 50% 50%, transparent 52%, rgba(0,0,0,.55)),
+    linear-gradient(160deg, #0a0e1a, #070a12);
+}
+.pfl *{box-sizing:border-box;}
+.pfl-wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 clamp(18px,3vw,44px); }
+
+/* ---------- TOP: image | copy ---------- */
+.pfl-top{ display:grid; grid-template-columns:44% 1fr; gap:clamp(24px,5vw,56px); align-items:start; }
+.pfl-frame{ margin-left:10px; position:relative; border-radius:var(--r); overflow:hidden; aspect-ratio:4/4.2; background:#0d1424; border:1px solid rgba(255,255,255,.12); }
+.pfl-frame::after{ content:"Image"; position:absolute; inset:0; z-index:0; display:flex; align-items:center; justify-content:center; color:var(--soft); font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.pfl-frame img{ position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover; display:block; }
+
+.pfl-eyebrow{
+  display:inline-flex; align-items:center; gap:8px; margin:0 0 20px; padding:7px 13px; border-radius:var(--r);
+  background:rgba(228,110,20,.16); border:1px solid rgba(228,110,20,.42);
+  color:var(--or); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+}
+.pfl-eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--or); }
+.pfl-h2{ margin:0; font-weight:700; line-height:1.12; letter-spacing:-.4px; font-size:clamp(2rem,4.2vw,3rem); color:#fff; max-width:15ch; }
+.pfl-h2 .or{ color:var(--or); }
+.pfl-lead{ margin:22px 0 0; max-width:48ch; color:var(--lite); font-size:clamp(.98rem,1.3vw,1.06rem); line-height:1.75; }
+.pfl-lead b{ color:#fff; font-weight:700; }
+.pfl-btn{
+  display:inline-flex; align-items:center; gap:.7em; margin-top:30px; text-decoration:none; cursor:pointer;
+  font-weight:700; font-size:.92rem; color:#fff; padding:13px 24px; border-radius:var(--r);
+  background:var(--or); border:1px solid var(--or); transition:background .2s, transform .2s;
+}
+.pfl-btn:hover{ background:#c85e0e; transform:translateY(-1px); }
+.pfl-btn svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2.2; }
+
+/* ---------- FLOW CARDS (4, WHITE) ---------- */
+.pfl-cards{ position:relative; z-index:2; margin-top:clamp(28px,4vw,44px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+@media (min-width:1101px){ .pfl-cards{ margin-top:-88px; } }
+.pfl-card{
+  position:relative; display:flex; flex-direction:column; text-decoration:none; color:var(--ink);
+  min-height:200px; padding:22px 22px 18px; border-radius:var(--r);
+  background:#fff; border:1px solid var(--line);
+  transition:transform .25s ease, border-color .25s ease;
+}
+.pfl-card:hover{ transform:translateY(-5px); border-color:var(--or); }
+.pfl-card.here{ border-top:3px solid var(--or); }
+
+.pfl-logo{ position:relative; width:auto; max-width:170px; height:90px; overflow:hidden; margin-bottom:18px; flex:none; display:grid; place-items:center start; }
+.pfl-logo img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; }
+.pfl-logo span{ display:none; }
+.pfl-card.here .pfl-logo span{ color:var(--or); }
+
+.pfl-k{ font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--or); }
+.pfl-card h3{ margin:8px 0 8px; font-weight:600; font-size:1.25rem; letter-spacing:-.01em; color:var(--nv);text-transform: capitalize;
+ }
+.pfl-card p{ margin:0; font-size:.8rem; line-height:1.5; color:var(--mut);padding: 10px 0px; }
+.pfl-arw{ margin-top:auto; align-self:flex-start; flex:none;
+  width:34px; height:34px; border-radius:50%; background:var(--or); color:#fff;
+  display:grid; place-items:center;
+  transition:transform .25s ease, box-shadow .2s ease, background .2s ease; }
+.pfl-arw svg{ width:15px; height:15px; stroke:#fff; fill:none; stroke-width:2.2; }
+.pfl-card:hover .pfl-arw{ transform:translate(3px,-3px); background:#c85e0e; box-shadow:0 6px 14px rgba(228,110,20,.4); }
+
+/* reveal */
+.pfl [data-reveal]{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; transition-delay:var(--d,0ms); }
+.pfl [data-reveal].is-in{ opacity:1; transform:none; }
+.pfl a:focus-visible{ outline:2px solid var(--or); outline-offset:3px; }
+
+@media (max-width:1100px){ .pfl-cards{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:980px){
+  .pfl-top{ grid-template-columns:1fr; gap:28px; }
+  .pfl-frame{ aspect-ratio:16/11; }
+  .pfl-h2{ max-width:none; }
+}
+@media (max-width:560px){ .pfl-cards{ grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce){ .pfl [data-reveal]{ opacity:1; transform:none; transition:none; } }
+</style>
+
+<section class="pfl" aria-label="The AccrualOS product flow">
+  <div class="pfl-wrap">
+
+    <!-- TOP -->
+    <div class="pfl-top">
+      <div data-reveal>
+        <div class="pfl-frame">
+          <!-- TODO: swap src with your photo -->
+          <img src="/about3.jpg" alt="AccrualOS in practice" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <div>
+        <span class="pfl-eyebrow" data-reveal>Where we come from</span>
+        <h2 class="pfl-h2" data-reveal style="--d:80ms">Backed by a group. Built <span class="or">for one job.</span></h2>
+        <p class="pfl-lead" data-reveal style="--d:160ms">AccrualOS is the accounting-firm edition of a platform proven across Australian business. It sits inside a real technology group, so the tool your practice runs on has <b>enterprise engineering behind it, not a side project.</b></p>
+        <!-- TODO: confirm target for "Meet the group" -->
+        <a class="pfl-btn" href="#leadership" data-reveal style="--d:240ms">Meet the group
+          <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </div>
+
+    <!-- FLOW CARDS: Sharktech -> VCPility -> Launch Your Dream -> AccrualOS -->
+    <div class="pfl-cards">
+      <!-- 1 - Sharktech -->
+      <a class="pfl-card" href="https://www.sharktech.com.au/" target="_blank" rel="noopener noreferrer" data-reveal>
+        <div class="pfl-logo"><img src="/sharktech.png" alt="Sharktech Global" onerror="this.style.display='none'"><span>SHARK<br>TECH</span></div>
+        <span class="pfl-k">01 &middot; The company</span>
+        <h3>Sharktech Global</h3>
+        <p>Technology and delivery company. The company behind AccrualOS product development, integrations and support.</p>
+        <span class="pfl-arw" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <!-- 2 - VCPility -->
+      <a class="pfl-card" href="https://vcpility.com.au" target="_blank" rel="noopener noreferrer" data-reveal style="--d:80ms">
+        <div class="pfl-logo"><img src="/VCP-Sharktech.png" alt="VCPility" onerror="this.style.display='none'"><span>VCP<br>ility</span></div>
+        <span class="pfl-k">02 &middot; The platform</span>
+        <h3>VCPility</h3>
+        <p>Configuration and managed services. Implementation, websites, SEO, AEO, content, advertising and custom automation.</p>
+        <span class="pfl-arw" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <!-- 3 - Launch Your Dream -->
+      <!-- TODO: set the correct Launch Your Dream URL -->
+      <a class="pfl-card" href="#" data-reveal style="--d:160ms">
+        <div class="pfl-logo"><img src="/Logo/LaunchYourDream.png" alt="Launch Your Dream" onerror="this.style.display='none'"><span>LYD</span></div>
+        <span class="pfl-k">03 &middot; The product family</span>
+        <h3>Launch Your Dream</h3>
+        <p>A family of industry-specific CRM, AI automation and growth platforms.</p>
+        <span class="pfl-arw" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <!-- 4 - AccrualOS (you are here) -->
+      <article class="pfl-card here" data-reveal style="--d:240ms">
+        <div class="pfl-logo"><img src="/accurallogo.png" alt="AccrualOS" onerror="this.style.display='none'"><span>Accrual<br>OS</span></div>
+        <span class="pfl-k">04 &middot; The product &middot; you are here</span>
+        <h3>AccrualOS</h3>
+        <p>Accounting practice management and growth platform, built only for Australian accounting and bookkeeping firms.</p>
+        <span class="pfl-arw" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+(function(){
+  var root = document.currentScript.closest('.pfl') || document;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = root.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.14 });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else { reveals.forEach(function(el){ el.classList.add('is-in'); }); }
+})();
+</script>

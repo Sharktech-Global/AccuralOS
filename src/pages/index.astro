@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Osin from '../components/osin.astro';
+import '../css/home.css';
+import Crystal from '../components/Crystal.astro';
+import How from '../components/Howwork.astro';
+import Pricing from '../components/Pricing.astro';
+import Plan from '../components/Plan.astro';
+import Faq from '../components/Faq.astro';
+import App from '../components/Appic.astro';
+import Client from '../components/Client.astro';
+import Path from '../components/Client-path.astro';
+
+---
+
+<Layout>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     BANNER SECTION (single slide) — START
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="banner-wrap">
+  <section class="banner" id="banner" aria-label="AccrualOS hero">
+ 
+    <!-- silk gradient background -->
+    <div class="wavewrap">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="bnRamp" x1="0" y1="0.15" x2="0.92" y2="1" gradientUnits="objectBoundingBox"></linearGradient>
+          <filter id="bnWarp" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+            <feTurbulence id="bnTurb" type="fractalNoise" baseFrequency="0.0034 0.0115" numOctaves="3" seed="14" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="300" xChannelSelector="R" yChannelSelector="G"/>
+            <feGaussianBlur stdDeviation="0.7"/>
+          </filter>
+        </defs>
+        <rect width="1600" height="900" fill="#07182E"/>
+        <g filter="url(#bnWarp)"><rect x="-500" y="-500" width="2700" height="1900" fill="url(#bnRamp)"/></g>
+      </svg>
+    </div>
+ 
+    <!-- background video -->
+    <video class="banner-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="/banner-video.mp4" type="video/mp4">
+    </video>
+ 
+    <div class="glow"></div>
+    <div class="scrim"></div>
+ 
+    <!-- single slide -->
+    <div class="slides">
+      <div class="slide is-on">
+        <div class="eyebrow">Accounting practice management for Australian firms</div>
+        <h1><span class="ln"><span>Run your clients, workflows and practice growth from one connected platform.</span></span></h1>
+        <p class="lede">AccrualOS brings your CRM, client communication, appointments, onboarding, workflow automation, AI assistants and growth tools together in one accounting-focused system.</p>
+        <div class="banner-cta-row">
+          <a class="banner-cta" href="/contact-us">Book an AccrualOS demo
+            <svg width="13" height="13" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H3.2M9 1v5.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="banner-cta secondary" href="/contact-us">Explore the platform</a>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- live activity panel -->
+    <aside class="live" aria-label="Live activity">
+      <div class="live-head">
+        <b><i class="pulse"></i>Running now</b>
+        <span class="clock" id="bnClock">11:47 pm</span>
+      </div>
+      <div class="evt" id="bnE1">
+        <div class="tick" style="background:#4F7CFF"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 5h8M5.5 1.5L9 5l-3.5 3.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="body"><div class="t">New enquiry</div><div class="s">"Looking for a BAS agent in Parramatta"</div></div>
+      </div>
+      <div class="evt typing" id="bnE2">
+        <div class="tick" style="background:#9AACA9"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2.6V5l1.7 1.1" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><circle cx="5" cy="5" r="3.9" stroke="#fff" stroke-width="1.1"/></svg></div>
+        <div class="body"><div class="t">AccrualOS is replying<span class="dots3"><i></i><i></i><i></i></span></div></div>
+      </div>
+      <div class="evt" id="bnE3">
+        <div class="tick"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1.5 5.2l2.3 2.3L8.5 2.8" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="body"><div class="t">Replied &amp; qualified</div><div class="s">Meeting booked — Thu 10:00 am</div></div>
+        <div class="meta" id="bnSecs">43s</div>
+      </div>
+    </aside>
+ 
+  </section>
+</div>
+ 
+<!-- ── TRUST MARQUEE ─────────────────────────────────────────────────────── -->
+<div class="trust-marquee" aria-label="What AccrualOS offers">
+  <div class="tm-inner">
+    <div class="tm-track" id="tmTrack">
+      <span class="tm-item">Built for Australian accounting firms</span>
+      <span class="tm-item">Configured and implemented for you</span>
+      <span class="tm-item">Works with your existing accounting software</span>
+      <span class="tm-item">Desktop and mobile access</span>
+      <span class="tm-item">Built for Australian accounting firms</span>
+      <span class="tm-item">Configured and implemented for you</span>
+      <span class="tm-item">Works with your existing accounting software</span>
+      <span class="tm-item">Desktop and mobile access</span>
+    </div>
+  </div>
+</div>
+<!-- ══════════════════════════════════════════════════════════════════════
+     BANNER SECTION (single slide) — END
+     ══════════════════════════════════════════════════════════════════════ -->
+ 
+<script is:inline>
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS HERO (single slide) — SCRIPT
+   Silk gradient · cursor parallax · live activity panel. No carousel.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+ 
+  var CONFIG = { parallax: { x: 34, y: 22 } };
+ 
+  function init() {
+    var banner = document.getElementById('banner');
+    if (!banner) return;
+ 
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var NS = 'http://www.w3.org/2000/svg';
+ 
+    /* ---- 1. build the silk gradient ---- */
+    var ramp = document.getElementById('bnRamp');
+    for (var i = 0; i <= 170; i++) {
+      var t     = i / 170;
+      var hue   = 205 + 30 * t + 8 * Math.sin(t * 8.5);
+      var sat   = 58 + 20 * Math.sin(t * 4.2);
+      var fold  = Math.pow(Math.abs(Math.sin(t * Math.PI * 13 + 0.6)), 2.6);
+      var light = 17 + 56 * fold + 8 * Math.sin(t * 3.1);
+      var stop  = document.createElementNS(NS, 'stop');
+      stop.setAttribute('offset', (t * 100).toFixed(2) + '%');
+      stop.setAttribute('stop-color', 'hsl(' + hue.toFixed(1) + ',' + sat.toFixed(1) + '%,' + light.toFixed(1) + '%)');
+      ramp.appendChild(stop);
+    }
+    if (!reduce) {
+      var anim = document.createElementNS(NS, 'animate');
+      anim.setAttribute('attributeName', 'baseFrequency');
+      anim.setAttribute('values', '0.0034 0.0115; 0.0041 0.0094; 0.0034 0.0115');
+      anim.setAttribute('dur', '34s');
+      anim.setAttribute('repeatCount', 'indefinite');
+      document.getElementById('bnTurb').appendChild(anim);
+    }
+ 
+    /* ---- 2. cursor parallax on the gradient ---- */
+    if (!reduce) {
+      var wrap = banner.querySelector('.wavewrap');
+      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      var loop = function () {
+        cx += (tx - cx) * 0.07;
+        cy += (ty - cy) * 0.07;
+        wrap.style.transform = 'translate3d(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px,0)';
+        raf = (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) ? requestAnimationFrame(loop) : null;
+      };
+      banner.addEventListener('mousemove', function (e) {
+        var r = banner.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width  - 0.5) * CONFIG.parallax.x;
+        ty = ((e.clientY - r.top)  / r.height - 0.5) * CONFIG.parallax.y;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+      banner.addEventListener('mouseleave', function () {
+        tx = 0; ty = 0;
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+    }
+ 
+    /* ---- 3. live activity panel ---- */
+    var e1 = document.getElementById('bnE1'),
+        e2 = document.getElementById('bnE2'),
+        e3 = document.getElementById('bnE3'),
+        secs = document.getElementById('bnSecs'),
+        clock = document.getElementById('bnClock');
+ 
+    if (e1 && e2 && e3) {
+      var times = ['11:47 pm', '6:12 am', '9:03 pm', '2:38 am', '10:21 pm'];
+      var feed = [
+        ['"Looking for a BAS agent in Parramatta"', 'Thu 10:00 am'],
+        ['"Need help with a company tax return"',   'Tue 2:30 pm'],
+        ['"Switching from our current accountant"', 'Mon 9:15 am'],
+        ['"Setting up a family trust this FY"',     'Wed 11:45 am']
+      ];
+      var q = 0;
+ 
+      var cycle = function () {
+        [e1, e2, e3].forEach(function (el) { el.classList.remove('is-on'); });
+        var item = feed[q % feed.length];
+        e1.querySelector('.s').textContent = item[0];
+        e3.querySelector('.s').textContent = 'Meeting booked — ' + item[1];
+        clock.textContent = times[q % times.length];
+        q++;
+ 
+        setTimeout(function () { e1.classList.add('is-on'); }, 400);
+        setTimeout(function () { e2.classList.add('is-on'); }, 1500);
+        setTimeout(function () {
+          e2.classList.remove('is-on');
+          e3.classList.add('is-on');
+          var n = 0, target = 28 + Math.floor(Math.random() * 26);
+          var tick = setInterval(function () {
+            n += 3;
+            if (n >= target) { n = target; clearInterval(tick); }
+            secs.textContent = n + 's';
+          }, 26);
+        }, 3400);
+        setTimeout(cycle, 8200);
+      };
+ 
+      if (reduce) { e1.classList.add('is-on'); e3.classList.add('is-on'); }
+      else { cycle(); }
+    }
+  }
+ 
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<Crystal />
+<App />
+
+<Osin />
+
+<How />
+<Pricing />
+<Client />
+<Path />
+<Plan />
+<Faq />
+
+</Layout>

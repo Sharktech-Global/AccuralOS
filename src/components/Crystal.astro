@@ -1,0 +1,458 @@
+<style>
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCRUALOS · FEATURES — left cards drive the right CRM app window
+   Select a card (left) OR a nav item (right) → the app swaps scene, page title
+   and the highlighted nav item. Centred header. Animated scenes. Tokens --pf-*.
+   ══════════════════════════════════════════════════════════════════════════ */
+.pf{
+  --pf-navy:#0E2E4D;--pf-ink:#0E2E4D;--pf-body:#3F4A57;--pf-muted:#6B7686;
+  --pf-line:rgba(14,46,77,.14);--pf-line-soft:rgba(14,46,77,.08);
+  --pf-orange:#E46E14;--pf-orange-2:#F58A4B;--pf-navy-soft:#EAF0F6;--pf-orange-soft:#FCEEE2;
+  --r-bg:#0B1F35;--r-bg-2:#0E2846;--r-text:rgba(255,255,255,.72);--r-line:rgba(255,255,255,.09);
+  --pf-canvas:#F6F8FB;--pf-r:5px;
+  --pf-font:"Manrope",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --pf-ease:cubic-bezier(.22,.85,.3,1);
+}
+.pf{position:relative;overflow:hidden;padding:clamp(56px,6vw,80px) 0 clamp(60px,7.5vw,120px);
+  font-family:var(--pf-font);color:var(--pf-ink);background:#fff}
+.pf *{box-sizing:border-box}
+.pf-shell{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 clamp(16px,1.8vw,24px)}
+
+.pf-gridbg{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right,  rgba(14,46,77,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14,46,77,.07) 1px, transparent 1px);
+  background-size:38px 38px;
+  -webkit-mask-image:radial-gradient(80% 68% at 50% 34%, #000 0%, transparent 82%);
+          mask-image:radial-gradient(80% 68% at 50% 34%, #000 0%, transparent 82%)}
+.pf-orb{position:absolute;z-index:0;border-radius:50%;filter:blur(74px);pointer-events:none}
+.pf-orb.a{width:440px;height:440px;background:var(--pf-navy);left:-10%;top:2%;opacity:.07}
+
+.pf-logo{height:24px;width:auto;max-width:100%;display:block}
+
+/* ── HEADER · centred ── */
+.pf-head{margin:0 auto clamp(30px,3.4vw,48px);text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  opacity:0;transform:translateY(22px);transition:opacity .8s var(--pf-ease),transform .8s var(--pf-ease)}
+.pf.in .pf-head{opacity:1;transform:none}
+.pf-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--pf-orange);margin-bottom:clamp(14px,1.6vw,18px)}
+.pf-eyebrow::before,.pf-eyebrow::after{content:"";width:30px;height:2px;background:var(--pf-orange)}
+.pf-h2{margin: 0;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -.028em;
+    color: var(--pf-ink);
+    text-transform: capitalize;}
+.pf-intro{margin:clamp(12px,1.4vw,16px) auto 0;max-width:65ch;font-size:16px;line-height:1.6;color:var(--pf-body)}
+
+.pf-grid{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:clamp(24px,3vw,44px);align-items:start}
+
+/* ── LEFT: feature cards (upgraded) ── */
+.pf-tabs{display:flex;flex-direction:column;gap:18px;
+  opacity:0;transform:translateY(22px);transition:opacity .8s var(--pf-ease) .1s,transform .8s var(--pf-ease) .1s}
+.pf.in .pf-tabs{opacity:1;transform:none}
+.pf-tab{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+ box-shadow: rgba(6, 22, 40, 0.28) 0px 6px 18px -6px, rgba(6, 22, 40, 0.18) 0px 2px 6px -2px;
+  width:100%;text-align:left;font-family:inherit;color:inherit;cursor:pointer;padding:16px 40px 16px 18px;
+  border:1px solid rgba(255,255,255,.10);border-radius:var(--pf-r);background:var(--r-bg-2);
+  transition:border-color .25s var(--pf-ease),background .25s var(--pf-ease),transform .25s var(--pf-ease),box-shadow .25s var(--pf-ease)}
+.pf-tab::before{content:"";position:absolute;left:0;top:12%;bottom:12%;width:3px;border-radius:0 3px 3px 0;
+  background:linear-gradient(180deg,var(--pf-orange),var(--pf-orange-2));transform:scaleY(0);transition:transform .3s var(--pf-ease)}
+/* NEW · animated chevron on the selected card */
+.pf-tab::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;
+  border-right:2px solid var(--pf-orange);border-top:2px solid var(--pf-orange);
+  transform:translateY(-50%) rotate(45deg);opacity:0;transition:opacity .3s var(--pf-ease),right .3s var(--pf-ease)}
+.pf-tab:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22);
+  box-shadow: rgba(6,22,40,.34) 0px 12px 26px -8px, rgba(6,22,40,.22) 0px 4px 10px -3px;}
+.pf-tab[aria-selected="true"]{background:#143054;border-color:rgba(228,110,20,.6);
+box-shadow: rgba(228,110,20,.18) 0px 10px 26px -10px, rgba(6,22,40,.30) 0px 2px 8px -3px;}
+.pf-tab[aria-selected="true"]::before{transform:scaleY(1)}
+.pf-tab[aria-selected="true"]::after{opacity:1;right:16px}
+.pf-tab:focus-visible{outline:2px solid var(--pf-orange);outline-offset:2px}
+.pf-ic{width:38px;height:38px;border-radius:var(--pf-r);flex:none;display:grid;place-items:center;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.82);transition:background .25s var(--pf-ease),color .25s var(--pf-ease),transform .25s var(--pf-ease)}
+.pf-tab[aria-selected="true"] .pf-ic{background:linear-gradient(135deg,var(--pf-orange-2),var(--pf-orange));color:#fff;transform:scale(1.04)}
+.pf-tab h4{margin:7px 0 0;font-size:clamp(14px,1.1vw,16px);font-weight:700;letter-spacing:-.015em;color:#F2F7FC}
+.pf-tab p{margin:0;max-height:0;overflow:hidden;opacity:0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);
+  transition:max-height .4s var(--pf-ease),opacity .3s var(--pf-ease),margin .4s var(--pf-ease)}
+.pf-tab[aria-selected="true"] p{max-height:120px;opacity:1;margin-top:7px}
+
+.pf-cta{display:flex;align-items:center;gap:clamp(14px,1.6vw,22px);margin-top:clamp(20px,2.4vw,30px);flex-wrap:wrap}
+.pf-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:var(--pf-r);background:var(--pf-navy);
+  border:0;color:#fff;font-size:14px;font-weight:700;font-family:inherit;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s}
+.pf-btn:hover{background:#163a5c;transform:translateY(-1px);box-shadow:0 10px 24px rgba(14,46,77,.28)}
+.pf-btn svg{width:13px;height:13px}
+.pf-link{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--pf-navy);
+  font-family:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,gap .2s,color .2s}
+.pf-link:hover{border-color:var(--pf-orange);color:var(--pf-orange);gap:12px}
+
+/* ── RIGHT: CRM app window (polished) ── */
+.pf-app{position:relative;display:grid;grid-template-columns:clamp(150px,15vw,190px) 1fr;
+  height:clamp(400px,44vw,486px);border:1px solid rgba(14,46,77,.16);border-radius:10px;overflow:hidden;
+  background:#fff;
+  opacity:0;transform:translateY(22px);transition:opacity .8s var(--pf-ease) .18s,transform .8s var(--pf-ease) .18s}
+.pf.in .pf-app{opacity:1;transform:none}
+
+.pf-nav{background:linear-gradient(180deg,var(--r-bg-2),var(--r-bg));border-right:1px solid var(--r-line);
+  display:flex;flex-direction:column;padding:14px 12px;min-width:0;overflow:hidden}
+.pf-brand{display:flex;align-items:center;gap:9px;padding:2px 6px 12px}
+.pf-brand .mk{width:22px;height:22px;border-radius:6px;flex:none;background:linear-gradient(135deg,var(--pf-orange),var(--pf-orange-2));
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px}
+.pf-brand b{color:#fff;font-size:14px;font-weight:800;letter-spacing:-.01em}
+.pf-org{display:flex;align-items:center;gap:8px;padding:8px 9px;margin-bottom:12px;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--r-line)}
+.pf-org .av{width:22px;height:22px;border-radius:5px;flex:none;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
+.pf-org span{min-width:0}
+.pf-org b{display:block;color:#fff;font-size:11.5px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-org small{display:block;color:rgba(255,255,255,.5);font-size:10px;line-height:1.2}
+.pf-navlist{display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.pf-navi{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:6px;background:transparent;
+  color:var(--r-text);font-size:12.5px;font-weight:600;transition:background .3s var(--pf-ease),color .3s var(--pf-ease)}
+.pf-navi svg{width:16px;height:16px;flex:none;opacity:.9}
+.pf-navi.dim{color:rgba(255,255,255,.38)}
+.pf-navi.is-on{background:var(--pf-orange);color:#fff}
+.pf-navi.is-on svg{opacity:1}
+/* NEW · nav items are clickable and drive the shift */
+.pf-navi[data-scene]{cursor:pointer}
+.pf-navi[data-scene]:hover:not(.is-on){background:rgba(255,255,255,.07);color:#fff}
+
+.pf-main{display:flex;flex-direction:column;min-width:0;background:var(--pf-canvas)}
+.pf-topbar{flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;height:54px;background:#fff;border-bottom:1px solid var(--pf-line-soft)}
+/* NEW · window chrome dots */
+.pf-dots{display:flex;gap:6px;margin-right:4px}
+.pf-dots i{width:9px;height:9px;border-radius:50%;background:#DCE3EB}
+.pf-dots i:nth-child(1){background:#F0B7A6}.pf-dots i:nth-child(2){background:#F2D6A0}.pf-dots i:nth-child(3){background:#B9DFC4}
+.pf-ptitle{font-size:15px;font-weight:800;color:var(--pf-ink);letter-spacing:-.01em}
+.pf-subtabs{display:flex;gap:14px;margin-left:6px}
+.pf-subtabs span{font-size:12px;color:var(--pf-muted);position:relative;padding-bottom:2px;cursor:pointer;transition:color .2s}
+.pf-subtabs span:hover{color:var(--pf-ink)}
+.pf-subtabs span.on{color:var(--pf-orange);font-weight:700}
+.pf-subtabs span.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--pf-orange);border-radius:2px}
+.pf-topspace{flex:1}
+.pf-new{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:6px;background:var(--pf-orange);color:#fff;font-size:12px;font-weight:700;border:0;cursor:pointer;transition:background .2s,transform .2s}
+.pf-new:hover{background:#cf6210;transform:translateY(-1px)}
+.pf-new svg{width:11px;height:11px}
+.pf-tav{width:26px;height:26px;border-radius:50%;flex:none;background:var(--pf-navy);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
+
+.pf-scenes{position:relative;flex:1;overflow:hidden}
+.pf-scene{position:absolute;inset:0;padding:clamp(14px,2vw,22px);opacity:0;visibility:hidden;transition:opacity .38s var(--pf-ease);display:flex;flex-direction:column}
+.pf-scene.active{opacity:1;visibility:visible}
+.pf-scene .lbl{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pf-muted);margin-bottom:13px;flex:none}
+.pf-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.s-chat .pf-body{justify-content:flex-end}
+.s-docs .pf-body,.s-cal .pf-body{justify-content:center}
+.s-board .pf-body{justify-content:stretch}
+.pf-scene .live{width:7px;height:7px;border-radius:50%;background:#28B463}
+.pf-scene.active .live{animation:pfLive 1.8s ease-in-out infinite}
+@keyframes pfLive{0%,100%{box-shadow:0 0 0 0 rgba(40,180,99,.5)}50%{box-shadow:0 0 0 5px rgba(40,180,99,0)}}
+
+/* chat */
+.s-chat .ch-row{display:flex;margin-bottom:9px}.s-chat .ch-row.out{justify-content:flex-end}
+.s-chat .ch-bub{max-width:74%;font-size:13px;line-height:1.45;padding:10px 13px;border-radius:12px;background:#fff;border:1px solid var(--pf-line);color:var(--pf-ink);opacity:0;transform:translateX(-12px)}
+.s-chat .ch-bub.b-out{background:linear-gradient(135deg,var(--pf-orange),var(--pf-orange-2));border-color:transparent;color:#fff;transform:translateX(12px)}
+.s-chat .ch-type{display:inline-flex;gap:4px;padding:10px 13px;border-radius:12px;background:#fff;border:1px solid var(--pf-line);opacity:0}
+.s-chat .ch-type i{width:5px;height:5px;border-radius:50%;background:var(--pf-muted);animation:pfDot 1s ease-in-out infinite}
+.s-chat .ch-type i:nth-child(2){animation-delay:.15s}.s-chat .ch-type i:nth-child(3){animation-delay:.3s}
+.s-chat .ch-pill{display:inline-flex;align-items:center;gap:7px;margin-top:11px;padding:9px 14px;border-radius:999px;background:var(--pf-navy);color:#fff;font-size:12.5px;font-weight:700;opacity:0;transform:scale(.85)}
+.s-chat .ch-pill::before{content:"✓";color:var(--pf-orange-2);font-weight:800}
+@keyframes pfDot{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.pf-scene.active.s-chat .ch-bub:not(.b-out){animation:pfChatA 7.5s var(--pf-ease) infinite}
+.pf-scene.active.s-chat .ch-type{animation:pfChatT 7.5s var(--pf-ease) infinite}
+.pf-scene.active.s-chat .ch-bub.b-out{animation:pfChatB 7.5s var(--pf-ease) infinite}
+.pf-scene.active.s-chat .ch-pill{animation:pfChatP 7.5s var(--pf-ease) infinite}
+@keyframes pfChatA{0%,4%{opacity:0;transform:translateX(-12px)}9%,94%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes pfChatT{0%,14%{opacity:0}18%,30%{opacity:1}34%,100%{opacity:0}}
+@keyframes pfChatB{0%,34%{opacity:0;transform:translateX(12px)}39%,94%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes pfChatP{0%,52%{opacity:0;transform:scale(.85)}57%{opacity:1;transform:scale(1.06)}62%,94%{opacity:1;transform:scale(1)}99%,100%{opacity:0;transform:scale(.85)}}
+
+/* docs */
+.s-docs .dc-row{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;background:#fff;border:1px solid var(--pf-line);border-radius:var(--pf-r);padding:10px 12px;margin-bottom:8px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.s-docs .dc-row:hover{border-color:rgba(228,110,20,.4);box-shadow:0 6px 16px rgba(14,46,77,.07);transform:translateY(-1px)}
+.s-docs .dc-ic{width:26px;height:26px;border-radius:6px;flex:none;display:grid;place-items:center;background:var(--pf-navy-soft);color:var(--pf-navy)}
+.s-docs .dc-name{font-size:13px;font-weight:600;color:var(--pf-ink)}
+.s-docs .dc-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--pf-line);position:relative}
+.s-docs .dc-check::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:var(--pf-orange);opacity:0;transform:scale(.4)}
+.s-docs .dc-check::before{
+    content: "";position: absolute;left: 5px;top: 7px;width: 8px;height: 3.5px;z-index: 1;
+    border-left: 2px solid #fff;border-bottom: 2px solid #fff;transform: rotate(-45deg) scale(0);transform-origin: center;}
+.s-docs .dc-bar{position:relative;height:6px;border-radius:999px;background:rgba(14,46,77,.12);overflow:hidden;margin-top:12px}
+.s-docs .dc-bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--pf-orange),var(--pf-orange-2))}
+.s-docs .dc-done{font-size:12px;font-weight:700;color:var(--pf-orange);margin-top:9px;opacity:0}
+.pf-scene.active.s-docs .dc-check::after{animation:pfFill 6s var(--pf-ease) infinite}
+.pf-scene.active.s-docs .dc-check::before{animation:pfTick 6s var(--pf-ease) infinite}
+.pf-scene.active.s-docs .dc-row:nth-child(2) .dc-check::after,.pf-scene.active.s-docs .dc-row:nth-child(2) .dc-check::before{animation-delay:.1s}
+.pf-scene.active.s-docs .dc-row:nth-child(3) .dc-check::after,.pf-scene.active.s-docs .dc-row:nth-child(3) .dc-check::before{animation-delay:.7s}
+.pf-scene.active.s-docs .dc-row:nth-child(4) .dc-check::after,.pf-scene.active.s-docs .dc-row:nth-child(4) .dc-check::before{animation-delay:1.3s}
+.pf-scene.active.s-docs .dc-row:nth-child(5) .dc-check::after,.pf-scene.active.s-docs .dc-row:nth-child(5) .dc-check::before{animation-delay:1.9s}
+.pf-scene.active.s-docs .dc-bar i{animation:pfBar 6s var(--pf-ease) infinite}
+.pf-scene.active.s-docs .dc-bar::after{content:"";position:absolute;top:0;left:0;height:100%;width:40px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:pfShimmer 6s var(--pf-ease) infinite}
+.pf-scene.active.s-docs .dc-done{animation:pfDone 6s var(--pf-ease) infinite}
+@keyframes pfFill{0%,6%{opacity:0;transform:scale(.4)}12%,92%{opacity:1;transform:scale(1)}98%,100%{opacity:0}}
+@keyframes pfTick{0%,8%{transform:rotate(-45deg) scale(0)}14%,92%{transform:rotate(-45deg) scale(1)}98%,100%{transform:rotate(-45deg) scale(0)}}
+@keyframes pfBar{0%,6%{width:0}52%,92%{width:100%}98%,100%{width:0}}
+@keyframes pfShimmer{0%,6%{left:-40px;opacity:0}10%{opacity:1}50%{left:100%;opacity:1}54%,100%{left:100%;opacity:0}}
+@keyframes pfDone{0%,56%{opacity:0}62%,92%{opacity:1}98%,100%{opacity:0}}
+
+/* board */
+.s-board .bd-wrap{position:relative;flex:1;min-height:0}
+.s-board .bd-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;height:100%}
+.s-board .bd-col{background:rgba(14,46,77,.04);border:1px solid var(--pf-line-soft);border-radius:var(--pf-r);padding:9px 8px;display:flex;flex-direction:column}
+.s-board .bd-h{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pf-muted);margin-bottom:8px}
+.s-board .bd-slot{height:34px;border-radius:5px;border:1px dashed rgba(14,46,77,.16);margin-bottom:7px;flex:none}
+.s-board .bd-card{display:block;height:26px;border-radius:5px;background:#fff;border:1px solid var(--pf-line);margin-bottom:7px;opacity:0;transform:translateY(6px)}
+.s-board .bd-move{position:absolute;top:35px;left:0;width:calc(33.33% - 15px);height:34px;border-radius:5px;background:#fff;border:1.5px solid var(--pf-orange);display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:var(--pf-ink)}
+.pf-scene.active.s-board .bd-card{animation:pfCard 7s var(--pf-ease) infinite}
+.pf-scene.active.s-board .bd-col:nth-child(2) .bd-card{animation-delay:.2s}
+.pf-scene.active.s-board .bd-col:nth-child(3) .bd-card{animation-delay:.4s}
+.pf-scene.active.s-board .bd-move{animation:pfMove 7s var(--pf-ease) infinite,pfLift 7s var(--pf-ease) infinite}
+@keyframes pfCard{0%,6%{opacity:0;transform:translateY(6px)}14%,100%{opacity:1;transform:none}}
+@keyframes pfMove{0%,22%{left:0}32%,52%{left:calc(33.33% + 5px)}62%,92%{left:calc(66.66% + 10px)}100%{left:0}}
+@keyframes pfLift{0%,22%{transform:scale(1);box-shadow:0 0 0 rgba(228,110,20,0)}27%{transform:scale(1.05);box-shadow:0 8px 20px rgba(228,110,20,.35)}32%,52%{transform:scale(1);box-shadow:0 0 0 rgba(228,110,20,0)}57%{transform:scale(1.05);box-shadow:0 8px 20px rgba(228,110,20,.35)}62%,100%{transform:scale(1);box-shadow:0 0 0 rgba(228,110,20,0)}}
+
+/* calendar */
+.s-cal .cl-grid{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:2px}
+.s-cal .cl-grid i{aspect-ratio:1;border-radius:5px;background:#fff;border:1px solid var(--pf-line-soft);display:grid;place-items:center;font-size:10px;color:var(--pf-muted);font-style:normal}
+.s-cal .cl-grid i.prep{position:relative}
+.s-cal .cl-grid i.prep::after{content:"✓";color:var(--pf-navy);font-weight:800;opacity:0}
+.s-cal .cl-grid i.due{background:var(--pf-orange-soft);border-color:var(--pf-orange);color:var(--pf-orange);font-weight:800}
+.s-cal .cl-tag{display:inline-flex;align-items:center;gap:7px;margin-top:11px;padding:8px 13px;border-radius:999px;background:var(--pf-navy);color:#fff;font-size:12px;font-weight:700;opacity:0;transform:translateY(6px)}
+.s-cal .cl-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pf-orange-2)}
+.pf-scene.active.s-cal .cl-grid i.due{animation:pfPulse 2.2s var(--pf-ease) infinite}
+.pf-scene.active.s-cal .cl-grid i.prep::after{animation:pfPrep 6s var(--pf-ease) infinite}
+.pf-scene.active.s-cal .cl-tag{animation:pfTag 6s var(--pf-ease) infinite}
+@keyframes pfPulse{0%,100%{box-shadow:0 0 0 0 rgba(228,110,20,.4)}50%{box-shadow:0 0 0 6px rgba(228,110,20,0)}}
+@keyframes pfPrep{0%,24%{opacity:0}30%,92%{opacity:1}98%,100%{opacity:0}}
+@keyframes pfTag{0%,40%{opacity:0;transform:translateY(6px)}48%,92%{opacity:1;transform:none}98%,100%{opacity:0}}
+
+@media (max-width:1080px){
+  .pf-grid{grid-template-columns:1fr;gap:clamp(24px,4vw,36px)}
+  .pf-h2{max-width:22ch}
+}
+@media (max-width:820px){
+  .pf-app{grid-template-columns:1fr;height:auto}
+  .pf-nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--r-line);padding:10px}
+  .pf-brand,.pf-org{display:none}
+  .pf-navlist{flex-direction:row;gap:6px}
+  .pf-navi{white-space:nowrap;padding:8px 12px}.pf-navi.dim{display:none}
+  .pf-scenes{height:clamp(300px,60vw,360px)}
+}
+@media (max-width:640px){.pf-gridbg{background-size:30px 30px}.pf-subtabs{display:none}}
+@media (max-width:560px){
+  .pf{padding:clamp(40px,11vw,56px) 0 clamp(46px,12vw,60px)}
+  .pf-head{margin-bottom:26px}
+  .pf-intro{font-size:14.5px;line-height:1.6}
+  .pf-tabs{gap:12px}
+  .pf-tab{padding:14px 32px 14px 15px;gap:12px}
+  .pf-tab h4{margin-top:5px}
+  .pf-cta{gap:12px;flex-direction:column;align-items:stretch}
+  .pf-btn{width:100%;justify-content:center}
+  .pf-link{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .pf *{animation:none!important;transition-duration:.01ms!important}
+  .pf-head,.pf-tabs,.pf-app{opacity:1;transform:none}
+  .s-chat .ch-bub,.s-chat .ch-pill{opacity:1;transform:none}.s-chat .ch-type{display:none}
+  .s-docs .dc-check::after{opacity:1;transform:scale(1)}.s-docs .dc-check::before{transform:rotate(-45deg) scale(1)}
+  .s-docs .dc-bar i{width:100%}.s-docs .dc-done{opacity:1}
+  .s-board .bd-card{opacity:1;transform:none}.s-board .bd-move{left:71%}
+  .s-cal .cl-grid i.prep::after{opacity:1}.s-cal .cl-tag{opacity:1;transform:none}
+}
+</style>
+
+<!-- ══════════ FEATURES (cards → CRM window) — START ══════════ -->
+<section class="pf" id="pf" aria-label="AccrualOS features">
+
+  <div class="pf-gridbg" aria-hidden="true"></div>
+  <span class="pf-orb a" aria-hidden="true"></span>
+  <span class="pf-orb b" aria-hidden="true"></span>
+
+  <div class="pf-shell">
+
+    <div class="pf-head">
+      <div class="pf-eyebrow">One view of the practice</div>
+      <h2 class="pf-h2">See what is happening across your practice.</h2>
+      <p class="pf-intro">View new enquiries, appointments, onboarding progress, outstanding requests, follow-up activity and workflow exceptions from one central dashboard.</p>
+    </div>
+
+    <div class="pf-grid">
+
+      <!-- LEFT: feature cards -->
+      <div class="pf-tabs" role="tablist" aria-label="AccrualOS features">
+
+        <button class="pf-tab" role="tab" id="pf-tab-0" aria-selected="true" aria-controls="pf-app" data-scene="0">
+          <span class="pf-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4.5h14v9H2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 5l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          <span><h4>Enquiry desk</h4><p>Every enquiry qualified, answered and booked, day or night, without anyone opening the inbox.</p></span>
+        </button>
+
+        <button class="pf-tab" role="tab" id="pf-tab-1" aria-selected="false" aria-controls="pf-app" tabindex="-1" data-scene="1">
+          <span class="pf-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 2h6l3 3v11H5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 2v3.5h3M7 9.5h4M7 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <span><h4>Document chase</h4><p>Requests, reminders and filing handled end to end, so nobody writes another follow-up email.</p></span>
+        </button>
+
+        <button class="pf-tab" role="tab" id="pf-tab-2" aria-selected="false" aria-controls="pf-app" tabindex="-1" data-scene="2">
+          <span class="pf-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 2.5h5v5h-5zM10.5 2.5h5v5h-5zM2.5 10.5h5v5h-5zM10.5 10.5h5v5h-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+          <span><h4>Practice board</h4><p>Every client, job and deadline on one screen the whole team shares. No spreadsheet, no chasing.</p></span>
+        </button>
+
+        <button class="pf-tab" role="tab" id="pf-tab-3" aria-selected="false" aria-controls="pf-app" tabindex="-1" data-scene="3">
+          <span class="pf-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 4.5h13v11h-13zM2.5 7.5h13M6 2.5v3M12 2.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 11l1.6 1.6L11.5 9.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><h4>Compliance calendar</h4><p>BAS, IAS and lodgement dates tracked against the ATO calendar, queued before the deadline moves.</p></span>
+        </button>
+
+        <div class="pf-cta">
+          <a class="pf-btn" href="/contact-us">Start for $1
+            <svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H3.2M9 1v5.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="pf-link" href="/#how-it-works">See the 21-day setup
+            <svg width="11" height="11" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 5h8M5.5 1.5L9 5l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: CRM app window -->
+      <div class="pf-app" id="pf-app" role="tabpanel" aria-labelledby="pf-tab-0">
+
+        <aside class="pf-nav">
+          <div class="pf-brand">
+            <img class="pf-logo" src="/accuralwhite.png" alt="AccrualOS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="pf-brandfb" style="display:none;align-items:center;gap:9px"><span class="mk">A</span><b>AccrualOS</b></span>
+          </div>
+          <div class="pf-org"><span class="av">MA</span><span><b>Meridian Advisory</b><small>Sydney · NSW</small></span></div>
+          <nav class="pf-navlist">
+            <div class="pf-navi dim"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 2.5h5v5h-5zM10.5 2.5h5v5h-5zM2.5 10.5h5v5h-5zM10.5 10.5h5v5h-5z" stroke="currentColor" stroke-width="1.5"/></svg>Dashboard</div>
+            <div class="pf-navi is-on" data-scene="0" role="button" tabindex="0"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 3.5h13v9h-8l-3 2.5v-2.5h-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Conversations</div>
+            <div class="pf-navi" data-scene="1" role="button" tabindex="0"><svg viewBox="0 0 18 18" fill="none"><path d="M5 2h6l3 3v11H5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 2v3.5h3" stroke="currentColor" stroke-width="1.5"/></svg>Documents</div>
+            <div class="pf-navi" data-scene="2" role="button" tabindex="0"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 3h4v12h-4zM7.5 3h4v12h-4zM12.5 3h3v12h-3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Opportunities</div>
+            <div class="pf-navi" data-scene="3" role="button" tabindex="0"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 4.5h13v11h-13zM2.5 7.5h13M6 2.5v3M12 2.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Calendars</div>
+            <div class="pf-navi dim"><svg viewBox="0 0 18 18" fill="none"><path d="M2.5 5.5h13v8h-13zM2.5 8h13" stroke="currentColor" stroke-width="1.5"/></svg>Payments</div>
+          </nav>
+        </aside>
+
+        <div class="pf-main">
+          <div class="pf-topbar">
+            <span class="pf-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="pf-ptitle" id="pfTitle">Conversations</span>
+            <div class="pf-subtabs" aria-hidden="true"><span class="on">All</span><span>Unread</span><span>Booked</span></div>
+            <span class="pf-topspace"></span>
+            <button class="pf-new" type="button" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>New</button>
+            <span class="pf-tav" aria-hidden="true">AV</span>
+          </div>
+
+          <div class="pf-scenes" aria-live="polite">
+
+            <div class="pf-scene s-chat active" data-scene="0">
+              <span class="lbl"><span class="live"></span> Live enquiry · 11:47 pm</span>
+              <div class="pf-body">
+                <div class="ch-row in"><span class="ch-bub">Hi, do you do BAS for sole traders in Parramatta?</span></div>
+                <div class="ch-row in"><span class="ch-type"><i></i><i></i><i></i></span></div>
+                <div class="ch-row out"><span class="ch-bub b-out">We do. I can book you in, Thursday 10 am?</span></div>
+                <div class="ch-row"><span class="ch-pill">Booked · Thu 10:00 am AEST</span></div>
+              </div>
+            </div>
+
+            <div class="pf-scene s-docs" data-scene="1">
+              <span class="lbl">Collecting BAS documents · Whitfield Pty Ltd</span>
+              <div class="pf-body">
+                <div class="dc-row"><span class="dc-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4.5L11.5 4.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="dc-name">BAS worksheet</span><span class="dc-check"></span></div>
+                <div class="dc-row"><span class="dc-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4.5L11.5 4.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="dc-name">Bank statements</span><span class="dc-check"></span></div>
+                <div class="dc-row"><span class="dc-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4.5L11.5 4.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="dc-name">Payroll summary</span><span class="dc-check"></span></div>
+                <div class="dc-row"><span class="dc-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M4 1.5h4.5L11.5 4.5v8H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span><span class="dc-name">Expense receipts</span><span class="dc-check"></span></div>
+                <div class="dc-bar"><i></i></div>
+                <div class="dc-done">4 of 4 collected · filed automatically</div>
+              </div>
+            </div>
+
+            <div class="pf-scene s-board" data-scene="2">
+              <span class="lbl">Job pipeline · Thompson Pty moving to Lodged</span>
+              <div class="pf-body">
+                <div class="bd-wrap">
+                  <div class="bd-cols">
+                    <div class="bd-col"><span class="bd-h">To do</span><span class="bd-slot"></span><span class="bd-card"></span><span class="bd-card"></span></div>
+                    <div class="bd-col"><span class="bd-h">In progress</span><span class="bd-slot"></span><span class="bd-card"></span></div>
+                    <div class="bd-col"><span class="bd-h">Lodged</span><span class="bd-slot"></span><span class="bd-card"></span><span class="bd-card"></span></div>
+                  </div>
+                  <div class="bd-move">Thompson Pty · BAS</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pf-scene s-cal" data-scene="3">
+              <span class="lbl">July 2026 · ATO lodgement calendar</span>
+              <div class="pf-body">
+                <div class="cl-grid">
+                  <i>21</i><i>22</i><i class="prep">23</i><i>24</i><i>25</i><i>26</i><i>27</i>
+                  <i>28</i><i class="due">BAS</i><i>30</i><i>31</i><i>1</i><i>2</i><i>3</i>
+                  <i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i>
+                </div>
+                <div class="cl-tag">BAS queued · 5 days early</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════ FEATURES (cards → CRM window) — END ══════════ -->
+
+<script is:inline>
+(function () {
+  'use strict';
+  function init() {
+    var section = document.getElementById('pf');
+    if (!section) return;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (e) {
+        e.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.15 });
+      io.observe(section);
+    } else { section.classList.add('in'); }
+
+    var tabs = Array.prototype.slice.call(section.querySelectorAll('.pf-tab'));
+    var scenes = Array.prototype.slice.call(section.querySelectorAll('.pf-scene'));
+    var navItems = Array.prototype.slice.call(section.querySelectorAll('.pf-navi[data-scene]'));
+    var subtabs = Array.prototype.slice.call(section.querySelectorAll('.pf-subtabs span'));
+    var title = document.getElementById('pfTitle');
+    var TITLES = ['Conversations', 'Documents', 'Opportunities', 'Calendars'];
+
+    function play(idx) {
+      scenes.forEach(function (sc, i) {
+        if (i === idx) { sc.classList.remove('active'); void sc.offsetWidth; sc.classList.add('active'); }
+        else sc.classList.remove('active');
+      });
+      navItems.forEach(function (n) { n.classList.toggle('is-on', parseInt(n.dataset.scene, 10) === idx); });
+      title.textContent = TITLES[idx] || '';
+    }
+    function select(idx) {
+      tabs.forEach(function (t, i) { var on = i === idx; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      play(idx);
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(i); });
+      tab.addEventListener('keydown', function (ev) {
+        var idx = null;
+        if (ev.key === 'ArrowDown' || ev.key === 'ArrowRight') idx = (i + 1) % tabs.length;
+        else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') idx = (i - 1 + tabs.length) % tabs.length;
+        if (idx !== null) { ev.preventDefault(); tabs[idx].focus(); select(idx); }
+      });
+    });
+
+    navItems.forEach(function (n) {
+      var go = function () { select(parseInt(n.dataset.scene, 10)); };
+      n.addEventListener('click', go);
+      n.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); go(); } });
+    });
+
+    subtabs.forEach(function (s) {
+      s.addEventListener('click', function () { subtabs.forEach(function (x) { x.classList.remove('on'); }); s.classList.add('on'); });
+    });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+})();
+</script>

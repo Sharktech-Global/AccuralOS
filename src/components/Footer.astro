@@ -1,0 +1,284 @@
+<style>
+  .tf{
+    --bg:#0e1621;
+    --tk-base:#0e1621;
+    --tk-wash-1:rgba(44,127,181,.22);
+    --tk-wash-2:rgba(239,106,52,.14);
+    --line:rgba(255,255,255,.10);
+    --text:#e8ecf1;
+    --muted:#8b95a3;
+    --faint:#63707f;
+    --accent:#F0742C;
+    --green:#35c07a;
+    --r:5px;
+    --font:"Manrope";
+    position:relative;overflow:hidden;color:var(--text);
+    background: radial-gradient(46% 62% at 12% 44%, var(--tk-wash-1), transparent 68%), radial-gradient(38% 50% at 2% 84%, var(--tk-wash-2), transparent 70%), var(--tk-base);
+    font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased;font-synthesis-weight:none;
+  }
+  .tf *{box-sizing:border-box;font-family:var(--font);min-width:0}
+  .tf-shell{    position: relative;
+    z-index: 1;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 62px) clamp(20px, 3vw, 20px) 20px !important;}
+
+  .tf-eyebrow{display:inline-flex;align-items:center;gap:11px;font-size:10px;font-weight:700;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+  .tf-eyebrow::before{content:"";width:26px;height:1.5px;background:var(--faint)}
+
+  /* ── TOP ── */
+  .tf-top{    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-bottom: clamp(10px, 2.4vw, 20px) !important;}
+  .tf-brand{display:flex;flex-direction:column;gap:16px}
+  .tf-logos{display:flex;align-items:center;gap:clamp(16px,2.6vw,30px);flex-wrap:wrap}
+  .tf-logolink{display:inline-flex;align-items:center;transition:opacity .2s ease,transform .2s ease}
+  .tf-logolink:hover{opacity:.82;transform:translateY(-1px)}
+  .tf-logo{display:block;height:clamp(72px,6.43vw,80px);width:auto;max-width:100%}
+  .tf-logo--sm{height:clamp(44px,4.6vw,58px)}
+  .tf-logodiv{width:1px;height:clamp(38px,4vw,52px);background:var(--line);flex:none}
+  .tf-wm{font-size:clamp(40px,7vw,84px);font-weight:800;letter-spacing:-.04em;line-height:.9;color:var(--text)}
+
+  .tf-cta{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-top:6px}
+  .tf-cta .k{font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+  .tf-cta h3{font-size: clamp(18px, 1.8vw, 31px);
+    font-weight: 700;
+    letter-spacing: -.02em; 
+    margin: 5px auto;}
+.tf-btn
+ {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13.5px;
+    padding: 12px 18px !important;
+    border-radius: var(--r);
+    margin-top: 0px;
+    transition: transform .18s, box-shadow .2s, filter .2s;
+}  .tf-btn:hover{transform:translateY(-1px);filter:brightness(1.06);box-shadow:0 12px 26px rgba(239,106,52,.3)}
+  .tf-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .tf-hr{height:1px;background:var(--line);border:0}
+
+  /* ── MID ── */
+  .tf-mid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:clamp(28px,3vw,26px);
+    padding:clamp(34px,4vw,20px) 0}
+  .tf-lead p{color:white;font-size:14px;line-height:1.7;margin-bottom:26px}
+  .tf-info{display:flex;flex-direction:column;gap:12px}
+  .tf-info .row{display:flex;gap:16px;align-items:baseline}
+  .tf-info .lbl{flex:none;width:62px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .tf-info .val{font-size:13px;color:var(--text);font-weight:600}
+  .tf-info .val.on{color:var(--green);display:flex;align-items:center;gap:8px;font-weight:600}
+  .tf-info .val.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 0 rgba(53,192,122,.5);animation:tfPulse 2.2s ease-out infinite}
+
+  .tf-col h4{font-size:15.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:18px}
+  .tf-col ul{list-style:none;display:flex;flex-direction:column;gap:13px;padding:0px}
+  .tf-col a{color:var(--text);text-decoration:none;font-size:15.5px;transition:color .2s}
+  .tf-col a:hover{color:var(--accent)}
+
+  /* ── CONTACT ROW ── */
+  .tf-contact{display:grid;grid-template-columns:1fr 1fr 1.2fr;padding:clamp(14px,1.6vw,12px) 0}
+  .tf-contact .cell{padding-left:clamp(20px,2.4vw,34px)}
+  .tf-contact .cell:first-child{padding-left:0}
+  .tf-contact .cell + .cell{border-left:1px solid var(--line)}
+  .tf-contact .lbl{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
+  .tf-contact .big{font-size:15px;font-weight:700;color:var(--text)}
+  .tf-contact a.big{text-decoration:none}
+  .tf-contact a.big:hover{color:var(--accent)}
+  .tf-offices{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,18px);padding:clamp(16px,2vw,20px) 0}
+  .tf-office{
+    display:flex;align-items:flex-start;gap:14px;text-decoration:none;
+    padding:clamp(16px,1.8vw,20px);border:1px solid var(--line);border-radius:14px;
+    background:rgba(255,255,255,.02);transition:border-color .22s ease,background .22s ease,transform .22s ease;
+  }
+  .tf-office:hover{border-color:var(--accent);background:rgba(240,116,44,.05);transform:translateY(-2px)}
+  .tf-office-pin{
+    flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+    background:rgba(240,116,44,.12);color:var(--accent);transition:background .22s ease}
+  .tf-office:hover .tf-office-pin{background:var(--accent);color:#fff}
+  .tf-office-pin svg{width:20px;height:20px}
+  .tf-office-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .tf-office-city{font-size:13px;font-weight:800;letter-spacing:.01em;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tf-office-city em{
+    font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);background:rgba(240,116,44,.12);padding:3px 7px;border-radius:999px}
+  .tf-office address{font-style:normal;font-size:13.5px;line-height:1.55;color:var(--faint)}
+  .tf-office:hover address{color:var(--text)}
+  .tf-right{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .tf-mini{display:flex;gap:16px;font-size:12.5px}
+  .tf-mini a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .tf-mini a:hover{color:var(--accent)}
+  .tf-social{display:flex;gap:14px}
+  .tf-social a{color:var(--muted);transition:color .2s}
+  .tf-social a:hover{color:var(--accent)}
+
+  /* ── BOTTOM ── */
+  .tf-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    padding:20px 0 clamp(22px,3vw,34px);font-size:12px;color:var(--faint)}
+  .tf-power{display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .tf-power b{font-size:14px;letter-spacing:-.01em;text-transform:none;color:var(--text);font-weight:800}
+  .tf-power b i{color:var(--accent);font-style:normal}
+  .tf-power-logo{height:52px;width:auto;display:inline-block;vertical-align:middle}
+
+  /* mega wordmark */
+  .tf-mega{position:relative;z-index:0;text-align:center;line-height:.78;overflow:hidden;padding-bottom:clamp(6px,1.4vw,16px)}
+  .tf-mega span{font-size:clamp(70px,16vw,220px);font-weight:800;letter-spacing:-.045em;
+    color:rgba(255,255,255,.035);user-select:none;display:inline-block}
+
+  @keyframes tfPulse{0%{box-shadow:0 0 0 0 rgba(53,192,122,.5)}70%{box-shadow:0 0 0 6px rgba(53,192,122,0)}100%{box-shadow:0 0 0 0 rgba(53,192,122,0)}}
+
+  @media (max-width:900px){
+    .tf-mid{grid-template-columns:1fr 1fr;gap:32px}
+    .tf-lead{grid-column:1 / -1}
+    .tf-contact{grid-template-columns:1fr}
+    .tf-offices{grid-template-columns:1fr;gap:18px}
+    .tf-contact .cell{padding-left:0;border-left:none!important;padding-top:18px;border-top:1px solid var(--line)}
+    .tf-contact .cell:first-child{padding-top:0;border-top:none}
+  }
+  @media (max-width:560px){
+    .tf-top{flex-direction:column}.tf-cta{text-align:left;align-items:flex-start}
+    .tf-mid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){.tf *{animation:none!important;transition:none!important}}
+</style>
+
+<footer class="tf" aria-label="Site footer">
+  <div class="tf-shell">
+
+    <!-- TOP -->
+    <div class="tf-top">
+      <div class="tf-brand">
+        <span class="tf-eyebrow">Built for Australian accounting firms</span>
+        <!-- Brand family lockup: AccrualOS · Launch Your Dream · VCPility -->
+        <div class="tf-logos">
+          <a class="tf-logolink" href="/" aria-label="AccrualOS">
+            <img class="tf-logo" src="/accuralwhite.png" alt="AccrualOS"
+                 onerror="this.style.display='none';document.getElementById('tfWm').style.display='inline-block'">
+            <span class="tf-wm" id="tfWm" style="display:none">AccrualOS</span>
+          </a>
+          <span class="tf-logodiv" aria-hidden="true"></span>
+          <a class="tf-logolink" href="https://www.launchyourdream.ai/" target="_blank" rel="noopener noreferrer" aria-label="Launch Your Dream">
+            <img class="tf-logo tf-logo--sm" src="/Logo/lyd.webp" alt="Launch Your Dream" onerror="this.style.display='none'">
+          </a>
+          <span class="tf-logodiv" aria-hidden="true"></span>
+          <a class="tf-logolink" href="https://vcpility.com.au" target="_blank" rel="noopener noreferrer" aria-label="VCPility">
+            <img class="tf-logo tf-logo--sm" src="/creation-log.png" alt="VCPility" onerror="this.style.display='none'">
+          </a>
+        </div>
+      </div>
+
+      <div class="tf-cta">
+        <h3>Ready when you are.</h3> 
+        <a class="tf-btn" href="/contact-us">Book a demo
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M6 1.5L10.5 6 6 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <hr class="tf-hr"> 
+
+    <!-- MID -->
+    <div class="tf-mid">
+      <div class="tf-lead">
+        <p>The practice system that answers the enquiry, chases the documents, books the work, and files the paperwork — while your team does the work clients pay for.</p>
+        <div class="tf-info">
+          <div class="row"><span class="lbl">Location</span><span class="val">Australia</span></div>
+          <div class="row"><span class="lbl">Hours</span><span class="val">Mon–Fri · 9am–5pm AEST</span></div>
+          <div class="row"><span class="lbl">Status</span><span class="val on">Onboarding new practices</span></div>
+        </div>
+      </div>
+
+      <div class="tf-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/#hw">How it works</a></li>
+          <li><a href="/#pm">What's included</a></li>
+          <li><a href="/#plans">Plans</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="tf-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about-us">About us</a></li>
+          <li><a href="/contact-us">Contact</a></li>
+          <li><a href="/contact-us">Support</a></li>
+        </ul>
+      </div>
+
+      <div class="tf-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/terms">Terms of service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="tf-hr">
+
+    <!-- CONTACT ROW -->
+    <div class="tf-contact">
+      <div class="cell">
+        <div class="lbl">Phone</div>
+        <a class="big" href="tel:+61468017373">+61 468 017 373</a>
+      </div>
+      <div class="cell">
+        <div class="lbl">Email</div>
+        <a class="big" href="mailto:sales@sharktech.com.au">sales@sharktech.com.au</a>
+      </div>
+      <div class="cell">
+        <div class="tf-right">
+          <div class="tf-mini"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a></div>
+          <div class="tf-social">
+            <a href="https://www.linkedin.com/company/106765599/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="27" height="27" viewBox="0 0 16 16" fill="currentColor"><path d="M3.4 5.5H.9V14h2.5V5.5ZM2.1 4.3a1.45 1.45 0 1 0 0-2.9 1.45 1.45 0 0 0 0 2.9ZM15 14v-4.7c0-2.5-.53-4.1-3.05-4.1-1.21 0-2.02.66-2.36 1.29h-.03V5.5H7.2V14h2.5V9.8c0-1.11.21-2.18 1.58-2.18 1.35 0 1.37 1.26 1.37 2.25V14H15Z"/></svg></a>
+            <a href="https://www.facebook.com/people/Sharktech-Accrualos/61594135106940/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="27" height="27" viewBox="0 0 16 16" fill="currentColor"><path d="M9.2 14V8.4h1.9l.28-2.2H9.2V4.8c0-.63.18-1.06 1.08-1.06h1.15V1.78A15.4 15.4 0 0 0 9.75 1.7c-1.66 0-2.8 1.02-2.8 2.88v1.6H5.05v2.2h1.9V14H9.2Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="tf-hr">
+
+    <!-- OFFICES -->
+    <div class="tf-offices">
+      <a class="tf-office" href="https://maps.google.com/?q=Level+1,+244+Macquarie+St,+Liverpool+NSW+2170" target="_blank" rel="noopener noreferrer">
+        <span class="tf-office-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="tf-office-body">
+          <span class="tf-office-city">Sydney <em>Headquarters</em></span>
+          <address>Level 1, 244 Macquarie St, Liverpool NSW 2170, Australia</address>
+        </span>
+      </a>
+      <a class="tf-office" href="https://maps.google.com/?q=Suite+383,+11+Wilson+St,+South+Yarra+VIC+3141" target="_blank" rel="noopener noreferrer">
+        <span class="tf-office-pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span class="tf-office-body">
+          <span class="tf-office-city">Melbourne</span>
+          <address>Suite 383, 11 Wilson St, South Yarra VIC 3141, Australia</address>
+        </span>
+      </a>
+    </div>
+
+    <hr class="tf-hr">
+
+    <!-- BOTTOM -->
+    <div class="tf-bottom">
+      <span>© 2026 Divine Empyrean Pty Ltd · ABN 54 672 825 731 · Sydney NSW</span>
+      <span class="tf-power">Powered by <a href="https://vcpility.com.au" target="_blank" rel="noopener noreferrer" aria-label="VCPility"><img class="tf-power-logo" src="/creation-log.png" alt="Sharktech VCP"></a></span>
+    </div>
+  </div>
+</footer>

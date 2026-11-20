@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/about-us.css';
+import Plan from '../components/Plan.astro';
+---
+
+<Layout
+  title="Packages & Pricing — AccrualOS"
+  description="AccrualOS plans: Launch, Elevate and Dominate. Pick the level of support your practice needs, from running the day-to-day to full-service growth. Start for $1."
+>
+
+<!-- ── TOP BANNER (same as about page) ───────────────────────────────────── -->
+<section class="ah-section">
+  <div class="ah-wrap">
+    <div class="ah-body">
+      <div class="ah-media"></div>
+      <div class="ah-fluted"></div>
+      <div class="ah-tint"></div>
+      <div class="ah-sheen"></div>
+      <div class="ah-vignette"></div>
+
+      <span class="ah-brand">AccrualOS</span>
+      <h1 class="ah-title"><i>/</i>Packages<i>/</i></h1>
+      <nav class="ah-crumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><em>Packages</em>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLANS (pli-section from Plan.astro) ───────────────────────────────── -->
+<Plan />
+
+</Layout>

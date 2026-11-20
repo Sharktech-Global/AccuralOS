@@ -1,0 +1,384 @@
+<!-- AccrualOS: Cybersecurity & Secure AI Deployment - GHL fragment -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+:root{
+  --paper:#ffffff;
+  --ink:#0E2E4D;
+  --muted:#5b7085;
+  --line:#e3e9ef;
+  --soft:#f5f8fb;
+  --dark:#0E2E4D;
+  --accent:#E46E14;
+  --accent-soft:#fbeee3;
+  --accent-line:#f3d6bd;
+  --r:5px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Poppins",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3,.eyebrow,.faq summary{font-family:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.container{width:min(1120px,calc(100% - 40px));margin:0 auto}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 22px;border-radius:var(--r);text-decoration:none;font-weight:700;
+  border:1px solid transparent;transition:transform .2s ease,background .2s ease,border-color .2s ease
+}
+.btn-primary{background:var(--accent);color:white}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-secondary{border-color:var(--line);background:white;color:var(--ink)}
+.btn-secondary:hover{border-color:var(--accent)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:84px 0 72px;background:var(--paper)}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right, rgba(14,46,77,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14,46,77,.045) 1px, transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(circle at 50% 24%, #000 0%, transparent 70%);
+  mask-image:radial-gradient(circle at 50% 24%, #000 0%, transparent 70%);
+}
+.hero .container{position:relative;z-index:1}
+.hero-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center}
+.hero-copy{max-width:600px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.hero h1{font-size:clamp(40px,4.4vw,44px);line-height:1.2;letter-spacing:-.04em;margin:16px 0}
+.hero .lead{font-size:18px;max-width:720px;color:var(--muted);margin:0 0 26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.trustline{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;color:var(--muted);font-size:13.5px}
+.trustline span{display:inline-flex;align-items:center;gap:8px}
+.trustline span:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+
+/* VISUAL FRAME (SVG mock with optional real screenshot on top) */
+.visual{position:relative;border:1px solid var(--line);border-radius:10px;background:white;overflow:hidden}
+.visual svg{display:block;width:100%;height:auto}
+.visual .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px}
+.dark .visual{border-color:rgba(255,255,255,.14)}
+
+section{padding:76px 0}
+.section-head{max-width:760px;margin-bottom:34px}
+.section-head h2{font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-.03em;margin:8px 0 14px}
+.section-head p{color:var(--muted);font-size:17px;margin:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{position:relative;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r);padding:28px;background:#fff;min-width:0;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);background:linear-gradient(180deg,#ffffff 0%,#fff8f2 100%)}
+.card:hover .ico{transform:scale(1.06)}
+.card h3{margin:14px 0 8px;font-size:20px}
+.card p{margin:0;color:var(--muted)}
+.ico{width:46px;height:46px;border-radius:var(--r);background:linear-gradient(135deg,#E46E14 0%,#c65c0f 100%);display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.ico svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tag{width:40px;height:40px;border-radius:var(--r);background:linear-gradient(135deg,#E46E14 0%,#c65c0f 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+.dark{position:relative;overflow:hidden;background:linear-gradient(165deg,#0E2E4D 0%,#081a2e 55%,#04101c 100%);color:white}
+.dark::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 78%);mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 78%)}
+.dark .container{position:relative;z-index:1}
+.dark .section-head p,.dark .card p{color:#a9bcd0}
+.dark .card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);border-top-color:var(--accent)}
+.dark .card h3{color:white}
+.dark .ico{background:rgba(228,110,20,.16)}
+
+.process{display:grid;gap:0;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line);min-width:0}
+.step b{font-size:18px}
+.step p{margin:4px 0 0;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.kpi{padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);min-width:0}
+.kpi b{display:block;font-size:18px;margin-bottom:5px}
+.kpi span{color:var(--muted);font-size:14px}
+.callout{padding:30px;border-radius:var(--r);background:var(--accent-soft);border:1px solid var(--accent-line)}
+.callout h3{margin-top:0}
+.faq details{border-top:1px solid var(--line);padding:20px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:800;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:0 0 auto;font-size:24px;font-weight:400;line-height:1;color:var(--accent);transition:transform .25s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--muted);max-width:820px}
+.faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.cta{padding:68px 0}
+.ctabox{background:linear-gradient(165deg,#0E2E4D 0%,#081a2e 100%);color:white;border-radius:var(--r);padding:48px;display:grid;grid-template-columns:1.4fr .8fr;gap:24px;align-items:center}
+.ctabox p{color:#a9bcd0;margin-bottom:0}
+.cta-actions{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+.ctabox .btn-secondary{background:transparent;color:white;border-color:#3a5a79}
+.ctabox .btn-secondary:hover{border-color:var(--accent)}
+
+@media(max-width:900px){
+  .hero-grid,.faq-grid,.grid-3,.grid-2,.kpis,.ctabox{grid-template-columns:1fr}
+  .faq-grid .visual{order:-1}
+  .hero{padding-top:64px}
+  .cta-actions{justify-content:flex-start}
+}
+</style>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="visual">
+        <!-- Branded security posture mock. Drop a real screenshot into .shot src to override. -->
+        <!-- TODO: replace hero image -->
+        <img class="shot" src="/service/ser21.jpg" alt="AccrualOS security posture overview for an Australian accounting firm" loading="lazy" onerror="this.style.display='none'">
+        <svg viewBox="0 0 520 380" role="img" aria-label="Security posture dashboard mock">
+          <rect x="0" y="0" width="520" height="380" fill="#0E2E4D"/>
+          <rect x="0" y="0" width="520" height="42" fill="#0b243d"/>
+          <circle cx="24" cy="21" r="5" fill="#E46E14"/><circle cx="42" cy="21" r="5" fill="#2f4d6b"/><circle cx="60" cy="21" r="5" fill="#2f4d6b"/>
+          <text x="86" y="26" fill="#a9bcd0" font-family="Manrope,sans-serif" font-size="12" font-weight="700">Security posture</text>
+          <rect x="24" y="62" width="146" height="70" rx="5" fill="rgba(255,255,255,0.05)"/>
+          <text x="38" y="88" fill="#a9bcd0" font-family="Manrope,sans-serif" font-size="10">MFA coverage</text>
+          <text x="38" y="114" fill="#fff" font-family="Manrope,sans-serif" font-size="22" font-weight="800">92%</text>
+          <rect x="186" y="62" width="146" height="70" rx="5" fill="rgba(228,110,20,0.16)"/>
+          <text x="200" y="88" fill="#E46E14" font-family="Manrope,sans-serif" font-size="10" font-weight="700">Critical findings</text>
+          <text x="200" y="114" fill="#fff" font-family="Manrope,sans-serif" font-size="22" font-weight="800">3</text>
+          <rect x="348" y="62" width="148" height="70" rx="5" fill="rgba(255,255,255,0.05)"/>
+          <text x="362" y="88" fill="#a9bcd0" font-family="Manrope,sans-serif" font-size="10">Backups</text>
+          <text x="362" y="114" fill="#fff" font-family="Manrope,sans-serif" font-size="22" font-weight="800">Tested</text>
+          <rect x="24" y="156" width="288" height="200" rx="5" fill="rgba(255,255,255,0.04)"/>
+          <text x="40" y="184" fill="#a9bcd0" font-family="Manrope,sans-serif" font-size="11" font-weight="700">Essential Eight</text>
+          <circle cx="48" cy="206" r="7" fill="#E46E14"/><path d="M44.5 206 l2.5 2.5 4.5 -5.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="66" y="201" width="206" height="9" rx="4" fill="#38557a"/>
+          <circle cx="48" cy="232" r="7" fill="#E46E14"/><path d="M44.5 232 l2.5 2.5 4.5 -5.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="66" y="227" width="178" height="9" rx="4" fill="#38557a"/>
+          <circle cx="48" cy="258" r="7" fill="#E46E14"/><path d="M44.5 258 l2.5 2.5 4.5 -5.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="66" y="253" width="198" height="9" rx="4" fill="#38557a"/>
+          <circle cx="48" cy="284" r="7" fill="#2f4d6b"/><rect x="66" y="279" width="150" height="9" rx="4" fill="#2f4d6b"/>
+          <circle cx="48" cy="310" r="7" fill="#2f4d6b"/><rect x="66" y="305" width="188" height="9" rx="4" fill="#2f4d6b"/>
+          <rect x="328" y="156" width="168" height="200" rx="5" fill="rgba(255,255,255,0.04)"/>
+          <path d="M412 190 L452 206 L452 242 C452 270 434 288 412 298 C390 288 372 270 372 242 L372 206 Z" fill="rgba(228,110,20,0.15)" stroke="#E46E14" stroke-width="2"/>
+          <path d="M397 246 l10 10 21 -23" stroke="#E46E14" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">Cybersecurity and secure AI deployment for accountants</div>
+        <h1>Automate the practice without losing control of access, data and risk.</h1>
+        <p class="lead">Australian accounting practices handle sensitive client, financial and tax information every day. Sharktech can assess the security environment around AccrualOS, Microsoft 365, websites, email and new AI workflows.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/contact-us">Talk to the Australian team</a>
+          <a class="btn btn-secondary" href="#services">View service scope</a>
+        </div>
+        <div class="trustline"><span>Essential Eight aligned health checks</span><span>Australian business-hours monitoring</span><span>Defined fixed-scope projects</span><span>Works alongside your existing IT provider</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTITY BAR -->
+<section style="padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--soft)">
+  <div class="container">
+    <p style="margin:0;color:var(--muted);font-size:14px">
+      <strong style="color:var(--ink)">Entity relationship:</strong>
+      <a href="https://www.sharktech.com.au/" style="font-weight:700">Sharktech Global</a> &gt;
+      <a href="https://www.sharktech.com.au/launch-your-dream" style="font-weight:700">Launch Your Dream</a> &gt;
+      <a href="https://accrual-os.vercel.app/" style="font-weight:700">AccrualOS</a> &gt;
+      specialist technology services for Australian accounting and finance teams.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Built for accounting and finance teams</div>
+      <h2>Security should be part of the AI deployment plan from day one.</h2>
+      <p>Automation connects systems and moves information faster. For accountants, that makes identity, permissions, email security, backups, staff awareness and escalation rules part of the implementation conversation.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4-3 6.6-7 8-4-1.4-7-4-7-8V6z"/><path d="M9 11.5l2 2 4-4"/></svg></div><h3>Secure AI implementation</h3><p>Map data access, user permissions, logging, human approvals and exception handling before new AI workflows go live.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Essential Eight health check</h3><p>Review the current security baseline across accounts, administrator access, MFA, patching, backups and recovery.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18h9a4 4 0 0 0 .5-7.97A5.5 5.5 0 0 0 6 9.5 3.5 3.5 0 0 0 7 18z"/></svg></div><h3>Microsoft 365 review</h3><p>Assess cloud identity, dormant users, guest access, sign-in methods, access rules, logging and backup settings.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div><h3>Email fraud protection</h3><p>Strengthen SPF, DKIM and DMARC, review mail flows and add a practical payment-verification process.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.3"/></svg></div><h3>Web and portal security</h3><p>Assess and harden websites, booking systems, portals and client login areas that collect sensitive information.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 6"/><path d="M17 20a5.5 5.5 0 0 0-3-4.9"/></svg></div><h3>Policies and staff awareness</h3><p>Improve phishing awareness, incident processes and the security documents clients, insurers and tenders may request.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- DARK: CYBERSECURITY SCOPE -->
+<section class="dark">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Cybersecurity for accounting practices</div>
+      <h2 style="font-size:clamp(28px,3.6vw,40px);line-height:1.12;letter-spacing:-.03em;margin:8px 0 14px">Protect the systems that hold client and financial information.</h2>
+      <p style="color:#a9bcd0;font-size:17px;margin:0">Sharktech's documented cybersecurity scope covers eight defined services for Australian businesses.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card"><div class="tag">01</div><h3>Security Health Check</h3><p>Assess accounts, administrator access, MFA, patching, backups and recovery against the Essential Eight.</p></article>
+      <article class="card"><div class="tag">02</div><h3>Vulnerability Assessment and Penetration Testing</h3><p>Authorised testing of websites, applications and networks with verified findings and remediation guidance.</p></article>
+      <article class="card"><div class="tag">03</div><h3>Website and Web Application Security</h3><p>Harden certificates, security headers, platforms, administrator access, firewall rules and tested backups.</p></article>
+      <article class="card"><div class="tag">04</div><h3>Cloud and Microsoft 365 Security Review</h3><p>Review administrator accounts, dormant users, guest access, MFA, access rules, logging and backups.</p></article>
+      <article class="card"><div class="tag">05</div><h3>Email Security and Fraud Protection</h3><p>Configure SPF, DKIM and DMARC, review mail-sending services, audit forwarding rules and strengthen payment verification.</p></article>
+      <article class="card"><div class="tag">06</div><h3>Security Awareness Training</h3><p>Practical phishing and fraud training with simulated campaigns and trend reporting.</p></article>
+      <article class="card"><div class="tag">07</div><h3>Security Monitoring</h3><p>Monitoring setup, tuned alerts, monthly reporting and agreed escalation during Australian business hours.</p></article>
+      <article class="card"><div class="tag">08</div><h3>Policies and Compliance Support</h3><p>Security policies, incident response planning and gap analysis against SMB1001 or ISO 27001.</p></article>
+      <article class="card"><div class="tag">AI</div><h3>Secure AI deployment</h3><p>Review access, permissions, logging, data flows and human approval points when new AI workflows are introduced.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">How Sharktech delivers</div>
+      <h2>Scope the bottleneck first. Build the right solution second.</h2>
+      <p>AccrualOS is the fixed-price product layer. Custom service work is scoped separately and quoted per job.</p>
+    </div>
+    <div class="process">
+      <div class="step"><div class="tag">01</div><div><b>Discovery and scope</b><p>Understand what the practice runs, what the business is being asked to prove and which systems are in scope.</p></div></div>
+      <div class="step"><div class="tag">02</div><div><b>Permission and access</b><p>Agree what can be reviewed or tested, when the work will occur and who owns approvals.</p></div></div>
+      <div class="step"><div class="tag">03</div><div><b>Assessment or build</b><p>Run the agreed security review, hardening, testing or secure AI implementation work.</p></div></div>
+      <div class="step"><div class="tag">04</div><div><b>Findings and priorities</b><p>Provide clear management findings plus technical detail for the people implementing fixes.</p></div></div>
+      <div class="step"><div class="tag">05</div><div><b>Fix, retest and support</b><p>Help close agreed findings, confirm fixes where applicable and define any ongoing support separately.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEASURE -->
+<section style="background:var(--soft)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">What management should measure</div>
+      <h2>Technology should improve a business outcome.</h2>
+      <p>For accountants and CFOs, the case should be clear before the build starts.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b>MFA coverage</b><span>Whether appropriate user and administrator accounts have stronger sign-in controls.</span></div>
+      <div class="kpi"><b>Critical findings</b><span>High-priority issues that need immediate remediation or escalation.</span></div>
+      <div class="kpi"><b>Phishing reporting</b><span>Whether staff recognise and report suspicious messages more consistently.</span></div>
+      <div class="kpi"><b>Recovery readiness</b><span>Whether backups, logging and escalation processes can support a real incident.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALLOUT -->
+<section>
+  <div class="container">
+    <div class="callout">
+      <h3>Cybersecurity that fits around your existing IT provider</h3>
+      <p>Sharktech's supplied cybersecurity scope does not replace the firm's general helpdesk, device or network provider. The team works alongside existing IT on defined assessment, hardening, monitoring and remediation. Monitoring is reviewed during Australian business hours, not around the clock.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq" style="background:var(--soft)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions Australian accounting and finance teams ask</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="visual">
+        <!-- Branded AI assistant mock. Drop a real screenshot into .shot src to override. -->
+        <!-- TODO: replace faq image -->
+        <img class="shot" src="/service/ser22.jpg" alt="AccrualOS AI assistant answering a security question from an accounting practice" loading="lazy" onerror="this.style.display='none'">
+        <svg viewBox="0 0 460 440" role="img" aria-label="AccrualOS AI assistant conversation mock">
+          <rect x="0" y="0" width="460" height="440" fill="#0E2E4D"/>
+          <rect x="0" y="0" width="460" height="44" fill="#0b243d"/>
+          <circle cx="24" cy="22" r="5" fill="#E46E14"/><circle cx="42" cy="22" r="5" fill="#2f4d6b"/><circle cx="60" cy="22" r="5" fill="#2f4d6b"/>
+          <text x="86" y="27" fill="#a9bcd0" font-family="Manrope,sans-serif" font-size="12" font-weight="700">AccrualOS assistant</text>
+          <rect x="24" y="70" width="250" height="66" rx="10" fill="rgba(255,255,255,0.06)"/>
+          <rect x="40" y="88" width="210" height="9" rx="4" fill="#38557a"/>
+          <rect x="40" y="106" width="170" height="9" rx="4" fill="#38557a"/>
+          <rect x="150" y="152" width="286" height="92" rx="10" fill="rgba(228,110,20,0.92)"/>
+          <rect x="166" y="172" width="250" height="9" rx="4" fill="#ffd9bd"/>
+          <rect x="166" y="190" width="230" height="9" rx="4" fill="#ffd9bd"/>
+          <rect x="166" y="208" width="180" height="9" rx="4" fill="#ffe9d8"/>
+          <rect x="24" y="260" width="230" height="66" rx="10" fill="rgba(255,255,255,0.06)"/>
+          <rect x="40" y="278" width="190" height="9" rx="4" fill="#38557a"/>
+          <rect x="40" y="296" width="150" height="9" rx="4" fill="#38557a"/>
+          <rect x="24" y="372" width="412" height="44" rx="8" fill="rgba(255,255,255,0.05)"/>
+          <text x="42" y="399" fill="#7d93ab" font-family="Poppins,sans-serif" font-size="12">Ask about MFA, backups or Essential Eight</text>
+          <rect x="392" y="380" width="28" height="28" rx="6" fill="#E46E14"/>
+          <path d="M400 394 h12 M407 389 l5 5 -5 5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="faq-list">
+        <details open><summary>What cybersecurity service should an accounting practice start with?</summary><p>A Security Health Check is the documented first engagement when a business needs a clear picture of its current position and a prioritised remediation roadmap.</p></details>
+        <details><summary>Can Sharktech review Microsoft 365 security?</summary><p>Yes. The documented service covers administrator accounts, dormant users, guest access, MFA, access rules, logging and backups.</p></details>
+        <details><summary>Does Sharktech provide 24-hour security monitoring?</summary><p>No. The supplied service scope states that monitoring is reviewed during Australian business hours with agreed escalation contacts.</p></details>
+        <details><summary>Can Sharktech issue ISO 27001 certification?</summary><p>No. Sharktech can support policies and gap analysis, but certification is issued by the relevant certifying body.</p></details>
+        <details><summary>How does cybersecurity relate to AI deployment for accountants?</summary><p>New AI workflows should be scoped with clear data access, permissions, logging, human approvals and escalation rules. Security should be part of the deployment design rather than added after launch.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Related AccrualOS resources</div>
+      <h2>Keep the product, services and Sharktech entity connected.</h2>
+      <p>These links help visitors and search systems understand how the AccrualOS product and Sharktech specialist services fit together.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card"><h3>AccrualOS platform</h3><p>Explore the fixed-price growth ecosystem for Australian accounting practices.</p><p style="margin-top:14px"><a href="https://accrual-os.vercel.app/#what-is-included"><strong>View what is included</strong></a></p></article>
+      <article class="card"><h3>AI Deployment, Analytics &amp; Reporting for Accountants</h3><p>See the complementary specialist service page for Australian accountants and finance teams.</p><p style="margin-top:14px"><a href="ai-deployment-analytics-reporting-accountants.html"><strong>View related service</strong></a></p></article>
+      <article class="card"><h3>Sharktech Global</h3><p>Learn about the technology company behind AccrualOS and the Launch Your Dream platform series.</p><p style="margin-top:14px"><a href="https://www.sharktech.com.au/"><strong>Visit Sharktech Global</strong></a></p></article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <div class="ctabox">
+      <div>
+        <div class="eyebrow">AccrualOS by Sharktech Global</div>
+        <h2>Start with the bottleneck that is costing your team time.</h2>
+        <p>AccrualOS is the growth ecosystem for accountants. Sharktech Services handles the custom AI, analytics, reporting and security work around it.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="/contact-us">Book a discovery call</a>
+        <a class="btn btn-secondary" href="https://www.sharktech.com.au/about" target="_blank" rel="noopener noreferrer">About Sharktech</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var faqItems = document.querySelectorAll('.faq details');
+  faqItems.forEach(function(d){
+    d.addEventListener('toggle', function(){
+      if(d.open){
+        // opening one closes the others
+        faqItems.forEach(function(o){ if(o !== d){ o.open = false; } });
+      } else {
+        // never allow all to be closed — keep at least one open
+        var anyOpen = Array.prototype.some.call(faqItems, function(o){ return o.open; });
+        if(!anyOpen){ d.open = true; }
+      }
+    });
+  });
+
+  if(!reduce && 'IntersectionObserver' in window){
+    var els = document.querySelectorAll('.card,.step,.kpi,.callout,.visual');
+    els.forEach(function(el){
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(14px)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+    });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          obs.unobserve(e.target);
+        }
+      });
+    }, {threshold:.12});
+    els.forEach(function(el){ obs.observe(el); });
+  }
+})();
+</script>

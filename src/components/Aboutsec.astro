@@ -1,0 +1,230 @@
+<!-- =================================================================
+     AccrualOS - "WHAT IT DOES / WHERE IT STOPS"  (photo-collage version)
+     Left: lighter does / stops token checklist (copy verbatim).
+     Right: editorial two-photo collage with solid orange accent
+     blocks (per the WHO WE ARE reference).
+     Editorial: NO em / en / nb dashes. Canonical: Manrope, navy
+     #0E2E4D / orange #E46E14, flat 5px radius, no box-shadows, no grid.
+     Photo slots default to live feature assets; onerror falls back to
+     a clean placeholder tile. Verify trademark usage. Namespaced .bnd-.
+     ================================================================= -->
+
+<style>
+.bnd{
+  --nv:#0E2E4D; --or:#E46E14; --r:5px;
+  --ink:#0E2E4D; --mut:#54687c; --line:rgba(14,46,77,.14);
+  position:relative; box-sizing:border-box;
+  font-family:'Manrope',system-ui,-apple-system,sans-serif; color:var(--ink);
+  padding:clamp(60px,5vw,72px) 15px;
+}
+.bnd *{box-sizing:border-box;}
+.bnd-wrap{ position:relative; z-index:1; max-width:1260px; margin:0 auto;  }
+
+/* ---------- main split ---------- */
+.bnd-main{     display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(30px, 7vw, 100px);
+    align-items: center;}
+.bnd-media-col{ order:-1; }
+.bnd-col{ min-width:0; }
+
+/* ---------- header (in left col) ---------- */
+.bnd-eyebrow{
+  display:inline-flex; align-items:center; gap:8px; margin:0 0 16px; padding:7px 13px; border-radius:var(--r);
+  background:rgba(228,110,20,.10); border:1px solid rgba(228,110,20,.32);
+  color:var(--or); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+}
+.bnd-eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--or); }
+.bnd-h2{ font-weight:700; line-height:1.15; letter-spacing:-.4px; font-size:clamp(1.8rem,3.8vw,4rem); margin:0 0 12px; color:var(--nv); }
+.bnd-h2 .or{ color:var(--or); }
+.bnd-lead{ font-size:clamp(.98rem,1.15vw,1.05rem); line-height:1.7; color:var(--mut); margin:0 0 clamp(22px,3vw,30px); max-width:50ch; }
+
+/* ---------- checklist (lighter) ---------- */
+.bnd-block + .bnd-block{ margin-top:22px; padding-top:22px; border-top:1px solid var(--line); }
+.bnd-bhead{ display:flex; align-items:center; gap:12px; margin:0 0 14px; }
+.bnd-badge{ width:32px; height:32px; flex:none; border-radius:var(--r); display:flex; align-items:center; justify-content:center; }
+.bnd-badge svg{ width:17px; height:17px; fill:none; stroke-width:2.6; }
+.bnd-badge.pos{ background:var(--or); }
+.bnd-badge.pos svg{ stroke:#fff; }
+.bnd-badge.neg{ background:var(--nv); }
+.bnd-badge.neg svg{ stroke:#fff; }
+.bnd-btitle{ font-weight:700; font-size:1.1rem; letter-spacing:-.2px; color:var(--nv); }
+
+.bnd-list{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.bnd-list li{ display:flex; align-items:flex-start; gap:12px; font-size:clamp(.93rem,1.05vw,1rem); line-height:1.5; }
+.bnd-list.pos li{ color:var(--nv); }
+.bnd-list.neg li{ color:var(--mut); }
+.bnd-mk{     width: 15px;
+    height: 15px;
+    flex: none;
+    margin-top: 5px;
+    padding: 1px;
+    border-radius: 50%;
+    fill: none;
+    stroke-width: 2px;
+    transition: transform .2s; }
+.bnd-list.pos .bnd-mk{ stroke:#fff; background:var(--or); }
+.bnd-list.neg .bnd-mk{ stroke:#fff; background:var(--nv); }
+.bnd-list li:hover .bnd-mk{ transform:translateX(2px); }
+
+/* ---------- photo collage (right) ---------- */
+.bnd-media{ position:relative; width:100%; aspect-ratio:1/1; min-width:0; max-width:600px; margin:0 auto; }
+.bnd-acc{ position:absolute; z-index:0; background:var(--or); border-radius:var(--r); }
+.bnd-acc.bar{ left:2%; top:26%; width:16px; height:34%; }
+.bnd-acc.sq{ right:12%; bottom:1%; width:20%; height:17%; z-index:1; }
+.bnd-fig{ position:absolute; overflow:hidden; border-radius:var(--r); background:#e8edf2; border:1px solid var(--line); }
+.bnd-fig::after{ content:"Image"; position:absolute; inset:0; z-index:0; display:flex; align-items:center; justify-content:center; color:#9fb0c2; font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.bnd-fig img{ position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover; display:block; }
+.bnd-a{    right: 36px;
+    top: -30px;
+    width: 80%;
+    height: 80%;
+    z-index: 2; }
+.bnd-b{ left:0; bottom:0; width:58%; height:50%; z-index:3; border:6px solid #fff; }
+
+/* interactive: auto-cycling live card, pulse, photo hover, caption */
+.bnd-live{ position:absolute; z-index:4; right:-4%; top:8%; width:min(66%,248px); background:#fff; border:1px solid var(--line); border-radius:var(--r); padding:12px 14px; box-shadow:0 14px 34px -16px rgba(14,46,77,.45); }
+.bnd-live-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:0 0 10px; font-size:.64rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--mut); }
+.bnd-live-top .lab{ display:inline-flex; align-items:center; gap:7px; }
+.bnd-pdot{ width:8px; height:8px; border-radius:50%; background:var(--or); }
+.bnd-live .bnd-pdot{ animation:bnd-pulse 2.2s infinite; }
+@keyframes bnd-pulse{ 0%{ box-shadow:0 0 0 0 rgba(228,110,20,.5);} 70%{ box-shadow:0 0 0 7px rgba(228,110,20,0);} 100%{ box-shadow:0 0 0 0 rgba(228,110,20,0);} }
+.bnd-live-row{ display:flex; align-items:flex-start; gap:11px; transition:opacity .26s ease; }
+.bnd-live-icn{ width:32px; height:32px; flex:none; border-radius:var(--r); display:flex; align-items:center; justify-content:center; background:rgba(228,110,20,.12); border:1px solid rgba(228,110,20,.3); }
+.bnd-live-icn svg{ width:16px; height:16px; stroke:var(--or); fill:none; stroke-width:2.2; }
+.bnd-live-txt{ min-width:0; }
+.bnd-live-txt .ttl{ display:block; font-weight:700; font-size:.86rem; color:var(--nv); line-height:1.2; }
+.bnd-live-txt .sub{ display:block; font-size:.76rem; color:var(--mut); line-height:1.32; margin-top:2px; }
+.bnd-fig img{ transition:transform .5s ease; }
+.bnd-fig:hover img{ transform:scale(1.05); }
+.bnd-cap{ position:absolute; left:0; right:0; bottom:-24px; text-align:center; font-size:.72rem; color:#9fb0c2; font-weight:600; }
+
+/* ---------- CTA button (navy pill + orange arrow) ---------- */
+.bnd-btn{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:8px 8px 8px 22px; border-radius:999px;
+  background:var(--nv); color:#fff; text-decoration:none;
+  font-family:'Manrope',system-ui,sans-serif; font-weight:700; font-size:15px;
+  box-shadow:0 10px 24px rgba(14,46,77,.22);
+  transition:transform .2s ease, box-shadow .25s ease;
+}
+.bnd-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 32px rgba(14,46,77,.3); }
+.bnd-btn i{
+  width:26px; height:26px; border-radius:50%; flex:none; font-style:normal;
+  background:var(--or); color:#fff; display:grid; place-items:center;
+  transition:transform .2s ease;
+}
+.bnd-btn:hover i{ transform:translate(2px,-2px); }
+
+/* ---------- reveal ---------- */
+.bnd [data-reveal]{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; transition-delay:var(--d,0ms); }
+.bnd [data-reveal].is-in{ opacity:1; transform:none; }
+
+@media (max-width:860px){
+  .bnd-main{ grid-template-columns:1fr; gap:clamp(34px,7vw,50px); }
+  .bnd-media-col{ order:0; }
+  .bnd-media{ max-width:480px; }
+}
+@media (max-width:600px){ .bnd-live{ right:0; top:5%; width:min(82%,220px); padding:11px 12px; } }
+@media (prefers-reduced-motion:reduce){ .bnd [data-reveal]{ opacity:1; transform:none; transition:none; } .bnd-live .bnd-pdot{ animation:none; } .bnd-fig img{ transition:none; } .bnd-live-row{ transition:none; } }
+</style>
+
+<section class="bnd" aria-label="What AccrualOS does and where it stops">
+  <div class="bnd-wrap">
+    <div class="bnd-main">
+
+      <!-- LEFT: header + checklist -->
+      <div class="bnd-col" data-reveal>
+        <h2 class="bnd-h2">Clear About What<br> AccrualOS <span class="or">handles.</span></h2>
+        <p class="bnd-lead">It runs the client side of your practice and leaves your accounting and compliance systems in place.</p>
+
+        <div class="bnd-block">
+          <div class="bnd-bhead">
+            <span class="bnd-btitle">What AccrualOS does</span>
+          </div>
+          <ul class="bnd-list pos">
+            <li><svg class="bnd-mk" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Captures and routes new enquiries with a clear owner and next step</li>
+            <li><svg class="bnd-mk" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Books consultations and sends confirmations and reminders</li>
+            <li><svg class="bnd-mk" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Coordinates onboarding and outstanding information requests</li>
+            <li><svg class="bnd-mk" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Runs approved workflow follow-up and keeps conversations on the record</li>
+            <li><svg class="bnd-mk" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Shows what is waiting, who owns it and where attention is needed</li>
+          </ul>
+        </div>
+
+        <div class="bnd-block">
+          <a class="bnd-btn" href="/contact-us">Enquire Now
+            <i><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H3.2M9 1v5.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: photo collage -->
+      <div class="bnd-col bnd-media-col" data-reveal style="--d:120ms">
+        <div class="bnd-media">
+          <span class="bnd-acc bar" aria-hidden="true"></span>
+          <span class="bnd-acc sq" aria-hidden="true"></span>
+          <!-- TODO: replace src with a real practice photo. Defaults to a live feature asset; falls back to a placeholder tile. -->
+          <figure class="bnd-fig bnd-a"><img alt="Accounting team at work" src="/path5.jpg" onerror="this.style.display='none'"></figure>
+          <!-- TODO: replace src with a real practice photo. -->
+          <figure class="bnd-fig bnd-b"><img alt="Advisors meeting with a client" src="/path3.jpg" onerror="this.style.display='none'"></figure>
+
+          <!-- interactive live activity card (auto-cycles; illustrative prototype) -->
+          <div class="bnd-live" data-reveal style="--d:260ms" role="img" aria-label="Illustrative live practice activity" data-live>
+            <div class="bnd-live-top"><span class="lab"><span class="bnd-pdot"></span><span data-live-label>Running now</span></span><span data-live-time>6:12 am</span></div>
+            <div class="bnd-live-row">
+              <span class="bnd-live-icn" data-live-icn><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <span class="bnd-live-txt"><span class="ttl" data-live-title>New enquiry</span><span class="sub" data-live-sub>"Need help with a company tax return"</span></span>
+            </div>
+          </div>
+          <span class="bnd-cap" aria-hidden="true">Illustrative AccrualOS activity</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll reveal */
+  var els = document.querySelectorAll('.bnd [data-reveal]');
+  if(els.length){
+    if(!('IntersectionObserver' in window) || reduce){
+      els.forEach(function(el){ el.classList.add('is-in'); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, { threshold: 0.16 });
+      els.forEach(function(el){ io.observe(el); });
+    }
+  }
+
+  /* interactive live activity card (illustrative, auto-cycling) */
+  var card = document.querySelector('.bnd [data-live]');
+  if(card){
+    var states = [
+      { label:'Running now', time:'6:12 am',  icon:'M5 12h14M13 6l6 6-6 6', title:'New enquiry',           sub:'"Need help with a company tax return"' },
+      { label:'Just now',    time:'10:04 am', icon:'M20 6L9 17l-5-5',       title:'Replied and qualified', sub:'Meeting booked, Thu 10:00 am' },
+      { label:'Filed',       time:'9:47 am',  icon:'M7 3h8l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z', title:'Documents filed', sub:'BAS and payroll, 4 of 4' }
+    ];
+    var row  = card.querySelector('.bnd-live-row');
+    var lab  = card.querySelector('[data-live-label]');
+    var time = card.querySelector('[data-live-time]');
+    var icn  = card.querySelector('[data-live-icn] path');
+    var ttl  = card.querySelector('[data-live-title]');
+    var sub  = card.querySelector('[data-live-sub]');
+    var i = 0;
+    function apply(s){ if(lab)lab.textContent=s.label; if(time)time.textContent=s.time; if(icn)icn.setAttribute('d',s.icon); if(ttl)ttl.textContent=s.title; if(sub)sub.textContent=s.sub; }
+    apply(states[0]);
+    if(!reduce){
+      setInterval(function(){
+        i = (i + 1) % states.length;
+        if(row) row.style.opacity = '0';
+        setTimeout(function(){ apply(states[i]); if(row) row.style.opacity = '1'; }, 260);
+      }, 3000);
+    }
+  }
+})();
+</script>

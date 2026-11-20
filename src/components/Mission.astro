@@ -1,0 +1,163 @@
+<!-- =================================================================
+     AccrualOS - VISION & MISSION  (overlap, 12-col grid = proper placement)
+     Dominant image + a white card overlapping it: from the LEFT on
+     Vision, from the RIGHT on Mission. Image spans 8/12 columns and
+     stays taller; the card spans 6/12 and overlaps 2 columns.
+     Canonical: Manrope, navy #0E2E4D / orange #E46E14, flat 5px, no
+     gradients, no off-palette blue. Copy as supplied (em dashes swapped).
+     One soft shadow on the floating card (remove for fully flat).
+     FLAG: the "$5,000 Work-Free Recovery Guarantee" must not publish
+     until written terms are approved. TODO: real photos.
+     ================================================================= -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+.avm{
+  --nv:#0E2E4D; --or:#E46E14; --r:5px;
+  --ink:#0E2E4D; --mut:#54687c; --line:rgba(14,46,77,.14); --bg:#f7f9fb;
+  position:relative; box-sizing:border-box;
+  font-family:'Manrope',system-ui,-apple-system,sans-serif; color:var(--ink);
+  background:var(--bg); padding:clamp(60px,8vw,110px) 0;
+}
+.avm *{box-sizing:border-box;}
+.avm-wrap{ position:relative; z-index:1; max-width:1160px; margin:0 auto; padding:0 clamp(18px,3vw,44px); }
+
+/* header */
+.avm-head{ display:grid; grid-template-columns:1.35fr 1fr; gap:clamp(20px,4vw,54px); align-items:end; margin:0 0 clamp(34px,4.5vw,54px); }
+.avm-eyebrow{ display:inline-flex; align-items:center; gap:8px; margin:0 0 16px; padding:7px 13px; border-radius:var(--r); background:rgba(228,110,20,.10); border:1px solid rgba(228,110,20,.32); color:var(--or); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.avm-eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--or); }
+.avm-h2{ margin:0; font-weight:700; line-height:1.12; letter-spacing:-.5px; font-size:clamp(2rem,4.4vw,3.15rem); color:var(--nv); }
+.avm-h2 .g{ color:var(--or); }
+.avm-lead{ margin:0; color:var(--mut); font-size:clamp(.98rem,1.15vw,1.06rem); line-height:1.7; }
+
+/* bands: 12-col grid, image + overlapping card share row 1 */
+.avm-rows{ display:grid; gap:clamp(30px,4.5vw,56px); }
+.avm-band{ position:relative; display:grid; grid-template-columns:repeat(12,1fr); align-items:center; }
+
+.avm-media{ grid-row:1; z-index:1; align-self:stretch; min-height:clamp(420px,44vw,520px); position:relative; overflow:hidden; border-radius:var(--r); background:#e8edf2; border:1px solid var(--line); }
+.avm-band    .avm-media{ grid-column:5 / 13; }   /* Vision: image right */
+.avm-band.rev .avm-media{ grid-column:1 / 9;  }  /* Mission: image left */
+.avm-media::after{ content:"Image"; position:absolute; inset:0; z-index:0; display:flex; align-items:center; justify-content:center; color:#9fb0c2; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.avm-media img{ position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease; }
+.avm-band:hover .avm-media img{ transform:scale(1.04); }
+.avm-badge{ position:absolute; z-index:2; bottom:14px; background:var(--nv); color:#fff; font-size:.66rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:7px 12px; border-radius:var(--r); }
+.avm-band    .avm-badge{ right:14px; }
+.avm-band.rev .avm-badge{ left:14px; }
+
+.avm-card{
+  grid-row:1; z-index:2; align-self:center;
+  background:#fff; border:1px solid var(--line); border-radius:var(--r);
+  padding:clamp(24px,3vw,38px);
+  box-shadow:0 26px 60px -32px rgba(14,46,77,.45); /* lift off the image; remove for flat */
+}
+.avm-band    .avm-card{ grid-column:1 / 7;  }   /* Vision: card left, overlaps image from the left */
+.avm-band.rev .avm-card{ grid-column:7 / 13; }  /* Mission: card right, overlaps image from the right */
+
+.avm-blockhead{ display:flex; align-items:center; gap:12px; margin:0 0 14px; }
+.avm-emblem{ width:40px; height:40px; flex:none; }
+.avm-emblem svg{ width:100%; height:100%; display:block; }
+.avm-k{ font-size:.74rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--or); }
+.avm-card h3{ margin:0 0 14px; font-weight:700; line-height:1.16; letter-spacing:-.3px; font-size:clamp(1.5rem,2.8vw,2.05rem); color:var(--nv); }
+.avm-card h3 .g{ color:var(--or); }
+.avm-card p{ margin:0; color:var(--mut); font-size:clamp(.95rem,1.1vw,1.02rem); line-height:1.72; }
+
+/* promise */
+.avm-promise{ margin-top:clamp(28px,4vw,44px); display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; background:#fff; border:1px solid var(--line); border-left:4px solid var(--or); border-radius:var(--r); padding:clamp(18px,2.6vw,24px) clamp(20px,3vw,28px); }
+.avm-promise .tag{ flex:none; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:var(--or); padding:6px 12px; border-radius:var(--r); }
+.avm-promise span.txt{ font-size:clamp(.96rem,1.1vw,1.04rem); line-height:1.6; color:var(--nv); }
+.avm-promise span.txt b{ font-weight:800; }
+
+/* reveal */
+.avm [data-reveal]{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; transition-delay:var(--d,0ms); }
+.avm [data-reveal].is-in{ opacity:1; transform:none; }
+
+@media (max-width:820px){
+  .avm-head{ grid-template-columns:1fr; gap:18px; align-items:start; }
+  .avm-band{ display:block; }
+  .avm-media{ min-height:0; height:clamp(200px,46vw,300px); }
+  .avm-card{ width:92%; margin:-46px auto 0; }
+}
+@media (prefers-reduced-motion:reduce){ .avm [data-reveal]{ opacity:1; transform:none; transition:none; } .avm-media img{ transition:none; } }
+</style>
+
+<section class="avm" aria-label="Vision and mission">
+  <div class="avm-wrap">
+
+    <!-- header -->
+    <div class="avm-head">
+      <div>
+        <span class="avm-eyebrow" data-reveal>Our purpose</span>
+        <h2 class="avm-h2" data-reveal style="--d:80ms">We're building the future every <span class="g">accounting firm actually wants.</span></h2>
+      </div>
+      <p class="avm-lead" data-reveal style="--d:150ms">Two statements shape every call we make about AccrualOS, where we're headed, and what we owe the practices that trust us.</p>
+    </div>
+
+    <div class="avm-rows">
+      <!-- VISION: image right, card overlaps from the left -->
+      <article class="avm-band" data-reveal>
+        <div class="avm-media">
+          <img src="/vision.jpg" alt="The AccrualOS vision" onerror="this.style.display='none'">
+          <span class="avm-badge">01 &middot; Vision</span>
+        </div>
+        <div class="avm-card">
+          <div class="avm-blockhead">
+            <span class="avm-emblem" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="16" stroke="#E46E14" stroke-width="2.2"/>
+                <circle cx="24" cy="24" r="9" stroke="#0E2E4D" stroke-width="1.8" opacity=".55" stroke-dasharray="3 5"/>
+                <circle cx="24" cy="24" r="3.4" fill="#E46E14"/>
+              </svg>
+            </span>
+            <span class="avm-k">Vision</span>
+          </div>
+          <h3>The default OS for <span class="g">every Australian practice.</span></h3>
+          <p>A profession where the software fades into the background and the work rises to the front. Every firm, solo practitioners to twenty-person teams, running on automation that amplifies its people, absorbs the repetitive load, and scales without a new hire every time the client list grows. Not another tool bolted onto the stack. The operating system the whole practice runs on.</p>
+        </div>
+      </article>
+
+      <!-- MISSION: image left, card overlaps from the right -->
+      <article class="avm-band rev" data-reveal style="--d:120ms">
+        <div class="avm-media">
+          <img src="/mission.jpg" alt="The AccrualOS mission" onerror="this.style.display='none'">
+          <span class="avm-badge">02 &middot; Mission</span>
+        </div>
+        <div class="avm-card">
+          <div class="avm-blockhead">
+            <span class="avm-emblem" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="16" stroke="#0E2E4D" stroke-width="2.2"/>
+                <path d="M24 4v7M24 37v7M4 24h7M37 24h7" stroke="#E46E14" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="3.4" fill="#E46E14"/>
+              </svg>
+            </span>
+            <span class="avm-k">Mission</span>
+          </div>
+          <h3>Give practices their <span class="g">time back.</span></h3>
+          <p>The average practice burns its sharpest hours on admin no client ever sees or pays for: onboarding, chasing signatures, follow-ups, status updates. Our mission is to lift that off the desk and hand it to one purpose-built system, so the people in the firm get back to the work they trained for: judgment, advice, and relationships. Less drowning in process. More practising.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- promise -->
+    <div class="avm-promise" data-reveal style="--d:120ms">
+      <span class="tag">The promise</span>
+      <span class="txt">Live in <b>21 days</b>, backed by our <b>$5,000 Work-Free Recovery Guarantee</b>. We own the outcome, not just the software.</span>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+(function(){
+  var root = document.currentScript.closest('.avm') || document;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = root.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else { reveals.forEach(function(el){ el.classList.add('is-in'); }); }
+})();
+</script>
