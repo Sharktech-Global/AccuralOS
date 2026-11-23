@@ -1,3 +1,68 @@
+---
+const behindAnswer =
+  "AccrualOS is built by Sharktech Global. Dainu Devis, CEO, Sharktech Global, is chief executive of Sharktech Global, the technology and delivery company behind AccrualOS product development, integrations and support.";
+
+const faqItems = [
+  {
+    q: "What is AccrualOS?",
+    a: "AccrualOS is an accounting practice management and growth platform for Australian firms. It connects CRM, enquiries, appointments, client communication, onboarding, workflow follow-up, AI assistants and managed growth services in one configured system.",
+  },
+  {
+    q: "Does AccrualOS replace Xero, MYOB or QuickBooks?",
+    a: "No. AccrualOS manages client-facing and operational workflows around the accounting work. Your accounting platform remains responsible for ledger, reporting and accounting functions.",
+  },
+  {
+    q: "Does AccrualOS replace Karbon, FYI or another practice system?",
+    a: "It depends on the functions your firm uses. AccrualOS can manage enquiries, client communication, booking, onboarding and configurable follow-up. Some firms use it alongside a specialised job, document or compliance platform. We map the required systems before implementation.",
+  },
+  {
+    q: "Is AccrualOS built on GoHighLevel?",
+    a: "AccrualOS uses selected third-party technology as part of its platform infrastructure. The product includes accounting-specific configuration, workflows, templates, implementation and support delivered under the AccrualOS service.",
+  },
+  {
+    q: "Can AccrualOS provide accounting or tax advice through AI?",
+    a: "No. AI assistants are limited to approved administrative and general practice information. They can capture enquiries, answer approved FAQs and book consultations. They do not provide personal accounting, tax, financial or legal advice.",
+  },
+  {
+    q: "What does implementation include?",
+    a: "Implementation can include workflow discovery, CRM configuration, pipeline setup, forms, calendars, message templates, approved AI knowledge, testing, data import and team training. The exact scope depends on the selected plan and integrations.",
+  },
+  {
+    q: "What usage costs are separate?",
+    a: "SMS, email delivery, WhatsApp conversations, phone numbers, carrier calls, AI voice minutes, advertising media and third-party software may be charged separately. AccrualOS confirms the applicable rates before activation.",
+  },
+  {
+    q: "How long does setup take?",
+    a: "A standard implementation may target 21 days after the required information, access and approvals are received. Custom data migration, websites and integrations can extend the timeline. The approved project plan should state the actual go-live date.",
+  },
+  {
+    q: "Can we export our data?",
+    a: "The website should state the verified export options for contacts, opportunities and conversation records. Custom objects, documents and integrated data may require a separate export process.",
+  },
+  {
+    q: "Can AccrualOS guarantee search rankings or AI recommendations?",
+    a: "No. SEO and AEO improve technical structure, content quality, entity clarity and authority signals. Search engines and AI services decide what they display. No provider can guarantee a ranking, citation or recommendation.",
+  },
+  {
+    q: "Who is behind AccrualOS?",
+    a: behindAnswer,
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+const faqJson = JSON.stringify(faqSchema).replace(/</g, "\\u003c");
+---
 <!-- ============================================================
      AccrualOS — FAQ (.faqv layout)
      Canonicalised to the AccrualOS system: Manrope only,
@@ -5,6 +70,7 @@
      Accordion = one open at a time. Content verbatim as supplied.
      ============================================================ -->
 <section class="faqv" id="faq">
+  <script type="application/ld+json" set:html={faqJson} />
   <style>
     /* Manrope only — remove this @import if the font is loaded page-wide */
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
@@ -131,6 +197,8 @@
       font-size:13.5px;line-height:1.72;
     }
     .fv-inner b{color:var(--fv-navy);font-weight:600;}
+    .fv-inner a{color:var(--fv-navy);font-weight:600;text-decoration:underline;text-underline-offset:2px;}
+    .fv-inner a:hover{color:var(--fv-orange);}
 
     /* ---------- CTA button ---------- */
     .fv-btn{
@@ -293,6 +361,15 @@
               <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
             <div class="fv-a"><div class="fv-inner">
               No. SEO and AEO improve technical structure, content quality, entity clarity and authority signals. Search engines and AI services decide what they display. No provider can guarantee a ranking, citation or recommendation.
+            </div></div>
+          </details>
+
+          <details class="fv-item fv-reveal">
+            <summary class="fv-q"><span class="fv-no">11</span>
+              <span class="fv-qt">Who is behind AccrualOS?</span>
+              <span class="fv-ind"><i class="h"></i><i class="v"></i></span></summary>
+            <div class="fv-a"><div class="fv-inner">
+              AccrualOS is built by <a href="https://www.sharktech.com.au" target="_blank" rel="noopener noreferrer">Sharktech Global</a>. <a href="https://www.dainudevis.com" target="_blank" rel="noopener noreferrer">Dainu Devis</a>, CEO, <a href="https://www.sharktech.com.au" target="_blank" rel="noopener noreferrer">Sharktech Global</a>, is chief executive of Sharktech Global, the technology and delivery company behind AccrualOS product development, integrations and support.
             </div></div>
           </details>
 

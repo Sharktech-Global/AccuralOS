@@ -122,6 +122,16 @@
   .tf-social a{color:var(--muted);transition:color .2s}
   .tf-social a:hover{color:var(--accent)}
 
+  /* ── BUILT BY ── */
+  .tf-built{display:flex;align-items:baseline;justify-content:space-between;gap:10px 28px;flex-wrap:wrap;padding:18px 0 6px}
+  .tf-built-k,.tf-built-line,.tf-built-note{margin:0}
+  .tf-built-k{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .tf-built-line{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--text)}
+  .tf-built-line a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
+  .tf-built-line a:hover{color:var(--accent)}
+  .tf-built-note{flex-basis:100%;font-size:13px;line-height:1.6;color:var(--muted)}
+  .tf-built a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
   /* ── BOTTOM ── */
   .tf-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
     padding:20px 0 clamp(22px,3vw,34px);font-size:12px;color:var(--faint)}
@@ -274,6 +284,14 @@
     </div>
 
     <hr class="tf-hr">
+
+    <div class="tf-built" aria-label="Built by Sharktech Global">
+      <p class="tf-built-k">Built by Sharktech Global</p>
+      <p class="tf-built-line">
+        <a href="https://www.dainudevis.com" target="_blank" rel="noopener noreferrer">Dainu Devis</a>, CEO, <a href="https://www.sharktech.com.au" target="_blank" rel="noopener noreferrer">Sharktech Global</a>
+      </p>
+      <p class="tf-built-note">Sharktech Global is the technology and delivery company behind AccrualOS product development, integrations and support. Dainu Devis is CEO of Sharktech Global.</p>
+    </div>
 
     <!-- BOTTOM -->
     <div class="tf-bottom">
