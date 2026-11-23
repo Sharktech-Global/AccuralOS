@@ -17,6 +17,49 @@ const {
 const base = Astro.site ?? new URL(Astro.url.origin);
 const canonicalURL = new URL(Astro.url.pathname, base).href;
 const ogImage = new URL(image, base).href;
+const siteOrigin = new URL(base).origin;
+
+const entityGraph = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'SoftwareApplication',
+			'@id': `${siteOrigin}/#software`,
+			name: 'AccrualOS',
+			url: `${siteOrigin}/`,
+			applicationCategory: 'BusinessApplication',
+			operatingSystem: 'Web',
+			description:
+				'AccrualOS is an accounting practice management and growth platform for Australian firms. It connects CRM, enquiries, appointments, client communication, onboarding, workflow follow-up, AI assistants and managed growth services in one configured system.',
+			image: `${siteOrigin}/accurallogo.png`,
+			publisher: { '@id': 'https://www.sharktech.com.au/#organization' },
+		},
+		{
+			'@type': 'Organization',
+			'@id': `${siteOrigin}/#organization`,
+			name: 'AccrualOS',
+			url: `${siteOrigin}/`,
+			logo: `${siteOrigin}/accurallogo.png`,
+			parentOrganization: { '@id': 'https://www.sharktech.com.au/#organization' },
+		},
+		{
+			'@type': 'Organization',
+			'@id': 'https://www.sharktech.com.au/#organization',
+			name: 'Sharktech Global',
+			url: 'https://www.sharktech.com.au',
+			employee: { '@id': 'https://www.dainudevis.com/#person' },
+		},
+		{
+			'@type': 'Person',
+			'@id': 'https://www.dainudevis.com/#person',
+			name: 'Dainu Devis',
+			jobTitle: 'CEO',
+			url: 'https://www.dainudevis.com',
+			worksFor: { '@id': 'https://www.sharktech.com.au/#organization' },
+		},
+	],
+};
+const entityJson = JSON.stringify(entityGraph).replace(/</g, '\\u003c');
 ---
 <!doctype html>
 <html lang="en">
@@ -48,6 +91,8 @@ const ogImage = new URL(image, base).href;
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
+
+		<script type="application/ld+json" set:html={entityJson} />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

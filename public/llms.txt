@@ -1,0 +1,60 @@
+# AccrualOS
+
+> AccrualOS is the practice management and automation platform for Australian accounting and bookkeeping firms. It is built by Sharktech Global. Dainu Devis is CEO of Sharktech Global.
+
+AccrualOS connects CRM, enquiries, appointments, client communication, onboarding, workflow follow-up, AI assistants and managed growth services in one configured system. It does not replace Xero, MYOB or QuickBooks. The accounting platform remains responsible for the ledger, reporting and accounting functions.
+
+Sharktech Global is the technology and delivery company behind AccrualOS product development, integrations and support. Dainu Devis, CEO, Sharktech Global, is chief executive of Sharktech Global.
+
+The site copyright names Divine Empyrean Pty Ltd, ABN 54 672 825 731, Sydney NSW.
+
+Contact: sales@sharktech.com.au, +61 468 017 373. Hours listed on the site: Monday to Friday, 9am to 5pm AEST.
+
+## Company
+
+- [Dainu Devis](https://www.dainudevis.com): CEO, Sharktech Global
+- [Sharktech Global](https://www.sharktech.com.au): Technology and delivery company behind AccrualOS
+
+## FAQ
+
+Who is behind AccrualOS? AccrualOS is built by Sharktech Global. Dainu Devis, CEO, Sharktech Global, is chief executive of Sharktech Global, the technology and delivery company behind AccrualOS product development, integrations and support.
+
+## Pages
+
+- [Home](https://accrualos.com.au/): Accounting practice management for Australian firms
+- [About](https://accrualos.com.au/about-us): About AccrualOS, built by Sharktech Global
+- [Services](https://accrualos.com.au/services): AI deployment, analytics and reporting for accounting practices
+- [AI deployment for accountants](https://accrualos.com.au/services/ai-deployment-accountants): Custom AI deployment and workflow automation for Australian accounting practices, delivered by Sharktech Services alongside AccrualOS
+- [AI analytics and reporting](https://accrualos.com.au/services/ai-analytics-reporting-accountants): Power BI dashboards and management reporting for Australian accounting practices, delivered by Sharktech Services alongside AccrualOS
+- [Cybersecurity and secure AI](https://accrualos.com.au/services/cybersecurity-ai-accountants): Secure AI deployment and cybersecurity for Australian accounting practices, delivered by Sharktech Services alongside AccrualOS
+- [Packages](https://accrualos.com.au/packages): Launch, Elevate and Dominate plans
+- [Blog](https://accrualos.com.au/blog): Practical AI and automation notes for Australian accountants
+- [Contact](https://accrualos.com.au/contact-us): Book a demo or start a $1 trial
+- [Privacy](https://accrualos.com.au/privacy): Privacy policy
+- [Terms](https://accrualos.com.au/terms): Terms of service
+
+## Optional
+
+- [Accounting Automation in Parramatta](https://accrualos.com.au/blog/accounting-automation-parramatta): Guide for growing Western Sydney practices
+- [Technology Services for Australian Accounting and Finance Teams](https://accrualos.com.au/blog/accounting-finance-technology-services-australia): When a product is enough and when a project is the better fit
+- [Accounting Practice Automation in Melbourne](https://accrualos.com.au/blog/accounting-practice-automation-melbourne): Where AI can remove repetitive admin
+- [Accounting Practice CRM in Australia](https://accrualos.com.au/blog/accounting-practice-crm-integrations-australia): Connect the apps a firm already uses
+- [AI for Accounting Firms in Perth](https://accrualos.com.au/blog/ai-accounting-firms-perth): From enquiry to onboarding
+- [AI Automation, Cybersecurity and Data Analytics for Australian Accountants](https://accrualos.com.au/blog/ai-automation-cybersecurity-data-analytics-accountants-australia): A practical technology roadmap
+- [AI for Accountants in Adelaide](https://accrualos.com.au/blog/ai-for-accountants-adelaide): How smaller practices can automate
+- [AI for Accountants in Australia](https://accrualos.com.au/blog/ai-for-accountants-australia): Building an AI-enabled practice
+- [AI for Accountants in Brisbane](https://accrualos.com.au/blog/ai-for-accountants-brisbane): A practical automation roadmap
+- [AI for Accountants in Sydney](https://accrualos.com.au/blog/ai-for-accountants-sydney): How practices can automate client work
+- [Analytics and Reporting for Australian Accounting Practices](https://accrualos.com.au/blog/analytics-reporting-accounting-practices-australia): Management reporting for accounting practices
+- [AI Deployment and IT Support for Australian Accountants](https://accrualos.com.au/blog/australian-ai-deployment-it-support-accountants): What good implementation looks like
+- [CFO Management Reporting for Accounting Firms](https://accrualos.com.au/blog/cfo-management-reporting-ai-accounting-firms): Decision quality from better data
+- [Custom AI Deployments for Australian Accountants](https://accrualos.com.au/blog/custom-ai-deployments-australian-accountants): Building automation around a practice
+- [Cybersecurity for Australian Accounting Practices](https://accrualos.com.au/blog/cybersecurity-australian-accounting-practices): Protecting the systems behind client service
+- [Data Analytics for Australian Accounting Practices](https://accrualos.com.au/blog/data-analytics-power-bi-australian-accounting-practices): From spreadsheets to practice visibility
+- [How to Automate an Accounting Practice](https://accrualos.com.au/blog/how-to-automate-accounting-practice): Ten workflows to start with
+- [How to Set Up AI Automation in an Accounting Business](https://accrualos.com.au/blog/how-to-set-up-ai-automation-accounting-business): A step-by-step framework
+- [Local AI Automation for Accountants](https://accrualos.com.au/blog/local-ai-automation-accountants-sydney-melbourne-brisbane-perth-adelaide): Sydney, Melbourne, Brisbane, Perth and Adelaide
+- [Marketing Automation for Accountants](https://accrualos.com.au/blog/marketing-automation-for-accountants): Turning enquiries into clients
+- [Smart Accounting CRM](https://accrualos.com.au/blog/smart-accounting-crm-client-management-automation): From first enquiry to client management
+- [What Should an Accounting Practice Automate First?](https://accrualos.com.au/blog/what-accounting-practice-automate-first): Twelve high-value opportunities
+- [Xero, MYOB and QuickBooks](https://accrualos.com.au/blog/xero-myob-quickbooks-smart-automation-accountants): Smart automation around existing accounting software
